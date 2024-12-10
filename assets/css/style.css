@@ -271,8 +271,8 @@ div#preloader {
 
 .navbar-header a.navbar-brand {
   display: inline-block;
-  height: 70px;
-  padding: 15px 0;
+  height: 80px;
+  padding: 0px 0;
 }
 
 .main-menu ul.navbar-nav li {
@@ -395,7 +395,7 @@ div#preloader {
 
 .stick .navbar-header a.navbar-brand {
   display: inline-block;
-  height: 90px;
+  height: 70px;
 }
 
 .stick .navbar-brand>img {
@@ -410,7 +410,7 @@ div#preloader {
   color: #fff;
   padding: 0;
   margin: 0;
-  font-size: 36px;
+  font-size: 2.5rem;
   font-weight: bold;
   line-height: 1;
 }
@@ -471,6 +471,27 @@ div#preloader {
 
 .stick .navbar-default .navbar-toggle {
   padding: 10px 0px;
+}
+
+@media (max-width: 768px) {
+  .sticky-logo h1 {
+    text-align: left;
+    font-size: 1.7rem;
+  }
+  .navbar{
+    --bs-navbar-padding-y: 0rem !important;
+  } 
+  .navbar-toggler{
+    padding: 0;
+  }
+/* 
+  .navbar-toggler-icon{
+    padding: 0 0; 
+    font-size: 5rem;
+    height: 20px; 
+    width: 20px; 
+    right: 0.2rem;
+  } */
 }
 
 /*--------------------------------*/
