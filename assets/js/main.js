@@ -14,25 +14,25 @@
   /*---------------------
    TOP Menu Stick
   --------------------- */
-  var s = $("#sticker");
-  var pos = s.position();
-  $(window).on('scroll', function() {
-    var windowpos = $(window).scrollTop() > 300;
-    if (windowpos > pos.top) {
-      s.addClass("stick");
-    } else {
-      s.removeClass("stick");
-    }
-  });
+  // var s = $("#sticker");
+  // var pos = s.position();
+  // $(window).on('scroll', function() {
+  //   var windowpos = $(window).scrollTop() > 300;
+  //   if (windowpos > pos.top) {
+  //     s.addClass("stick");
+  //   } else {
+  //     s.removeClass("stick");
+  //   }
+  // });
 
   /*----------------------------
    Navbar nav
   ------------------------------ */
-  var main_menu = $(".main-menu ul.navbar-nav li ");
-  main_menu.on('click', function() {
-    main_menu.removeClass("active");
-    $(this).addClass("active");
-  });
+  // var main_menu = $(".main-menu ul.navbar-nav li ");
+  // main_menu.on('click', function() {
+  //   main_menu.removeClass("active");
+  //   $(this).addClass("active");
+  // });
 
   /*----------------------------
    wow js active
@@ -72,8 +72,8 @@
   /*---------------------
     Venobox
   --------------------- */
-  var veno_box = $('.venobox');
-  veno_box.venobox();
+  // var veno_box = $('.venobox');
+  // veno_box.venobox();
 
   /*----------------------------
   Page Scroll
@@ -104,7 +104,7 @@
   });
 
   /*----------------------------
-   Parallax
+   Parallax maybe not nececcesry
   ------------------------------ */
   var well_lax = $('.wellcome-area');
   well_lax.parallax("50%", 0.4);
@@ -114,65 +114,65 @@
   /*--------------------------
    collapse
   ---------------------------- */
-  var panel_test = $('.panel-heading a');
-  panel_test.on('click', function() {
-    panel_test.removeClass('active');
-    $(this).addClass('active');
-  });
+  // var panel_test = $('.panel-heading a');
+  // panel_test.on('click', function() {
+  //   panel_test.removeClass('active');
+  //   $(this).addClass('active');
+  // });
 
   /*---------------------
    Testimonial carousel
   ---------------------*/
-  var test_carousel = $('.testimonial-carousel');
-  test_carousel.owlCarousel({
-    loop: true,
-    nav: false,
-    dots: true,
-    autoplay: true,
-    responsive: {
-      0: {
-        items: 1
-      },
-      768: {
-        items: 1
-      },
-      1000: {
-        items: 1
-      }
-    }
-  });
+  // var test_carousel = $('.testimonial-carousel');
+  // test_carousel.owlCarousel({
+  //   loop: true,
+  //   nav: false,
+  //   dots: true,
+  //   autoplay: true,
+  //   responsive: {
+  //     0: {
+  //       items: 1
+  //     },
+  //     768: {
+  //       items: 1
+  //     },
+  //     1000: {
+  //       items: 1
+  //     }
+  //   }
+  // });
   /*----------------------------
    isotope active
   ------------------------------ */
   // portfolio start
-  $(window).on("load", function() {
-    var $container = $('.awesome-project-content');
-    $container.isotope({
-      filter: '*',
-      animationOptions: {
-        duration: 750,
-        easing: 'linear',
-        queue: false
-      }
-    });
-    var pro_menu = $('.project-menu li a');
-    pro_menu.on("click", function() {
-      var pro_menu_active = $('.project-menu li a.active');
-      pro_menu_active.removeClass('active');
-      $(this).addClass('active');
-      var selector = $(this).attr('data-filter');
-      $container.isotope({
-        filter: selector,
-        animationOptions: {
-          duration: 750,
-          easing: 'linear',
-          queue: false
-        }
-      });
-      return false;
-    });
+  // $(window).on("load", function() {
+  //   var $container = $('.awesome-project-content');
+  //   $container.isotope({
+  //     filter: '*',
+  //     animationOptions: {
+  //       duration: 750,
+  //       easing: 'linear',
+  //       queue: false
+  //     }
+  //   });
+  //   var pro_menu = $('.project-menu li a');
+  //   pro_menu.on("click", function() {
+  //     var pro_menu_active = $('.project-menu li a.active');
+  //     pro_menu_active.removeClass('active');
+  //     $(this).addClass('active');
+  //     var selector = $(this).attr('data-filter');
+  //     $container.isotope({
+  //       filter: selector,
+  //       animationOptions: {
+  //         duration: 750,
+  //         easing: 'linear',
+  //         queue: false
+  //       }
+  //     });
+  //     return false;
+  //   });
 
-  });
+  // });
   //portfolio end
 
   /*---------------------
