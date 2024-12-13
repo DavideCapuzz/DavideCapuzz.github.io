@@ -347,47 +347,11 @@ div#preloader {
     text-align: left;
     font-size: 1.7rem;
   }
-  /* .navbar{
-    --bs-navbar-padding-y: 0rem !important;
-  }  */
   .navbar-button{
     padding-top:5px;
     padding-right:10px;
   }
 }
-/*
-.stick .navbar-brand>img {
-  display: none;
-}
-
-.stick .navbar-brand.sticky-logo>img {
-  display: block;
-}*/
-/* .stick .logo {
-  height: 20px;
-} */
-
-/* .stick .logo a {
-  margin-top: 0px;
-} */
-
-/* .stick .main-menu ul.nav>li>a {
-  color: #fff;
-  line-height: 22px;
-  padding: 24px 0px;
-  text-transform: capitalize;
-  letter-spacing: 1px;
-} */
-
-/* .stick .navbar-default .navbar-toggle .icon-bar {
-  background-color: #fff;
-  width: 30px;
-  height: 2px;
-} */
-
-/* .stick .navbar-default .navbar-toggle {
-  padding: 10px 0px;
-} */
 /*--------------------------------*/
 
 /* 2.1. Image Area
@@ -397,7 +361,7 @@ div#preloader {
 	/*background-color: #2f333d; */
 	background-image: url("../images/davide_picture.jpg");
 	display: inline;
-	opacity: 0.8;
+	/* opacity: 0.8; */
 	float: left;
 	padding: 0px 0;
 	width: 100%;
@@ -459,22 +423,6 @@ div#preloader {
 	color: #fff;
 }
 
-/* .layer-1-3 a.ready-btn {
-  border: 1px solid #fff;
-  border-radius: 30px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 17px;
-  font-weight: 600;
-  margin-top: 30px;
-  padding: 10px 20px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: all 0.4s ease 0s;
-  z-index: 222;
-} */
-
 .mu-header-featured-content a.ready-btn {
   border: 1px solid #fff;
   border-radius: 30px;
@@ -521,13 +469,13 @@ div#preloader {
 
 .about-area {
 	
-	padding: 100px 1000 px 10 px 10 px;
+	/* padding: 100px 1000 px 10 px 10 px; */
   /*background-color: #2f333d;*/
   background-image: url("../images/davide_picture.jpg");
   /*background-color: rgba(27,26,27,1);*/
   height: 100%;
   display: inline;
-	opacity: 0.8;
+	/* opacity: 0.8; */
 	float: left;
 	padding: 0px 0;
 	width: 100%;
@@ -563,237 +511,40 @@ div#preloader {
 	font-weight: 700;
 }
 
-/* inizio lateral scroll*/
-
-
-
-div.scrollmenu {
-	overflow-y: visible;
-	direction: rtl;
-  background-color: rgba(27,26,27,0);
-  overflow: auto;
-  white-space: nowrap;
-   height:75vh;
+.cv_area {
+  overflow-x: hidden;
+  display: flex;
+}
+.section_cv {
+  min-width: 50vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4ch;
 }
 
-div.scrollmenu a.expand_up {
-	overflow-y: visible;
-  display: inline-block;
+.section_cv:nth-child(even) {
+  background-color: teal;
   color: white;
-  text-align: center;
-  background-color: rgba(27,26,27,0);
-  text-decoration: none;
-  height: 90%;
-  width: 10%;
 }
-
-div.scrollmenu a.expand_down {
-	overflow-y: visible;
-  display: inline-block;
-  color: white;
-  text-align: center;
-  background-color: rgba(27,26,27,0);
-  text-decoration: none;
-  height: 90%;
-  width: 10%;
-}
-
-div.scrollmenu a.no_expand {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  background-color: rgba(27,26,27,0);
-  text-decoration: none;
-  height: 90%;
-  width: 10%;
-}
-
-div.scrollmenu a.expand_up:hover {
-  /*background-color: #777;*/
-  overflow: visible;
-  background-color: #777;
-  width: 50vh;
-  height: 50vh;
-  padding: 1vh;
-  margin-bottom:10vh;
-}
-
-div.scrollmenu a.expand_down:hover {
-  background-color: #777;
-  width: 50vh;
-  height: 50vh;
-  padding: 1vh;
-  margin-bottom:10vh;
-}
-
-#about_photo_down {
-	background-color: #777;
-	width: 50vh;
-	height: 50vh;
-	padding: 1vh;
-	margin-bottom:10vh;
-}
-
-/* fine cose che ho aggiunto io*/
-
-/*timeline */
-
-div.scrollmenu a.expand_down:hover hr.line1 {
-	/*margin-top: 39%;*/
-	color: rgba(27,26,27,0);
-	border: 10px solid ;
-	margin-right: -20px;
-	border-radius: 0px;
-}
-
-.line1 {
-	/*margin-top: 39%;*/
-	color: #3ec1d5;
-	border: 10px solid ;
-	margin-right: -20px;
-	margin-left: -30px;
-	border-radius: 0px;
-}
-
-a.expand_down:hover img.img_bottom {
-	width:100px;
-	height: 100px;
-	margin-top:0%;
-	margin-bottom:200px;
-	visibility: visible;
-	
-}
-
-.img_bottom {
-	/*margin-top: 39%;*/
-	visibility: hidden;
-	width:0px;
-	height: 0px;
-}
-
-.line2 {
-	color:#64bf60;
-	margin-top: -5% ;
-	margin-right: -20px;
-	margin-left: -30px;
-	border: 10px solid;
-	border-radius: 0px;
-}
-
-div.scrollmenu a.expand_down:hover hr.line2 {
-	/*margin-top: 39%;*/
-	color: rgba(27,26,27,0);
-	border: 10px solid ;
-	margin-right: -20px;
-	border-radius: 0px;
-}
-
-.cv_point_up_no_line {
-	color: rgba(0,0,0,0);
-  border-left: 6px solid;
-  height: 40%;
-  margin-top: 30px;
-  margin-left: 0px;
-  margin-bottom: -25px;
- }
- 
- .cv_point_up {
-	color: #3ec1d5;
-  border-left: 6px solid;
-  height: 40%;
-  margin-top: 30px;
-  margin-left: 0px;
-  margin-bottom: -25px;
- }
-
-
-.cv_point_down {
-	color:#64bf60;
-  border-left: 6px solid ;
-  height: 40%;
-  margin-top: -25px;
-  margin-left: 0px;
-  margin-bottom: 0px;
-  
-}
-
-div.scrollmenu a.expand_down:hover div.cv_point_down {
-	color:#64bf60;
-  border-left: 6px solid ;
-  height: 40%;
-  margin-top: -15px;
-  margin-left: 0px;
-  margin-bottom: 0px;
-  
-}
-
-
-.cv_point_down_no_line {
-	color: rgba(0,0,0,0);
-  border-left: 6px solid ;
-  height: 40%;
-  margin-top: -25px;
-  margin-left: 0px;
-  margin-bottom: 0px;
-  
-}
-
-.top_write {
-	float:left;
-	top: 10px;
-}
-
-.bottom_write {
-	
-	float:left;
-	 top: 60%;
-	 position: relative;
-}
-
-.year {
-	font-size: 150%;
-	color: #fff;
-}
-
-.descript {
-	font-size: 150%;
-	color: #fff;
-}
-
-
-
-
-/* end timeline*/
-.single-well>a {
-  display: block;
-}
-
-.single-well ul li {
-  color: #444;
-  display: block;
-  padding: 5px 0;
-}
-
-.single-well ul li i {
-  color: #3EC1D5;
-  padding-right: 10px;
-  font-size: 12px;
-}
-
-.single-well p {
-  color: #444;
-}
-
 /*--------------------------------
 
  4.Competence Area
 --------------------------------*/
 
-.competences-area {
-	
-	padding: 100px 1000 px 10 px 10 px;
-  background-color: rgba(0,0,0,0.80);
+.competences-area {	
+	/* padding: 100px 1000 px 10 px 10 px; */
+  /* background-color: rgba(0,0,0,0.80); */
   height: 100%;
+  display: inline;
+	opacity: 0.8;
+	float: left;
+	padding: 0px 0;
+	width: 100%;
+	background-position: top; /* Center the image */
+	background-repeat: no-repeat; /* Do not repeat the image */
+	/* background-size: 200%;  */
 }
 
 .competences-area p {
@@ -857,6 +608,14 @@ div.scrollmenu a.expand_down:hover div.cv_point_down {
 	padding: 100px 1000 px 10 px 10 px;
   background-color: rgba(0,0,0,0.85);
   height: 100%;
+  display: inline;
+	/* opacity: 0.8; */
+	float: left;
+	padding: 0px 0;
+	width: 100%;
+	background-position: top; /* Center the image */
+	background-repeat: no-repeat; /* Do not repeat the image */
+	/* background-size: 200%;  */
 }
 
 .ideas-area p {

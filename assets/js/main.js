@@ -212,42 +212,9 @@
 })(jQuery);
 
 
-//inizio cose mie
+const scrollContainer = document.querySelector("cv_area");
 
-
-var line = document.getElementById("line");
-var length = line.getTotalLength();
-
-// The start position of the drawing
-line.style.strokeDasharray = length;
-
-// Hide the line by offsetting dash. Remove this line to show the line before scroll draw
-line.style.strokeDashoffset = length;
-
-// Find scroll percentage on scroll (using cross-browser properties), and offset dash same amount as percentage scrolled
-window.addEventListener("scroll", myFunction);
-
-function myFunction() {
-var scrollpercent = (document.body.scrollTop + document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-
-  var draw = length * scrollpercent;
-  
-  // Reverse the drawing (when scrolling upwards)
-  line.style.strokeDashoffset = length - draw;
-}
-
-function expand_picture() {
-var x = document.getElementById("about_photo_down");
-x.style.display = "block";
-  
-  } 
-
-function resize_picture() {
-var x = document.getElementById("about_photo_down");
-x.style.display = "none";
-
-if (x.style.display === "block") {
-    x.style.display = "none";
-  }
-  
-  }
+scrollContainer.addEventListener("wheel", (evt) => {
+    evt.preventDefault();
+    scrollContainer.scrollLeft += evt.deltaY;
+});
