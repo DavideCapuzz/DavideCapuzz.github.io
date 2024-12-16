@@ -46,28 +46,28 @@
   //---------------------------------------------
   //Nivo slider
   //---------------------------------------------
-  $('#ensign-nivoslider').nivoSlider({
-    effect: 'random',
-    slices: 15,
-    boxCols: 12,
-    boxRows: 8,
-    animSpeed: 500,
-    pauseTime: 5000,
-    startSlide: 0,
-    directionNav: true,
-    controlNavThumbs: false,
-    pauseOnHover: true,
-    manualAdvance: false,
-  });
+  // $('#ensign-nivoslider').nivoSlider({
+  //   effect: 'random',
+  //   slices: 15,
+  //   boxCols: 12,
+  //   boxRows: 8,
+  //   animSpeed: 500,
+  //   pauseTime: 5000,
+  //   startSlide: 0,
+  //   directionNav: true,
+  //   controlNavThumbs: false,
+  //   pauseOnHover: true,
+  //   manualAdvance: false,
+  // });
 
   /*----------------------------
    Scrollspy js
   ------------------------------ */
-  var Body = $('body');
-  Body.scrollspy({
-    target: '.navbar-collapse',
-    offset: 80
-  });
+  // var Body = $('body');
+  // Body.scrollspy({
+  //   target: '.navbar-collapse',
+  //   offset: 80
+  // });
 
   /*---------------------
     Venobox
@@ -106,10 +106,10 @@
   /*----------------------------
    Parallax maybe not nececcesry
   ------------------------------ */
-  var well_lax = $('.wellcome-area');
-  well_lax.parallax("50%", 0.4);
-  var well_text = $('.wellcome-text');
-  well_text.parallax("50%", 0.6);
+  // var well_lax = $('.wellcome-area');
+  // well_lax.parallax("50%", 0.4);
+  // var well_text = $('.wellcome-text');
+  // well_text.parallax("50%", 0.6);
 
   /*--------------------------
    collapse
@@ -177,7 +177,7 @@
 
   /*---------------------
    Circular Bars - Knob
---------------------- */
+  --------------------- */
   if (typeof($.fn.knob) != 'undefined') {
     var knob_tex = $('.knob');
     knob_tex.each(function() {
@@ -209,12 +209,141 @@
     });
   }
 
+  console.log("oh");
+
+  // $(document).ready(function () {
+    
+  //   $("#news-slider").owlCarousel({
+  //     items: 3,
+  //     itemsDesktop: [1199, 3],
+  //     itemsDesktopSmall: [980, 2],
+  //     itemsMobile: [600, 1],
+  //     navigation: true,
+  //     navigationText: ["", ""],
+  //     pagination: true,
+  //     autoPlay: true
+  //   });
+  // });
+
+  $(document).ready(function() {
+
+    var owl = $("#news-slider");
+
+    owl.owlCarousel({
+        stagePadding:1,
+        startPosition:6,
+        loop:false,
+        margin:10,
+        nav:true,
+        navText: [
+          "<div class='nav-btn prev-slide'></div>",
+          "<div class='nav-btn next-slide'></div>"],
+        autoplay:false,
+        dots:true,
+        items: 3, //10 items above 1000px browser width
+        responsiveClass:true,
+        responsive:{
+          0:{
+            items:1
+          },
+          600:{
+            items:2
+          },
+          1000:{
+              items:3
+          }
+        }
+      })
+
+    });
+
+    // to debug
+    owl.on('mousewheel', '.owl-stage', function (e) {
+      if (e.deltaY>0) {
+          owl.trigger('next.owl');
+      } else {
+          owl.trigger('prev.owl');
+      }
+      e.preventDefault();
+  });
+
 })(jQuery);
 
 
-const scrollContainer = document.querySelector("cv_area");
+// const scrollContainer = document.querySelector("cv_area");
 
-scrollContainer.addEventListener("wheel", (evt) => {
-    evt.preventDefault();
-    scrollContainer.scrollLeft += evt.deltaY;
-});
+// scrollContainer.addEventListener("wheel", (evt) => {
+//     evt.preventDefault();
+//     scrollContainer.scrollLeft += evt.deltaY;
+// });
+
+
+
+function createPostCard(imageUrl, titleText, descriptionText, postDateText) {
+  // Create the post card container
+  var postSlide = document.createElement('div');
+  postSlide.classList.add('post-slide');
+  
+  // Create the image section
+  var postImg = document.createElement('div');
+  postImg.classList.add('post-img');
+  var img = document.createElement('img');
+  img.src = imageUrl;
+  img.alt = 'Post Image';
+  postImg.appendChild(img);
+
+  // Create overlay link
+  // var overLayer = document.createElement('a');
+  // // overLayer.href = '';
+  // overLayer.classList.add('over-layer');
+  // var overIcon = document.createElement('i');
+  // overIcon.classList.add('fa', 'fa-link');
+  // overLayer.appendChild(overIcon);
+  // postImg.appendChild(overLayer);
+
+  // Create the content section
+  var postContent = document.createElement('div');
+  postContent.classList.add('post-content');
+
+  // Create post title
+  var postTitle = document.createElement('h3');
+  postTitle.classList.add('post-title');
+  var postLink = document.createElement('a');
+  // postLink.href = '';
+  postLink.textContent = titleText;
+  postTitle.appendChild(postLink);
+
+  // Create post description
+  var postDescription = document.createElement('p');
+  postDescription.classList.add('post-description');
+  postDescription.textContent = descriptionText;
+
+  // Create post date
+  var postDate = document.createElement('span');
+  postDate.classList.add('post-date');
+  var dateIcon = document.createElement('i');
+  dateIcon.classList.add('fa', 'fa-clock-o');
+  postDate.appendChild(dateIcon);
+  postDate.appendChild(document.createTextNode(postDateText));
+
+  // Create read more link
+  var readMore = document.createElement('a');
+  // readMore.href = '';
+  readMore.classList.add('read-more');
+  readMore.textContent = 'read more';
+
+  // Append all sections to postContent
+  postContent.appendChild(postTitle);
+  postContent.appendChild(postDescription);
+  postContent.appendChild(postDate);
+  postContent.appendChild(readMore);
+
+  // Append the image and content to the postSlide
+  postSlide.appendChild(postImg);
+  postSlide.appendChild(postContent);
+
+  // Append the postSlide to the main container
+  document.getElementById('news-slider').appendChild(postSlide);
+}
+
+  

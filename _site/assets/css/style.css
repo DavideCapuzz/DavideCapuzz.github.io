@@ -224,6 +224,9 @@ div#preloader {
   padding-bottom: 10px;
 }
 
+.section-headline  {
+  margin-top: 70px;
+}
 .section-headline h2 {
   display: inline-block;
   font-size: 40px;
@@ -482,11 +485,11 @@ div#preloader {
 	background-position: top; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */
 	background-size: 200%; /* Resize the background image to cover the entire container */
-
 }
 
 .about-area p {
-	font-size: 200%;
+	/* font-size: 200%; */
+  font-size: 100%;
 	color: #fff;
 	font-weight: 300;
 	margin-bottom: 15px;
@@ -511,23 +514,384 @@ div#preloader {
 	font-weight: 700;
 }
 
-.cv_area {
-  overflow-x: hidden;
-  display: flex;
+.cv_slider{
+  margin-right:0px !important;
+  margin-left:0px !important;
+  --bs-gutter-x: 0 !important;
 }
-.section_cv {
-  min-width: 50vw;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4ch;
+/* Container */
+.container-fluid {
+  margin-top: 10%;
+  --bs-gutter-x: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
-.section_cv:nth-child(even) {
-  background-color: teal;
-  color: white;
+/* News Slider */
+#news-slider {
+  margin-top: 0px;
+  /* display: flex; */
+  /* overflow: hidden; */
+  /* padding-left: 5%; */
+  /* padding-right: 5%; */
 }
+
+.post-slide {
+  overflow: hidden;
+  height: 500px;
+  width: 100%;
+  /* width: 33.3333%; */
+  background: #fff;
+  /* margin: 20px 15px 20px; */
+  border-radius: 15px;
+  padding-top: 1px;
+  box-shadow: 0px 14px 22px -9px #bbcbd8;
+}
+
+/* Post Card Styling */
+.post-description p{
+  font-size: 30px;  
+}
+
+.post-slide:hover {
+  transform: translateY(-5px);
+}
+
+/* Image Section */
+.post-slide .post-img {  
+  width: 100%;
+  height: 40%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.post-slide .post-img img {
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s linear;
+}
+
+.post-slide:hover .post-img img {
+  transform: scale(1.1);
+}
+
+/* Overlay on Hover */
+.post-slide .over-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, rgba(6, 190, 244, 0.75) 0%, rgba(45, 112, 253, 0.6) 100%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.post-slide:hover .over-layer {
+  opacity: 1;
+}
+
+.post-slide .over-layer i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Post Content */
+.post-slide .post-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-slide .post-title {
+  font-size: 15px;
+  font-weight: bold;
+}
+.post-slide .post-title a {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.post-slide .post-title a:hover {
+  color: #3498db;
+}
+
+.post-slide .post-description {
+  color: #808080;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.post-slide .post-date {
+  color: #a9a9a9;
+  font-size: 14px;
+}
+
+.post-slide .post-date i {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+/* "Read More" Button */
+.post-slide .read-more {
+  padding: 7px 20px;
+  font-size: 12px;
+  background-color: #2196f3;
+  color: #fff;
+  border-radius: 25px;
+  box-shadow: 0px 10px 20px -10px #1376c5;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.post-slide .read-more:hover {
+  background-color: #3498db;
+  text-decoration: none;
+}
+
+/* Responsiveness */
+@media only screen and (max-width: 1280px) {
+  .post-slide .post-title {
+    font-size: 16px;
+  }
+
+  .post-slide .read-more {
+    font-size: 11px;
+  }
+}
+
+/* display none until init */
+.owl-carousel{
+	/* display: none; */
+	position: relative;
+	width: 100%;
+	-ms-touch-action: pan-y;
+  
+}
+.owl-carousel .owl-wrapper{
+	display: none;
+	position: relative;
+	-webkit-transform: translate3d(0px, 0px, 0px);
+  
+}
+.owl-carousel .owl-wrapper-outer{
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+.owl-carousel .owl-item img{
+    padding:7px!important;
+    background-color:#f6f5ff;
+		margin-left:0px!important;
+    border-radius:15px;
+}
+.owl-carousel .allitem {
+  padding: 25px;
+	border-radius:0px;
+}
+.owl-carousel .owl-item{
+	/* float: left; */
+	border-radius:5px;
+  /* border:1px solid rgba(87,59,255,0.21); */
+}
+
+.owl-carousel .item {
+    display: inline-block;
+    width: auto;  /* Ensure the items are flexible */
+}
+.owl-controls .owl-page,
+.owl-controls .owl-buttons div{
+	/* cursor: pointer; */
+}
+.owl-controls {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 50);
+}
+
+.owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled{
+pointer-events: none;
+opacity: 0.2;
+}
+
+.owl-carousel .prev-slide{
+  /* background: url(https://freakyjolly.com/demo/jquery/OwlCarousel2/nav-icon.png) no-repeat scroll 0 0; */
+  left: -65px;
+}
+.owl-carousel .next-slide{
+  /* background: url(https://freakyjolly.com/demo/jquery/OwlCarousel2/nav-icon.png) no-repeat scroll -24px 0px; */
+  right: -65px;
+}
+.owl-carousel .prev-slide:hover{
+ background-position: 0px -53px;
+}
+.owl-carousel .next-slide:hover{
+background-position: -24px -53px;
+}
+
+
+/* mouse grab icon */
+.grabbing { 
+    cursor:url(grabbing.png) 8 8, move;
+}
+.owl-carousel  .owl-wrapper,
+.owl-carousel  .owl-item{
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility:    hidden;
+	-ms-backface-visibility:     hidden;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+}
+
+.owl-carousel.owl-theme .owl-controls .owl-dots {
+  bottom: 10px;
+  display: block;
+  left: 50%;
+  /* margin-left: -20px; */
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.owl-dots{
+  margin-top: 3%;
+}
+
+.owl-carousel.owl-theme .owl-controls .owl-dots div.owl-dot>span {
+  background: #fff none repeat scroll 0 0;
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  -moz-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  -ms-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.testimonial-content {
+  margin-bottom: 15px;
+}
+
+.owl-carousel.owl-theme .owl-controls .owl-dots div.owl-dot {
+  display: inline-block;
+  margin: 0 3px;
+}
+
+.owl-carousel.owl-theme .owl-controls .owl-dots div.owl-dot.active span {
+  background: #3EC1D5;
+}
+
+.owl-carousel .owl-nav{
+  /* overflow: hidden; */
+  height: 0px;
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  /* text-align: left; */
+}
+.owl-carousel .nav-btn{
+  /* height: 47px; */
+  position: absolute;
+  /* width: 26px; */
+  cursor: pointer;
+  top: 100px !important;
+}
+/* Styling for the previous button */
+.owl-prev, .owl-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* background-color: rgba(0, 0, 0, 0.7);  */
+  background-color: 3EC1D5;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 24px;
+  z-index: 15;  /* Ensures buttons are above the background */
+}
+.owl-prev {
+  left: 0;
+}
+
+.owl-next {
+  right: 0;
+}
+
+.prev-slide,
+.next-slide {
+  position: relative;
+  padding: 5px;
+  /* margin: 30px auto; */
+  /* background: #3EC1D5; */
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 20px;
+  width: 50px;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+}
+
+.next-slide:hover {
+  transform: translate3d(0, 10px, 0);
+}
+
+.prev-slide:hover {
+  transform: translate3d(0, 10px, 0);
+}
+
+.prev-slide::after,
+.next-slide::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  z-index: 11;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-top: 5px solid #fff;
+  border-left: 5px solid #fff;
+}
+.prev-slide::after {
+  top: 0px;
+  transform: rotate(315deg);
+}
+
+.next-slide::after {
+  top: 0px;
+  transform: rotate(135deg);
+}
+
+.owl-theme .owl-dots .owl-dot span{
+  /* background: #869791; */
+  width: 30px;
+  height: 15px;
+}
+
+/* .owl-theme .owl-dots .owl-dot .active span{
+  background: #D6D6D6;
+} */
+
 /*--------------------------------
 
  4.Competence Area
@@ -1501,40 +1865,7 @@ S
   font-size: 20px;
 }
 
-/* .testimonial-carousel.owl-carousel.owl-theme .owl-controls .owl-dots div.owl-dot>span {
-  background: #fff none repeat scroll 0 0;
-  display: inline-block;
-  height: 8px;
-  width: 8px;
-  -moz-transition: 0.4s;
-  -webkit-transition: 0.4s;
-  -o-transition: 0.4s;
-  -ms-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-.testimonial-carousel.owl-carousel.owl-theme .owl-controls .owl-dots {
-  bottom: -30px;
-  display: block;
-  left: 50%;
-  margin-left: -20px;
-  position: absolute;
-} 
-
-.testimonial-content {
-  margin-bottom: 15px;
-}
-
-.testimonial-carousel.owl-carousel.owl-theme .owl-controls .owl-dots div.owl-dot {
-  display: inline-block;
-  margin: 0 3px;
-}
-
-.testimonial-carousel.owl-carousel.owl-theme .owl-controls .owl-dots div.owl-dot.active span {
-  background: #3EC1D5;
-}
-*/
+/
 .testi-text.text-center>h6 {
   color: #fff;
   font-size: 20px;
@@ -1551,6 +1882,8 @@ S
   color: #3EC1D5;
   font-size: 14px;
 }
+
+/* fix */
 
 /*--------------------------------*/
 
