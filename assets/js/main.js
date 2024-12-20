@@ -260,14 +260,14 @@
     });
 
     // to debug
-    owl.on('mousewheel', '.owl-stage', function (e) {
-      if (e.deltaY>0) {
-          owl.trigger('next.owl');
-      } else {
-          owl.trigger('prev.owl');
-      }
-      e.preventDefault();
-  });
+  //   owl.on('mousewheel', '.owl-stage', function (e) {
+  //     if (e.deltaY>0) {
+  //         owl.trigger('next.owl');
+  //     } else {
+  //         owl.trigger('prev.owl');
+  //     }
+  //     e.preventDefault();
+  // });
 
 })(jQuery);
 
@@ -281,12 +281,94 @@
 
 
 
+// function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
+//   // Create the post card container
+//   var postSlide = document.createElement('div');
+//   postSlide.classList.add('post-slide');
+  
+//   // Create the image section
+//   var postImg = document.createElement('div');
+//   postImg.classList.add('post-img');
+//   var img = document.createElement('img');
+//   img.src = imageUrl;
+//   img.alt = 'Post Image';
+//   postImg.appendChild(img);
+
+//   // Create overlay link
+//   // var overLayer = document.createElement('a');
+//   // // overLayer.href = '';
+//   // overLayer.classList.add('over-layer');
+//   // var overIcon = document.createElement('i');
+//   // overIcon.classList.add('fa', 'fa-link');
+//   // overLayer.appendChild(overIcon);
+//   // postImg.appendChild(overLayer);
+
+//   // Create the content section
+//   var postContent = document.createElement('div');
+//   postContent.classList.add('post-content');
+
+//   // Create post title
+//   var postTitle = document.createElement('h3');
+//   postTitle.classList.add('post-title');
+//   var postLink = document.createElement('a');
+//   // postLink.href = '';
+//   postLink.textContent = Role;
+//   postTitle.appendChild(postLink);
+
+//   var secondPostTitle = document.createElement('h4');  // Use h4 for the second title
+//   secondPostTitle.classList.add('second-post-title');
+//   var secondPostLink = document.createElement('a');
+//   // secondPostLink.href = '';
+//   secondPostLink.textContent = Company;
+//   secondPostTitle.appendChild(secondPostLink);
+
+//   // Create post description
+//   var postDescription = document.createElement('p');
+//   postDescription.classList.add('post-description');
+//   postDescription.textContent = descriptionText;
+
+//   // Create post date
+//   var postDate = document.createElement('span');
+//   postDate.classList.add('post-date');
+//   var dateIcon = document.createElement('i');
+//   dateIcon.classList.add('fa', 'fa-clock-o');
+//   postDate.appendChild(dateIcon);
+//   postDate.appendChild(document.createTextNode(Data));
+
+//   var postLoc = document.createElement('span');
+//   postLoc.classList.add('post-loc');
+//   var dateLoc = document.createElement('i');
+//   dateLoc.classList.add('fa', 'fa-location-dot');
+//   postLoc.appendChild(dateLoc);
+//   postLoc.appendChild(document.createTextNode(Loc));
+
+//   // Create read more link
+//   var readMore = document.createElement('a');
+//   // readMore.href = '';
+//   readMore.classList.add('read-more');
+//   readMore.textContent = 'read more';
+
+//   // Append all sections to postContent
+//   postContent.appendChild(postTitle);
+//   postContent.appendChild(secondPostTitle); 
+//   postContent.appendChild(postDescription);
+//   postContent.appendChild(postDate);
+//   postContent.appendChild(postLoc);
+//   postContent.appendChild(readMore);
+
+//   // Append the image and content to the postSlide
+//   postSlide.appendChild(postImg);
+//   postSlide.appendChild(postContent);
+
+//   // Append the postSlide to the main container
+//   document.getElementById('news-slider').appendChild(postSlide);
+// }
+
 function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
-  // Create the post card container
+  // Create the post card container (table)
   var postSlide = document.createElement('div');
   postSlide.classList.add('post-slide');
-  
-  // Create the image section
+
   var postImg = document.createElement('div');
   postImg.classList.add('post-img');
   var img = document.createElement('img');
@@ -294,74 +376,113 @@ function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
   img.alt = 'Post Image';
   postImg.appendChild(img);
 
-  // Create overlay link
-  // var overLayer = document.createElement('a');
-  // // overLayer.href = '';
-  // overLayer.classList.add('over-layer');
-  // var overIcon = document.createElement('i');
-  // overIcon.classList.add('fa', 'fa-link');
-  // overLayer.appendChild(overIcon);
-  // postImg.appendChild(overLayer);
-
-  // Create the content section
   var postContent = document.createElement('div');
   postContent.classList.add('post-content');
+  
+  // Create the table to hold the post content
+  var postTable = document.createElement('table');
+  postTable.classList.add('post-table');
+  var tableBody = document.createElement('tbody');
 
-  // Create post title
-  var postTitle = document.createElement('h3');
-  postTitle.classList.add('post-title');
-  var postLink = document.createElement('a');
-  // postLink.href = '';
-  postLink.textContent = Role;
-  postTitle.appendChild(postLink);
+  
+  
+  // Create the table row for the image
+  // var imgRow = document.createElement('tr');
+  // var imgCell = document.createElement('td');
+  // imgCell.classList.add('post-img-cell');
+  // imgCell.setAttribute("colspan", 2); 
+  // var postImage = document.createElement('div');
+  // postImage.classList.add('post-img');
+  // var img = document.createElement('img');
+  // img.src = imageUrl;
+  // img.alt = 'Post Image';
+  // postImage.appendChild(img);
+  // imgCell.appendChild(postImage);
+  // imgRow.appendChild(imgCell);
+  // tableBody.appendChild(imgRow);
 
-  var secondPostTitle = document.createElement('h4');  // Use h4 for the second title
-  secondPostTitle.classList.add('second-post-title');
-  var secondPostLink = document.createElement('a');
-  // secondPostLink.href = '';
-  secondPostLink.textContent = Company;
-  secondPostTitle.appendChild(secondPostLink);
+  // Create the table row for Role and Company titles
+  var titleRow = document.createElement('tr');
+  var roleCell = document.createElement('td');
+  roleCell.classList.add('post-role-cell');
+  roleCell.setAttribute("colspan", 2);
+  var roleTitle = document.createElement('h3');
+  var roleLink = document.createElement('a');
+  roleLink.textContent = Role;
+  roleTitle.appendChild(roleLink);
+  roleCell.appendChild(roleTitle);
+  
+  var titleRow2 = document.createElement('tr')
+  var companyCell = document.createElement('td');
+  companyCell.classList.add('post-company-cell');
+  companyCell.classList.add('.post-content');
+  companyCell.setAttribute("colspan", 2);
+  var companyTitle = document.createElement('h4');
+  var companyLink = document.createElement('a');
+  companyLink.textContent = Company;
+  companyTitle.appendChild(companyLink);
+  companyCell.appendChild(companyTitle);
 
-  // Create post description
+  titleRow.appendChild(roleCell);
+  titleRow2.appendChild(companyCell);
+  tableBody.appendChild(titleRow);
+  tableBody.appendChild(titleRow2);
+
+  // Create the table row for the description
+  var descriptionRow = document.createElement('tr');
+  var descriptionCell = document.createElement('td');
+  descriptionCell.classList.add('post-description-cell');
+  descriptionCell.setAttribute("colspan", 2);
   var postDescription = document.createElement('p');
   postDescription.classList.add('post-description');
   postDescription.textContent = descriptionText;
+  descriptionCell.appendChild(postDescription);
+  descriptionRow.appendChild(descriptionCell);
+  tableBody.appendChild(descriptionRow);
 
-  // Create post date
-  var postDate = document.createElement('span');
-  postDate.classList.add('post-date');
+  // Create the table row for Date and Location
+  var dateLocRow = document.createElement('tr');
+  var dateCell = document.createElement('td');
+  dateCell.classList.add('post-date-cell');
   var dateIcon = document.createElement('i');
   dateIcon.classList.add('fa', 'fa-clock-o');
-  postDate.appendChild(dateIcon);
-  postDate.appendChild(document.createTextNode(Data));
+  dateCell.appendChild(dateIcon);
+  dateCell.appendChild(document.createTextNode(Data));
+  
+  var locCell = document.createElement('td');
+  locCell.classList.add('post-loc-cell');
+  var locIcon = document.createElement('i');
+  locIcon.classList.add('fa', 'fa-location-dot');
+  locCell.appendChild(locIcon);
+  locCell.appendChild(document.createTextNode(Loc));
 
-  var postLoc = document.createElement('span');
-  postLoc.classList.add('post-loc');
-  var dateLoc = document.createElement('i');
-  dateLoc.classList.add('fa', 'fa-location-dot');
-  postLoc.appendChild(dateLoc);
-  postLoc.appendChild(document.createTextNode(Loc));
+  dateLocRow.appendChild(dateCell);
+  // dateLocRow.appendChild(locCell);
+  tableBody.appendChild(dateLocRow);
 
-  // Create read more link
+  // Create the table row for the "read more" link
+  var readMoreRow = document.createElement('tr');
+  var emptyCell = document.createElement('td');
+  emptyCell.classList.add('read-more-cell');
+  var readMoreCell = document.createElement('td');
+  readMoreCell.classList.add('read-more-cell');
   var readMore = document.createElement('a');
-  // readMore.href = '';
   readMore.classList.add('read-more');
-  readMore.textContent = 'read more';
+  readMore.textContent = 'Read more';
+  readMoreCell.appendChild(readMore);
+  readMoreRow.appendChild(locCell);
+  readMoreRow.appendChild(readMoreCell);
+  tableBody.appendChild(readMoreRow);
 
-  // Append all sections to postContent
-  postContent.appendChild(postTitle);
-  postContent.appendChild(secondPostTitle); 
-  postContent.appendChild(postDescription);
-  postContent.appendChild(postDate);
-  postContent.appendChild(postLoc);
-  postContent.appendChild(readMore);
-
-  // Append the image and content to the postSlide
+  // Append the table body to the table
+  postTable.appendChild(tableBody);
+  postContent.appendChild(postTable);
+  
+  // Append the table to the postSlide
   postSlide.appendChild(postImg);
   postSlide.appendChild(postContent);
 
   // Append the postSlide to the main container
   document.getElementById('news-slider').appendChild(postSlide);
 }
-
   
