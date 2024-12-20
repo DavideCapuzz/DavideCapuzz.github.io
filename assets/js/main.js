@@ -281,7 +281,7 @@
 
 
 
-function createPostCard(imageUrl, titleText, descriptionText, postDateText) {
+function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
   // Create the post card container
   var postSlide = document.createElement('div');
   postSlide.classList.add('post-slide');
@@ -312,8 +312,15 @@ function createPostCard(imageUrl, titleText, descriptionText, postDateText) {
   postTitle.classList.add('post-title');
   var postLink = document.createElement('a');
   // postLink.href = '';
-  postLink.textContent = titleText;
+  postLink.textContent = Role;
   postTitle.appendChild(postLink);
+
+  var secondPostTitle = document.createElement('h4');  // Use h4 for the second title
+  secondPostTitle.classList.add('second-post-title');
+  var secondPostLink = document.createElement('a');
+  // secondPostLink.href = '';
+  secondPostLink.textContent = Company;
+  secondPostTitle.appendChild(secondPostLink);
 
   // Create post description
   var postDescription = document.createElement('p');
@@ -326,7 +333,14 @@ function createPostCard(imageUrl, titleText, descriptionText, postDateText) {
   var dateIcon = document.createElement('i');
   dateIcon.classList.add('fa', 'fa-clock-o');
   postDate.appendChild(dateIcon);
-  postDate.appendChild(document.createTextNode(postDateText));
+  postDate.appendChild(document.createTextNode(Data));
+
+  var postLoc = document.createElement('span');
+  postLoc.classList.add('post-loc');
+  var dateLoc = document.createElement('i');
+  dateLoc.classList.add('fa', 'fa-location-dot');
+  postLoc.appendChild(dateLoc);
+  postLoc.appendChild(document.createTextNode(Loc));
 
   // Create read more link
   var readMore = document.createElement('a');
@@ -336,8 +350,10 @@ function createPostCard(imageUrl, titleText, descriptionText, postDateText) {
 
   // Append all sections to postContent
   postContent.appendChild(postTitle);
+  postContent.appendChild(secondPostTitle); 
   postContent.appendChild(postDescription);
   postContent.appendChild(postDate);
+  postContent.appendChild(postLoc);
   postContent.appendChild(readMore);
 
   // Append the image and content to the postSlide
