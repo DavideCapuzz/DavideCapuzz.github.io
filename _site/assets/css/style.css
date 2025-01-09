@@ -705,6 +705,7 @@ div#preloader {
 }
 
 /* "Read More" Button */
+
 .post-slide .read-more {
   padding: 7px 20px;
   font-size: 12px;
@@ -712,7 +713,7 @@ div#preloader {
   color: #fff;
   border-radius: 25px;
   box-shadow: 0px 10px 20px -10px #1376c5;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-decoration: none;
   margin-top: auto;
   align-self: flex-start;

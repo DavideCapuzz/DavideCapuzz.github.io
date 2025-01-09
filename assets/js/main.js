@@ -231,7 +231,7 @@
 
     owl.owlCarousel({
         stagePadding:1,
-        startPosition:6,
+        startPosition:7,
         loop:false,
         margin:10,
         nav:true,
@@ -280,91 +280,7 @@
 // });
 
 
-
-// function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
-//   // Create the post card container
-//   var postSlide = document.createElement('div');
-//   postSlide.classList.add('post-slide');
-  
-//   // Create the image section
-//   var postImg = document.createElement('div');
-//   postImg.classList.add('post-img');
-//   var img = document.createElement('img');
-//   img.src = imageUrl;
-//   img.alt = 'Post Image';
-//   postImg.appendChild(img);
-
-//   // Create overlay link
-//   // var overLayer = document.createElement('a');
-//   // // overLayer.href = '';
-//   // overLayer.classList.add('over-layer');
-//   // var overIcon = document.createElement('i');
-//   // overIcon.classList.add('fa', 'fa-link');
-//   // overLayer.appendChild(overIcon);
-//   // postImg.appendChild(overLayer);
-
-//   // Create the content section
-//   var postContent = document.createElement('div');
-//   postContent.classList.add('post-content');
-
-//   // Create post title
-//   var postTitle = document.createElement('h3');
-//   postTitle.classList.add('post-title');
-//   var postLink = document.createElement('a');
-//   // postLink.href = '';
-//   postLink.textContent = Role;
-//   postTitle.appendChild(postLink);
-
-//   var secondPostTitle = document.createElement('h4');  // Use h4 for the second title
-//   secondPostTitle.classList.add('second-post-title');
-//   var secondPostLink = document.createElement('a');
-//   // secondPostLink.href = '';
-//   secondPostLink.textContent = Company;
-//   secondPostTitle.appendChild(secondPostLink);
-
-//   // Create post description
-//   var postDescription = document.createElement('p');
-//   postDescription.classList.add('post-description');
-//   postDescription.textContent = descriptionText;
-
-//   // Create post date
-//   var postDate = document.createElement('span');
-//   postDate.classList.add('post-date');
-//   var dateIcon = document.createElement('i');
-//   dateIcon.classList.add('fa', 'fa-clock-o');
-//   postDate.appendChild(dateIcon);
-//   postDate.appendChild(document.createTextNode(Data));
-
-//   var postLoc = document.createElement('span');
-//   postLoc.classList.add('post-loc');
-//   var dateLoc = document.createElement('i');
-//   dateLoc.classList.add('fa', 'fa-location-dot');
-//   postLoc.appendChild(dateLoc);
-//   postLoc.appendChild(document.createTextNode(Loc));
-
-//   // Create read more link
-//   var readMore = document.createElement('a');
-//   // readMore.href = '';
-//   readMore.classList.add('read-more');
-//   readMore.textContent = 'read more';
-
-//   // Append all sections to postContent
-//   postContent.appendChild(postTitle);
-//   postContent.appendChild(secondPostTitle); 
-//   postContent.appendChild(postDescription);
-//   postContent.appendChild(postDate);
-//   postContent.appendChild(postLoc);
-//   postContent.appendChild(readMore);
-
-//   // Append the image and content to the postSlide
-//   postSlide.appendChild(postImg);
-//   postSlide.appendChild(postContent);
-
-//   // Append the postSlide to the main container
-//   document.getElementById('news-slider').appendChild(postSlide);
-// }
-
-function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
+function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc) {
   // Create the post card container (table)
   var postSlide = document.createElement('div');
   postSlide.classList.add('post-slide');
@@ -383,23 +299,6 @@ function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
   var postTable = document.createElement('table');
   postTable.classList.add('post-table');
   var tableBody = document.createElement('tbody');
-
-  
-  
-  // Create the table row for the image
-  // var imgRow = document.createElement('tr');
-  // var imgCell = document.createElement('td');
-  // imgCell.classList.add('post-img-cell');
-  // imgCell.setAttribute("colspan", 2); 
-  // var postImage = document.createElement('div');
-  // postImage.classList.add('post-img');
-  // var img = document.createElement('img');
-  // img.src = imageUrl;
-  // img.alt = 'Post Image';
-  // postImage.appendChild(img);
-  // imgCell.appendChild(postImage);
-  // imgRow.appendChild(imgCell);
-  // tableBody.appendChild(imgRow);
 
   // Create the table row for Role and Company titles
   var titleRow = document.createElement('tr');
@@ -466,9 +365,14 @@ function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
   emptyCell.classList.add('read-more-cell');
   var readMoreCell = document.createElement('td');
   readMoreCell.classList.add('read-more-cell');
-  var readMore = document.createElement('a');
+  var readMore = document.createElement('button');
+
   readMore.classList.add('read-more');
   readMore.textContent = 'Read more';
+  // readMore.classList.add('btn', 'btn-info', 'btn-lg', 'post-slide', 'read-more');
+  readMore.setAttribute('data-bs-toggle', 'modal');  // Enable modal functionality
+  readMore.setAttribute('data-bs-target', '#'+ tag);
+
   readMoreCell.appendChild(readMore);
   readMoreRow.appendChild(locCell);
   readMoreRow.appendChild(readMoreCell);
@@ -486,3 +390,86 @@ function createPostCard(imageUrl, Role, Company, descriptionText, Data, Loc) {
   document.getElementById('news-slider').appendChild(postSlide);
 }
   
+
+function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip, Data, Loc) {
+  // Create the outer modal container (div with modal class)
+  var modal = document.createElement('div');
+  modal.classList.add('modal', 'fade');
+  modal.id = tag;
+  modal.setAttribute('tabIndex', -1);
+  modal.setAttribute('aria-labelledby', 'myModalLabel');
+  modal.setAttribute('aria-hidden', 'true');
+
+  // Create the modal dialog container
+  const modalDialog = document.createElement('div');
+  modalDialog.classList.add('modal-dialog', 'modal-dialog-scrollable', 
+    'modal-dialog-centered', 'modal-lg');
+  
+  // Create the modal content
+  const modalContent = document.createElement('div');
+  modalContent.classList.add('modal-content');
+  
+  // Create the modal header
+  const modalHeader = document.createElement('div');
+  modalHeader.classList.add('modal-header');
+  
+  const modalTitle = document.createElement('h5');
+  modalTitle.classList.add('modal-title');
+  modalTitle.id = 'myModalLabel';
+  modalTitle.innerText = Company; // You can change the title here
+  
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.classList.add('btn-close');
+  closeButton.setAttribute('data-bs-dismiss', 'modal');
+  closeButton.setAttribute('aria-label', 'Close');
+
+  // Create the modal body
+  const modalBody = document.createElement('div');
+  modalBody.classList.add('modal-body');
+  // modalBody.innerText = descriptionText;
+
+  var modalImg = document.createElement('div');
+  modalImg.classList.add('modal-img');
+  var img = document.createElement('img');
+  img.src = imageUrl;
+  img.alt = 'Modal Image';
+  modalImg.appendChild(img);
+
+  var modalDescription = document.createElement('div');
+  modalDescription.classList.add('modal-description');
+  var modalFirstRow = document.createElement('div');
+  modalFirstRow.innerText = descriptionText;
+  modalFirstRow.classList.add('modal-first-row');
+  modalDescription.appendChild(modalFirstRow);
+
+  var modalList = document.createElement('div');
+  let text = "<ul>";
+  Listdescrip.forEach(myFunction);
+  text += "</ul>";
+  
+  function myFunction(value) {
+    text += "<li>" + value + "</li>";
+    
+  } 
+  modalList.innerText = text;
+  modalList.classList.add('modal-list');  
+  modalDescription.appendChild(modalList);
+  
+  // Assemble the modal structure
+  modalBody.appendChild(modalImg);
+  modalBody.appendChild(modalDescription);
+
+  modalHeader.appendChild(modalTitle);
+  modalHeader.appendChild(closeButton);
+  
+  modalContent.appendChild(modalHeader);
+  modalContent.appendChild(modalBody);
+  
+  modalDialog.appendChild(modalContent);
+  
+  modal.appendChild(modalDialog);
+  
+  // Append modal to a specific part of the page
+  document.getElementById('about').appendChild(modal);
+}
