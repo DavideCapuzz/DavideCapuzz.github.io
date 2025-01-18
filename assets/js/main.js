@@ -303,24 +303,28 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   // Create the table row for Role and Company titles
   var titleRow = document.createElement('tr');
   var roleCell = document.createElement('td');
+  titleRow.classList.add('post-role-cell');
   roleCell.classList.add('post-role-cell');
   roleCell.setAttribute("colspan", 2);
+  var roleDiv = document.createElement('div');
+  roleDiv.classList.add('table-card-div');
   var roleTitle = document.createElement('h3');
-  var roleLink = document.createElement('a');
-  roleLink.textContent = Role;
-  roleTitle.appendChild(roleLink);
-  roleCell.appendChild(roleTitle);
+  roleTitle.textContent = Role;
+  roleDiv.appendChild(roleTitle);
+  roleCell.appendChild(roleDiv);
   
   var titleRow2 = document.createElement('tr')
   var companyCell = document.createElement('td');
   companyCell.classList.add('post-company-cell');
-  companyCell.classList.add('.post-content');
+  titleRow2.classList.add('post-company-cell');
+  // companyCell.classList.add('.post-content');
   companyCell.setAttribute("colspan", 2);
+  var companyDiv = document.createElement('div');
+  companyDiv.classList.add('table-card-div');
   var companyTitle = document.createElement('h4');
-  var companyLink = document.createElement('a');
-  companyLink.textContent = Company;
-  companyTitle.appendChild(companyLink);
-  companyCell.appendChild(companyTitle);
+  companyTitle.textContent = Company;
+  companyDiv.appendChild(companyTitle);
+  companyCell.appendChild(companyDiv);
 
   titleRow.appendChild(roleCell);
   titleRow2.appendChild(companyCell);
@@ -331,11 +335,15 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   var descriptionRow = document.createElement('tr');
   var descriptionCell = document.createElement('td');
   descriptionCell.classList.add('post-description-cell');
+  descriptionRow.classList.add('post-description-cell');
   descriptionCell.setAttribute("colspan", 2);
+  var descriptionDiv = document.createElement('div');
+  descriptionDiv.classList.add('table-card-div');
   var postDescription = document.createElement('p');
   postDescription.classList.add('post-description');
   postDescription.textContent = descriptionText;
-  descriptionCell.appendChild(postDescription);
+  descriptionDiv.appendChild(postDescription);
+  descriptionCell.appendChild(descriptionDiv);
   descriptionRow.appendChild(descriptionCell);
   tableBody.appendChild(descriptionRow);
 
@@ -343,6 +351,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   var dateLocRow = document.createElement('tr');
   var dateCell = document.createElement('td');
   dateCell.classList.add('post-date-cell');
+  dateLocRow.classList.add('post-date-cell');
   var dateIcon = document.createElement('i');
   dateIcon.classList.add('fa', 'fa-clock-o');
   dateCell.appendChild(dateIcon);
@@ -365,6 +374,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   emptyCell.classList.add('read-more-cell');
   var readMoreCell = document.createElement('td');
   readMoreCell.classList.add('read-more-cell');
+  readMoreRow.classList.add('read-more-cell');
   var readMore = document.createElement('button');
 
   readMore.classList.add('read-more');
@@ -444,16 +454,17 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   modalDescription.appendChild(modalFirstRow);
 
   var modalList = document.createElement('div');
-  let text = "<ul>";
-  Listdescrip.forEach(myFunction);
-  text += "</ul>";
-  
-  function myFunction(value) {
-    text += "<li>" + value + "</li>";
-    
-  } 
-  modalList.innerText = text;
-  modalList.classList.add('modal-list');  
+  const ulElement = document.createElement('ul');
+  ulElement.classList.add('modal-list'); 
+  // Loop through the array and create a list item (li) for each one
+  Listdescrip.forEach(item => {
+      const liElement = document.createElement('li');
+      liElement.textContent = item;
+      ulElement.appendChild(liElement);
+  });
+
+  modalList.appendChild(ulElement);
+  // modalList.classList.add('modal-list');  
   modalDescription.appendChild(modalList);
   
   // Assemble the modal structure

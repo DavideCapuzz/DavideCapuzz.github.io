@@ -524,7 +524,7 @@ div#preloader {
 
 .about-area h4 {
   margin: 0 0 1px;
-	margin-top: 0px;
+	margin-bottom: 0px;
 	font-size: 110%;
 	color: #000;
 	font-weight: 100;
@@ -587,7 +587,7 @@ div#preloader {
   position: relative;
   overflow: hidden;
   border-radius: 10px;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 .post-slide .post-img img {
@@ -629,8 +629,12 @@ div#preloader {
 
 /* Post Content */
 .post-slide .post-content {
-  padding: 20px;
-  height:60%;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 52%;
+  top: 1%;
+  bottom: 3%;
+  position: relative;
   /* display: flex;
   
   flex-direction: column; */
@@ -654,9 +658,50 @@ div#preloader {
   width: 100%;
   height: 100%;
   border-spacing: 0px;
+  table-layout: fixed;
+  /* border: 1px solid purple; */
 }
-.post-role-cell,
-.post-company-cell,
+
+.table-card-div{
+  height: 100%;
+  overflow: visible;
+}
+
+/* 
+.post-table tr {
+  border: 1px solid purple;
+} */
+
+.post-table tr.post-role-cell {
+  height: 25%; 
+}
+.post-table tr.post-company-cell {
+  height: 10%;
+}
+.post-table tr.post-description-cell {
+  height: 40%;
+}
+.post-table tr.post-date-cell {
+  height: 10%;
+}
+.post-table tr.read-more-cell {
+  height: 15%;
+}
+
+.post-role-cell tr{
+  line-height: 20px;
+}
+.post-role-cell td{
+  width: 100%;
+}
+
+.post-company-cell tr{
+  line-height: 17%;
+}
+.post-company-cell td{
+  width: 100%;
+}
+
 .post-description-cell,
 .post-img-cell {
   width: 100%;
@@ -666,6 +711,7 @@ div#preloader {
 .post-loc-cell,
 .read-more-cell {
   width: 50%;
+  margin-bottom: 2px;
 }
 
 .post-slide .post-title a:hover {
@@ -673,9 +719,9 @@ div#preloader {
 }
 
 .post-slide .post-description {
-  color: #808080;
+  color: #555353;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-top: 0px;
 }
 
 .post-slide .post-date {
@@ -709,10 +755,10 @@ div#preloader {
 .post-slide .read-more {
   padding: 7px 20px;
   font-size: 12px;
-  background-color: #2196f3;
+  background-color: #3ec1d5;
   color: #fff;
   border-radius: 25px;
-  box-shadow: 0px 10px 20px -10px #1376c5;
+  box-shadow: 0px 10px 20px -10px #3ec1d5;
   /* text-transform: uppercase; */
   text-decoration: none;
   margin-top: auto;
@@ -948,6 +994,66 @@ background-position: -24px -53px;
   /* background: #869791; */
   width: 30px;
   height: 15px;
+}
+
+.modal-img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.modal-list{  
+  > li{ 
+    list-style:none; 
+    position:relative; 
+    padding:0 0 0 2em;
+    margin:0 0 .5em 10px;
+    transition:.12s;
+    
+    &::before{
+      position:absolute;
+      content:'\2022'; 
+      font-family:Arial;
+      color:#383535;
+      top:0;
+      left:0;
+      text-align:center; 
+      font-size:2em; 
+      opacity:.5;
+      line-height:.75; 
+      transition:.5s;
+    }
+    
+    &:hover{
+      color:#080808;
+      &::before{
+        transform:scale(2); 
+        opacity:1; 
+        text-shadow:0 0 4px;
+        transition:.1s;
+      }
+    }
+  } 
+  
+  > li{
+    &::before{
+      content:'';
+      width:10px; height:10px;
+      background:#3EC1D5;
+      border-radius:3px;
+      line-height:0;
+      top:.27em; left:5px;
+    }
+    
+    &:hover::before{
+      transform:none; 
+      border-radius:5px; 
+      width:25px; 
+      left:-10px;
+      background:#3cd6ed;
+    }
+  }
 }
 
 @media (max-width: 767px) {
