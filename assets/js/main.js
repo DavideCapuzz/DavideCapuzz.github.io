@@ -209,8 +209,6 @@
     });
   }
 
-  console.log("oh");
-
   // $(document).ready(function () {
     
   //   $("#news-slider").owlCarousel({
@@ -426,7 +424,7 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   const modalTitle = document.createElement('h5');
   modalTitle.classList.add('modal-title');
   modalTitle.id = 'myModalLabel';
-  modalTitle.innerText = Company; // You can change the title here
+  modalTitle.innerText = Role;
   
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
@@ -438,6 +436,35 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   const modalBody = document.createElement('div');
   modalBody.classList.add('modal-body');
   // modalBody.innerText = descriptionText;
+  
+  const row = document.createElement('div');
+  row.classList.add('row');
+
+  const comapnycol = document.createElement('div');
+  comapnycol.classList.add("col-md-8","col-sm-8","col-xs-12");
+
+  const modalCompany = document.createElement('h6');
+  // modalCompany.classList.add('modal-title');
+  modalCompany.innerText = Company;
+  comapnycol.appendChild(modalCompany);
+  
+  var dateCell = document.createElement('div');
+  dateCell.classList.add("col-md-2","col-sm-2","col-xs-12");
+  var dateIcon = document.createElement('i');
+  dateIcon.classList.add('fa', 'fa-clock-o');
+  dateCell.appendChild(dateIcon);
+  dateCell.appendChild(document.createTextNode(Data));
+  
+  var locCell = document.createElement('div');
+  locCell.classList.add("col-md-2","col-sm-2","col-xs-12");
+  var locIcon = document.createElement('i');
+  locIcon.classList.add('fa', 'fa-location-dot');
+  locCell.appendChild(locIcon);
+  locCell.appendChild(document.createTextNode(Loc));
+  
+  row.appendChild(comapnycol);
+  row.appendChild(dateCell);
+  row.appendChild(locCell);
 
   var modalImg = document.createElement('div');
   modalImg.classList.add('modal-img');
@@ -468,6 +495,8 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   modalDescription.appendChild(modalList);
   
   // Assemble the modal structure
+  modalBody.appendChild(row);
+  // modalBody.appendChild(modalCompany);
   modalBody.appendChild(modalImg);
   modalBody.appendChild(modalDescription);
 
@@ -484,3 +513,27 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   // Append modal to a specific part of the page
   document.getElementById('about').appendChild(modal);
 }
+
+document.getElementById('downloadCV').addEventListener('click', function() {
+  const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf'; // Replace with your PDF file URL
+  
+  // Fetch the PDF file
+  fetch(pdfUrl)
+      .then(response => response.blob()) // Convert the response to a Blob
+      .then(blob => {
+          // Create a link element
+          const link = document.createElement('a');
+          
+          // Create a URL for the Blob and set it as the href attribute
+          link.href = URL.createObjectURL(blob);
+          
+          // Set the download attribute with the desired filename
+          link.download = 'resume_Capuzzo_2024.pdf'; // You can change the filename here
+          
+          // Programmatically click the link to trigger the download
+          link.click();
+      })
+      .catch(error => {
+          console.error('Error downloading the PDF:', error);
+      });
+});
