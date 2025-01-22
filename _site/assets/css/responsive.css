@@ -1,0 +1,152 @@
+
+/* small mobile :320px. */
+@media (max-width: 767px) {
+  /*--------------------------------*/
+  /*  2. Header top Area
+  /*--------------------------------*/
+  .nav-link{
+    padding-right:calc(var(--bs-gutter-x) * .5);
+    padding-left:calc(var(--bs-gutter-x) * .5);
+  }
+  .navbar-brand{
+    /* padding-right:calc(var(--bs-gutter-x) * .5); */
+    padding-left:calc(var(--bs-gutter-x) * .5) !important;
+  }
+  .menu-phone{
+    padding-right:0px !important;
+    padding-left:0px !important;
+  }
+  .header-area {
+    height: 50px !important;
+    background: #000;
+  }
+  .navbar-header a.navbar-brand, .stick .navbar-header a.navbar-brand {
+    display: inline-block;
+    height: 50px  !important;
+    padding: 9px 0;
+  }
+  .navbar-default .navbar-toggle, .stick .navbar-default .navbar-toggle {
+    padding: 15px 0;
+  }
+  .nav.navbar-nav.navbar-right, .stick .nav.navbar-nav.navbar-right {
+    background-color: #252525;
+    padding: 0;
+    margin-top: 0;
+  }
+  /* .logo {
+    height: inherit;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: -6px;
+    z-index: 999999;
+  }
+  .logo a {
+    padding: 0;
+  } */
+   /*--------------------------------*/
+
+  /* 2.1. Image Area
+  /*--------------------------------*/  
+  .slider-area {
+    height:100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  .mu-header-featured-area {
+    background-size: 570%;
+    height:100%;
+  }
+  .mu-header-featured-area .col-md-6 {
+    width: 100%;
+    /* padding: 0 15px; */
+  }
+
+  /* Stack image and content vertically */
+  .mu-header-featured-area .row {
+      display: block;
+  }
+  .mu-header-featured-img {  
+    overflow: hidden; 
+    max-height: 320px;
+      margin-top: 20%;  
+	    margin-left: 15%;
+	    margin-right: 15%;
+      /* max-width: 100%; */
+      /* height: auto; */
+  }
+  .mu-header-featured-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensure the image fills the container */
+    object-position: top;  /* Crop from the top, keeping the bottom part visible */
+}
+  .mu-header-featured-content {       
+      /* margin-left: 15%;
+      margin-right: 15%; */
+      margin-right: 0%;
+      margin-top: 15%;
+  }
+
+  .mu-header-featured-content h1 {
+    font-size: 200%;
+    color: #fff;
+    font-weight: 250;
+    margin-bottom: 10px;
+  }
+  
+  .mu-header-featured-content h2 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 250;
+    margin-bottom: 10px;
+  }
+  
+  .mu-header-featured-content h1 span {
+    font-weight: 600;
+  }
+  
+  .mu-header-featured-content p{
+    color: #fff;
+  }
+
+
+  .layer-1-3 a.ready-btn {
+    padding: 8px 15px;
+  }
+  .section-headline h2 {
+    font-size: 30px;
+  }
+  .suscribe-input input {
+    width: 60%;
+  }
+  .suscribe-input button {
+    font-size: 15px;
+    padding: 14px 10px;
+    width: 40%;
+  }
+  .section-headline h3 {
+    font-size: 25px;
+  }
+  .contact-form {
+    margin-top: 30px;
+  }
+  .footer-content {
+    margin-bottom: 30px;
+  }
+  .header-bottom h1 {
+    font-size: 30px;
+    margin-bottom: 0;
+  }
+  .page-area .slider-content {
+    padding: 100px 0;
+  }
+  .header-bottom h2 {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+}
+
+/* Large Mobile :480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
