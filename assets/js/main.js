@@ -102,7 +102,19 @@
     $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
     return false;
   });
-
+  
+  // $('[data-toggle="popover"]').popover();
+  // $('[data-bs-toggle="popover"]').each(function () {
+  //   new bootstrap.Popover(this);
+  // }); 
+  $('[data-bs-toggle="popover"]').each(function () {
+    // Initialize the popover using Bootstrap 5's native API (not jQuery)
+    new bootstrap.Popover(this, {
+      html: true, // Allow HTML content in the popover
+      trigger: 'click', // Trigger the popover on click
+      placement: 'left' // Set popover placement to the left
+    });
+  });
   /*----------------------------
    Parallax maybe not nececcesry
   ------------------------------ */
@@ -115,7 +127,9 @@
    collapse
   ---------------------------- */
   // var panel_test = $('.panel-heading a');
-  // panel_test.on('click', function() {
+  // panel_test.on('click'ta-bs-toggle="popover"]').each(function () {
+  //   new bootstrap.Popover(this);
+  // }); , function() {
   //   panel_test.removeClass('active');
   //   $(this).addClass('active');
   // });
@@ -537,3 +551,65 @@ document.getElementById('downloadCV').addEventListener('click', function() {
           console.error('Error downloading the PDF:', error);
       });
 });
+
+function createList(Title,ListTitle,ListContent,dir, id)
+{
+  // Create the <li> element
+var li = document.createElement('li');
+
+// Create the <button> element
+var button = document.createElement('button');
+button.type = 'button';
+button.classList.add('empty-button');
+button.setAttribute('data-bs-toggle', 'popover');
+button.setAttribute('data-bs-trigger', 'hover');
+button.setAttribute('data-bs-placement', dir);
+button.setAttribute('title', Title);
+button.setAttribute('data-bs-original-title', Title);
+var s = "<div class ='inpop'><b>" + ListTitle + "</b><ul>";
+console.log(Array.isArray(ListTitle))
+console.log(ListTitle)
+ListContent.forEach(item => {
+  s += "<li>" + item + "</li>";
+});
+s += "</ul></div>";
+console.log(s)
+
+button.setAttribute('data-bs-content', s);
+
+// Create the <h4> element and set its text
+var h4 = document.createElement('h4');
+h4.textContent = Title;
+
+// Append the <h4> element to the button
+button.appendChild(h4);
+
+// Append the <button> to the <li>
+li.appendChild(button);
+
+// Append the <li> to a parent container (e.g., a <ul> with id 'myList')
+document.getElementById(id).appendChild(li);
+// var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+// var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+//   return new bootstrap.Popover(popoverTriggerEl)
+// })
+// var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+// var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+//   return new bootstrap.Popover(popoverTriggerEl, {
+//     html: true, // Allow HTML content
+//     trigger: 'hover', // Trigger popover on focus
+//     content: function() {
+//       var content = $(popoverTriggerEl).attr("data-bs-content");
+//       return $(content).children(".popover-body").html(); // Extract content from the targeted element
+//     }
+//   });
+// });
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    
+    // Initialize popovers for each element
+    popoverTriggerList.forEach(function (popoverTriggerEl) {
+      new bootstrap.Popover(popoverTriggerEl, {
+        html: true
+      });
+    });
+}
