@@ -225,7 +225,7 @@ div#preloader {
 }
 
 .section-headline  {
-  margin-top: 70px;
+  margin-top: 125px;
 }
 .section-headline h2 {
   display: inline-block;
@@ -493,7 +493,7 @@ position: relative;
 
 .downloadCV{
   position: absolute;
-  top: -48px; /* Position 10px from the top */
+  top: 10px; /* Position 10px from the top */
   right: 10px; /* Position 10px from the right */
   z-index: 9999; /* Ensure it appears above other content */
   padding: 10px 20px;
@@ -1156,7 +1156,7 @@ background-position: -24px -53px;
 --------------------------------*/
 .competences-area {	
 	/* padding: 100px 1000 px 10 px 10 px; */
-  /* background-color: rgba(0,0,0,0.80); */
+  background-color: #3ec1d5;
   height: 100%;
   display: inline;
 	opacity: 0.8;
@@ -1237,7 +1237,7 @@ background-position: -24px -53px;
 .ideas-area {
 	
 	padding: 100px 1000 px 10 px 10 px;
-  background-color: rgba(0,0,0,0.85);
+  background-color: #091d20;
   height: 100%;
   display: inline;
 	/* opacity: 0.8; */
@@ -2327,7 +2327,8 @@ S
 
 .contact-area {
   height: auto;
-  width: 100%;
+	float: left;
+	width: 100%;
 }
 
 .contact-content {
