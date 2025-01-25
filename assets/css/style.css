@@ -225,13 +225,17 @@ div#preloader {
 }
 
 .section-headline  {
-  margin-top: 125px;
+  margin-top: 10%;
+}
+
+.section-contact  {
+  margin-top: 5%;
 }
 .section-headline h2 {
   display: inline-block;
   font-size: 40px;
   font-weight: 600;
-  margin-bottom: 70px;
+  /* margin-bottom: 70px; */
   position: relative;
   text-transform: capitalize;
 }
@@ -2132,7 +2136,6 @@ S
   font-size: 20px;
 }
 
-/
 .testi-text.text-center>h6 {
   color: #fff;
   font-size: 20px;
@@ -2276,7 +2279,7 @@ S
 
 .suscribe-text {
   display: block;
-  padding: 10px 0;
+  margin-top:5%;
 }
 
 .suscribe-text h3 {
@@ -2420,6 +2423,23 @@ S
   line-height: 46px;
   border-radius: 50%;
   margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;  
+}
+
+
+.link-link{
+  color:#444;
+}
+.link-link:hover {
+  color: #3EC1D5;
+}
+.link-link:hover {
+  --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
+}
+
+.find-me{
+  margin-top: 20%;
 }
 
 .single-icon p {
@@ -2429,6 +2449,19 @@ S
 
 .contact-icon {
   margin-bottom: 40px;
+}
+
+.single-icon{
+  margin-top: 40px;
+}
+
+.map {
+  height: 370px;
+  margin-bottom: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 #google-map {

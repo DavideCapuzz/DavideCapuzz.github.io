@@ -567,13 +567,10 @@ button.setAttribute('data-bs-placement', dir);
 button.setAttribute('title', Title);
 button.setAttribute('data-bs-original-title', Title);
 var s = "<div class ='inpop'><b>" + ListTitle + "</b><ul>";
-console.log(Array.isArray(ListTitle))
-console.log(ListTitle)
 ListContent.forEach(item => {
   s += "<li>" + item + "</li>";
 });
 s += "</ul></div>";
-console.log(s)
 
 button.setAttribute('data-bs-content', s);
 
