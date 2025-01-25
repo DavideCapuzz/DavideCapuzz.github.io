@@ -25,9 +25,6 @@
     height: 50px  !important;
     padding: 9px 0;
   }
-  .navbar-default .navbar-toggle, .stick .navbar-default .navbar-toggle {
-    padding: 15px 0;
-  }
   .nav.navbar-nav.navbar-right, .stick .nav.navbar-nav.navbar-right {
     background-color: #252525;
     padding: 0;
@@ -117,33 +114,11 @@
   .section-headline h2 {
     font-size: 30px;
   }
-  .suscribe-input input {
-    width: 60%;
-  }
-  .suscribe-input button {
-    font-size: 15px;
-    padding: 14px 10px;
-    width: 40%;
-  }
   .section-headline h3 {
     font-size: 25px;
   }
-  .contact-form {
-    margin-top: 30px;
-  }
   .footer-content {
     margin-bottom: 30px;
-  }
-  .header-bottom h1 {
-    font-size: 30px;
-    margin-bottom: 0;
-  }
-  .page-area .slider-content {
-    padding: 100px 0;
-  }
-  .header-bottom h2 {
-    font-size: 20px;
-    margin-bottom: 0;
   }
 }
 
