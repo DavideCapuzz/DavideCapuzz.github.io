@@ -251,13 +251,13 @@ div#preloader {
   --bs-navbar-padding-y: 0.0rem;
 }
 .header-area {  
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
-  background: rgba(0, 0, 0, 0.40);
-  z-index: 9;
+  background: rgba(0, 0, 0, 1);
+  height: 60px;
+  z-index: 1000;
 }
 .navbar-header a.navbar-brand {
   display: inline-block;
@@ -278,18 +278,8 @@ div#preloader {
 /* 2.1. Stick menu
 /*--------------------------------*/
 
-.header-area.stick {
-  background-color: rgba(0, 0, 0, 1);
-  /* height: 60px; */
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
 .stick .navbar-header a.navbar-brand {
-  display: inline-block;
-  height: 60px;
+  display: inline-block;  
 }
 .sticky-logo h1 {
   color: #fff;
