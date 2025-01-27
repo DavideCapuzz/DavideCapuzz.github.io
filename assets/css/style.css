@@ -366,22 +366,16 @@ div#preloader {
 }
 
 .mu-header-featured-img {
-	display: inline;
 	margin-left: 10%;
 	float: left;
-	/* width: 70%; */
-	left: 150px;
-	/* max-height:60%;  */
-  /* height: 10%; */
 }
 
 .mu-header-featured-content {
-	display: inline;
-	float: right;
-	margin-top: 40%;
-	text-align: center;
-	margin-right: 7%;
-	width: 100%;
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  top: 40%;
+  position: absolute;
 }
 
 .mu-header-featured-content h1 {

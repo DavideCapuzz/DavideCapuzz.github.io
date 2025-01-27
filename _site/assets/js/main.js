@@ -107,6 +107,7 @@
   // $('[data-bs-toggle="popover"]').each(function () {
   //   new bootstrap.Popover(this);
   // }); 
+  // initialize the popvoer on competences 
   $('[data-bs-toggle="popover"]').each(function () {
     // Initialize the popover using Bootstrap 5's native API (not jQuery)
     new bootstrap.Popover(this, {
@@ -115,6 +116,18 @@
       placement: 'left' // Set popover placement to the left
     });
   });
+
+  // hide menu if we touck inside the menu
+    // Add event listener on nav links
+    $('.navbar-nav .nav-link').click(function() {
+      // Check if the screen width is less than or equal to 768px (mobile view)
+      if ($(window).width() <= 768) {
+        // Set a timeout to close the menu after 2 seconds
+        setTimeout(function() {
+          $('#navbarNav').collapse('hide');  // Close the navbar menu
+        }, 2000); // 2000 milliseconds = 2 seconds
+      }
+    });
   /*----------------------------
    Parallax maybe not nececcesry
   ------------------------------ */
