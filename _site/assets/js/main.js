@@ -1,6 +1,6 @@
 (function($) {
   "use strict";
-
+  var timer =2000;
   /*--------------------------
   preloader
   ---------------------------- */
@@ -81,6 +81,11 @@
   var page_scroll = $('a.page-scroll');
   page_scroll.on('click', function(event) {
     var $anchor = $(this);
+    if ($anchor.attr('href')=="#about")
+    {
+      timer = 4000;
+    } else
+    { timer = 2000;}
     $('html, body').stop().animate({
       scrollTop: $($anchor.attr('href')).offset().top
     }, 1500, 'easeInOutExpo');
@@ -117,20 +122,65 @@
     });
   });
 
+  $('.navbar-nav .nav-link').click(function() {
+    // Check if the screen width is less than or equal to 768px (mobile view)
+    if ($(window).width() <= 768) {
+      // Set a timeout to close the menu after 2 seconds
+      
+      setTimeout(function() {
+        $('#navbarNav').collapse('hide');  // Close the navbar menu
+      }, timer); // 2000 milliseconds = 2 seconds
+    }
+  });
+
   // hide menu if we touck inside the menu
-    // Add event listener on nav links
-    $('.navbar-nav .nav-link').click(function() {
-      // Check if the screen width is less than or equal to 768px (mobile view)
-      if ($(window).width() <= 768) {
-        // Set a timeout to close the menu after 2 seconds
-        setTimeout(function() {
-          $('#navbarNav').collapse('hide');  // Close the navbar menu
-        }, 2000); // 2000 milliseconds = 2 seconds
+    // add element on the menu only if we are in the mobile mode and in the about page
+    function isElementInViewport(el) {
+      var rect = el[0].getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+      );
+    }
+
+    // Function to add an element if in mobile mode and the About section is in the viewport
+    function addElementIfMobileAndInAbout() {
+      // Check if the screen width is less than or equal to 768px (mobile mode) and the #about div is in the viewport
+      if ($(window).width() <= 768 && $('#about').length > 0 && isElementInViewport($('#about'))) {
+        // Only add the new element if it's not already added
+        if ($('#navbarNav #extra-item-dwnld-cv').length === 0) {
+          var newItem = $('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
+          // $('#navbar-items').append('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
+          $('#navbar-items').append(newItem); 
+          newItem.hide().fadeIn(1000);
+          document.getElementById('extra-item-dwnld-cv').addEventListener('click', downloadCV);
+        }
+      } else {
+        $('#navbarNav #extra-item-dwnld-cv').fadeOut(1500, function() {
+          // After fading out, remove the element from the DOM
+          $(this).remove();  // This refers to the element that just faded out
+        });
       }
+    }
+
+    // Check when the document is ready
+    addElementIfMobileAndInAbout();
+
+    // Check on window resize to ensure the element is added/removed when resizing
+    $(window).resize(function() {
+      addElementIfMobileAndInAbout();
+    });
+    // Check on scroll
+    $(window).scroll(function() {
+      addElementIfMobileAndInAbout();
     });
   /*----------------------------
    Parallax maybe not nececcesry
   ------------------------------ */
+  // Add event listener on nav links
+  
   // var well_lax = $('.wellcome-area');
   // well_lax.parallax("50%", 0.4);
   // var well_text = $('.wellcome-text');
@@ -293,6 +343,30 @@
   //     }
   //     e.preventDefault();
   // });
+
+  function downloadCV (event) {
+    const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf'; // Replace with your PDF file URL
+    
+    // Fetch the PDF file
+    fetch(pdfUrl)
+        .then(response => response.blob()) // Convert the response to a Blob
+        .then(blob => {
+            // Create a link element
+            const link = document.createElement('a');
+            
+            // Create a URL for the Blob and set it as the href attribute
+            link.href = URL.createObjectURL(blob);
+            
+            // Set the download attribute with the desired filename
+            link.download = 'resume_Capuzzo_2024.pdf'; // You can change the filename here
+            
+            // Programmatically click the link to trigger the download
+            link.click();
+        })
+        .catch(error => {
+            console.error('Error downloading the PDF:', error);
+        });
+  }
 
 })(jQuery);
 
@@ -541,29 +615,7 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   document.getElementById('about').appendChild(modal);
 }
 
-document.getElementById('downloadCV').addEventListener('click', function() {
-  const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf'; // Replace with your PDF file URL
-  
-  // Fetch the PDF file
-  fetch(pdfUrl)
-      .then(response => response.blob()) // Convert the response to a Blob
-      .then(blob => {
-          // Create a link element
-          const link = document.createElement('a');
-          
-          // Create a URL for the Blob and set it as the href attribute
-          link.href = URL.createObjectURL(blob);
-          
-          // Set the download attribute with the desired filename
-          link.download = 'resume_Capuzzo_2024.pdf'; // You can change the filename here
-          
-          // Programmatically click the link to trigger the download
-          link.click();
-      })
-      .catch(error => {
-          console.error('Error downloading the PDF:', error);
-      });
-});
+document.getElementById('downloadCV').addEventListener('click', downloadCV);
 
 function createList(Title,ListTitle,ListContent,dir, id)
 {
