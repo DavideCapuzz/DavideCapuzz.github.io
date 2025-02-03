@@ -311,8 +311,8 @@
         margin:10,
         nav:true,
         navText: [
-          "<div class='nav-btn prev-slide'></div>",
-          "<div class='nav-btn next-slide'></div>"],
+          "<div class='prev-slide'></div>",
+          "<div class='next-slide'></div>"],
         autoplay:false,
         dots:true,
         items: 3, //10 items above 1000px browser width
@@ -474,7 +474,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   var readMoreCell = document.createElement('td');
   readMoreCell.classList.add('read-more-cell');
   readMoreRow.classList.add('read-more-cell');
-  var readMore = document.createElement('button');
+  var readMore = document.createElement('div');
 
   readMore.classList.add('read-more');
   readMore.textContent = 'Read more';
