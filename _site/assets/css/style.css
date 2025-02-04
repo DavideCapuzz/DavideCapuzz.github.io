@@ -66,6 +66,11 @@ html, body {
   margin: 0 auto 15px;
 }
 
+.sticky{
+  position: sticky;
+  top: 0;
+}
+
 a:focus {
   outline: 0px solid;
 }
@@ -243,6 +248,17 @@ div#preloader {
   width: 40%;
 }
 
+.section-headline h1 {
+	margin-top: 5%;
+	font-size: 300%;
+	color: #fff;
+	font-weight: 300;
+	margin-bottom: 2.5%;
+}
+
+.section-headline h1 span {
+	font-weight: 700;
+}
 /*--------------------------------*/
 
 /*  2. Header top Area
@@ -444,21 +460,16 @@ div#preloader {
 --------------------------------*/
 
 .about-area {
-	
-	/* padding: 100px 1000 px 10 px 10 px; */
-  /*background-color: #2f333d;*/
   background-image: url("../images/davide_picture.jpg");
-  /*background-color: rgba(27,26,27,1);*/
   height: 100%;
   display: inline;
-	/* opacity: 0.8; */
 	float: left;
 	padding: 0px 0;
 	width: 100%;
 	background-position: top; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */
 	background-size: 200%; /* Resize the background image to cover the entire container */
-position: relative; 
+  position: relative; 
 }
 
 .downloadCV{
@@ -479,28 +490,17 @@ position: relative;
   font-size: 150%;
   color: #fff;
 	font-weight: 300;
-	/* margin-bottom: 15px; */
   text-align: center;
 }
 
 .about-area p {
-	/* font-size: 200%; */
   font-size: 100%;
 	color: #fff;
 	font-weight: 300;
 	margin-bottom: 15px;
 }
 
-.about-area h1 {
-	margin-top: 5%;
-	font-size: 300%;
-	color: #fff;
-	font-weight: 300;
-	margin-bottom: 2.5%;
-}
-
 .about-area h2 {
-	
   color: #fff;
   font-size: 15px;
   font-weight: 300;
@@ -511,8 +511,6 @@ position: relative;
 	margin-top: 1px;
 	font-size: 150%;
 	color: #000;
-	/* font-weight: 200; */
-	/* margin-bottom: 5px; */
 }
 
 .about-area h4 {
@@ -522,11 +520,6 @@ position: relative;
 	color: #000;
 	font-weight: 100;
   line-height: 10px;
-	/* margin-bottom: 15px; */
-}
-
-.about-area h1 span {
-	font-weight: 700;
 }
 
 .cv_slider{
@@ -543,12 +536,8 @@ position: relative;
 }
 
 /* News Slider */
-#news-slider {
+#cv-slider {
   margin-top: 0px;
-  /* display: flex; */
-  /* overflow: hidden; */
-  /* padding-left: 5%; */
-  /* padding-right: 5%; */
 }
 
 /*card box */
@@ -556,9 +545,7 @@ position: relative;
   overflow: hidden;
   height: min(500px,60vh);
   width: 95%;
-  /* width: 33.3333%; */
   background: #fff;
-  /* margin: 20px 15px 20px; */
   border-radius: 15px;
   padding-top: 1px;
   box-shadow: 0px 14px 22px -9px #bbcbd8;
@@ -613,9 +600,6 @@ position: relative;
   top: 1%;
   bottom: 3%;
   position: relative;
-  /* display: flex;
-  
-  flex-direction: column; */
 }
 
 .post-slide .post-title {
@@ -786,9 +770,7 @@ position: relative;
 	border-radius:0px;
 }
 .owl-carousel .owl-item{
-	/* float: left; */
 	border-radius:5px;
-  /* border:1px solid rgba(87,59,255,0.21); */
 }
 
 .owl-carousel .item {
@@ -831,7 +813,6 @@ opacity: 0.2;
   bottom: 10px;
   display: block;
   left: 50%;
-  /* margin-left: -20px; */
   position: absolute;
   transform: translateX(-50%);
 }
@@ -870,9 +851,6 @@ opacity: 0.2;
   right: 0;
   background-color:  rgba(0,0,0,0);
 }
-/* .owl-nav:hover{
-  background-color:  rgba(0,0,0,0);
-} */
 /* Styling for the previous button */
 .owl-prev, .owl-next {
   position: absolute;
@@ -894,8 +872,6 @@ opacity: 0.2;
 .prev-slide::after,
 .next-slide::after {
   content: "";
-  /* left: 0px; */
-  
   display: block;
   width: 50px;
   height: 50px;
@@ -1000,12 +976,10 @@ opacity: 0.2;
     top: 102% !important;
   }
   .owl-prev {
-    /* top: 0%; */
     left: 24%;
   }
   
   .owl-next {
-    /* top: 0%; */
     right: 24%;
   }
   .prev-slide::after,
@@ -1021,16 +995,11 @@ opacity: 0.2;
   }
 }
 
-/* .owl-theme .owl-dots .owl-dot .active span{
-  background: #D6D6D6;
-} */
-
 /*--------------------------------
 
  4.Competence Area
 --------------------------------*/
 .competences-area {	
-	/* padding: 100px 1000 px 10 px 10 px; */
   background-color: #3ec1d5;
   height: 100%;
   display: inline;
@@ -1040,20 +1009,16 @@ opacity: 0.2;
 	width: 100%;
 	background-position: top; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */
-	/* background-size: 200%;  */
   position: relative;
+  overflow: scroll;
+}
+
+.competences-area .first-row{
+  background-color: #3ec1d5;
 }
 
 .competences-area p {
 	font-size: 200%;
-	color: #fff;
-	font-weight: 300;
-	margin-bottom: 15px;
-}
-
-.competences-area h1 {
-	margin-top: 5%;
-	font-size: 300%;
 	color: #fff;
 	font-weight: 300;
 	margin-bottom: 15px;
@@ -1066,17 +1031,13 @@ opacity: 0.2;
   font-weight: 300;
 }
 
-.competences-area h1 span {
-	font-weight: 700;
-}
 /* list skill */
 .list-skill {
-	margin-top: 10%;
+	margin-top: 30%;
 	color: #fff;
 }
 
 .list-skill h3 {
-	margin-top: 30%;
 	color: #fff;
 }
 
@@ -1105,6 +1066,20 @@ opacity: 0.2;
   margin-top: 2%;
 }
 
+@media (max-width: 767px) {
+  .list-skill {
+    margin-top: 5%;
+  }
+  .skill-div{
+    overflow: scroll;
+  }
+  .list-skill h4 {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-size: 19px;
+}
+}
+
 /*----------------------------------------
   5.Idea Area
 ----------------------------------------*/
@@ -1131,7 +1106,7 @@ opacity: 0.2;
 	margin-bottom: 15px;
 }
 
-.ideas-area h1 {
+/* .ideas-area h1 {
 	margin-top: 5%;
 	font-size: 300%;
 	color: #fff;
@@ -1139,15 +1114,15 @@ opacity: 0.2;
 	margin-bottom: 15px;
 }
 
+.ideas-area h1 span {
+	font-weight: 700;
+} */
+
 .ideas-area h2 {
 	
   color: #fff;
   font-size: 15px;
   font-weight: 300;
-}
-
-.ideas-area h1 span {
-	font-weight: 700;
 }
 
 .clearfix {
@@ -1188,7 +1163,7 @@ opacity: 0.2;
 }
 
 /* Tablet desktop :768px. */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 767px) {
   .suscribe-text h3 {
     font-size: 16px;
     padding-right: 20px;
@@ -1208,6 +1183,7 @@ opacity: 0.2;
   height: auto;
 	float: left;
 	width: 100%;
+  overflow: scroll;
 }
 
 .single-icon i {
@@ -1258,15 +1234,23 @@ opacity: 0.2;
   display: flex;
 }
 
-#google-map {
+.no-map {
   height: 370px;
   margin-bottom: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 /* Tablet desktop :768px. */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 767px) {
   .contact-form {
     margin-top: 0px;
   }
+  .no-map {
+  height: auto;
+  margin-bottom: 0px;
+}
 }
 /*----------------------------------------*/
 

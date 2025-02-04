@@ -302,7 +302,7 @@
 
   $(document).ready(function() {
 
-    var owl = $("#news-slider");
+    var owl = $("#cv-slider");
 
     owl.owlCarousel({
         stagePadding:1,
@@ -367,6 +367,14 @@
             console.error('Error downloading the PDF:', error);
         });
   }
+
+  // close popover 
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('.popover').length && !$(e.target).closest('[data-bs-toggle="popover"]').length) {
+      // Close the popover if clicked outside of it
+      $('[data-bs-toggle="popover"]').popover('hide');
+    }
+  });
 
 })(jQuery);
 
@@ -496,7 +504,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   postSlide.appendChild(postContent);
 
   // Append the postSlide to the main container
-  document.getElementById('news-slider').appendChild(postSlide);
+  document.getElementById('cv-slider').appendChild(postSlide);
 }
   
 
@@ -627,7 +635,7 @@ var button = document.createElement('button');
 button.type = 'button';
 button.classList.add('empty-button');
 button.setAttribute('data-bs-toggle', 'popover');
-button.setAttribute('data-bs-trigger', 'hover');
+button.setAttribute('data-bs-trigger', 'hover click');
 button.setAttribute('data-bs-placement', dir);
 button.setAttribute('title', Title);
 button.setAttribute('data-bs-original-title', Title);
