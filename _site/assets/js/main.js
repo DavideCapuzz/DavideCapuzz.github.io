@@ -1,12 +1,12 @@
-(function($) {
+(function ($) {
   "use strict";
-  var timer =2000;
+  var timer = 2000;
   /*--------------------------
   preloader
   ---------------------------- */
-  $(window).on('load', function() {
+  $(window).on('load', function () {
     var pre_loader = $('#preloader');
-    pre_loader.fadeOut('slow', function() {
+    pre_loader.fadeOut('slow', function () {
       $(this).remove();
     });
   });
@@ -39,7 +39,7 @@
   ------------------------------ */
   new WOW().init();
 
-  $(".navbar-collapse a:not(.dropdown-toggle)").on('click', function() {
+  $(".navbar-collapse a:not(.dropdown-toggle)").on('click', function () {
     $(".navbar-collapse.collapse").removeClass('in');
   });
 
@@ -79,23 +79,192 @@
   Page Scroll
   ------------------------------ */
   var page_scroll = $('a.page-scroll');
-  page_scroll.on('click', function(event) {
+  var scrolling = false; // Flag to block scroll events during animation
+  page_scroll.on('click', function (event) {
     var $anchor = $(this);
-    if ($anchor.attr('href')=="#about")
-    {
+    if ($anchor.attr('href') == "#about") {
       timer = 4000;
-    } else
-    { timer = 2000;}
+    } else { timer = 2000; }
+
+    scrolling = true;
     $('html, body').stop().animate({
+      scrolling: true,
       scrollTop: $($anchor.attr('href')).offset().top
-    }, 1500, 'easeInOutExpo');
+    }, 1500, 'easeInOutExpo', function () {
+      // Reset scrolling flag to false when animation is complete
+      scrolling = false;
+    });
+
     event.preventDefault();
   });
+
+  var sectionIds = $('section').map(function () {
+    return $(this).attr('id');
+  }).get();
+  
+  // console.log(sectionIds);
+  
+  var heights = [];
+  $('section:visible').each(function () {
+    heights.push($(this).outerHeight());
+  });
+  
+  // console.log(heights);
+  
+  var lastScrollTop = 0; // Initialize last scroll position
+  var up = false; // Direction flag (up or down)
+  
+  $(window).on('scroll', function () {
+    if (scrolling) {
+      return; // Prevent further scroll events during animation
+    }
+  
+    var scrollPosition = $(window).scrollTop();  // Current scroll position
+    var windowHeight = $(window).height();  // Height of the viewport
+  
+    // Determine scroll direction with margin
+    if (scrollPosition > lastScrollTop) {
+      up = false;  // Scrolling down
+      // console.log('Scrolling down');
+      // Update last scroll position to the current one for the next scroll event
+      lastScrollTop = scrollPosition;
+    } else if (scrollPosition < lastScrollTop) {
+      up = true;  // Scrolling up
+      // console.log('Scrolling up');
+      // Update last scroll position to the current one for the next scroll event
+      lastScrollTop = scrollPosition;
+    }
+  
+    var activeSection = $('section').filter(function () {
+      var top = $(this).offset().top;  // Top position of the section
+      var sectionHeight = $(this).outerHeight();
+      var bottom = top + sectionHeight;  // Bottom position of the section
+  
+      var sectionTopInViewport = Math.max(0, top - scrollPosition); // Section's top relative to the viewport
+      var sectionBottomInViewport = Math.min(windowHeight, top + sectionHeight - scrollPosition);
+  
+      // Calculate the visible height of the section
+      var visibleHeight = sectionBottomInViewport - sectionTopInViewport;
+  
+      // Calculate the percentage of the section that is visible
+      var visiblePercentage = (visibleHeight / sectionHeight) * 100;
+  
+      // Return whether the section is visible
+      return top < scrollPosition + windowHeight && bottom > scrollPosition;
+    }).first();  // Get the first section that is currently in the viewport
+  
+    // After getting the first visible section, now we can calculate and log the details.
+    if (activeSection.length) {
+      var top = activeSection.offset().top;
+      var sectionHeight = activeSection.outerHeight();
+      var bottom = top + sectionHeight;
+      var sectionTopInViewport = Math.max(0, top - scrollPosition);
+      var sectionBottomInViewport = Math.min(windowHeight, top + sectionHeight - scrollPosition);
+      var visibleHeight = sectionBottomInViewport - sectionTopInViewport;
+      var visiblePercentage = (visibleHeight / sectionHeight) * 100;
+  
+      // console.log(activeSection.attr('id'), activeSection.prev('section').attr('id'), 
+      // activeSection.next('section').attr('id') , visiblePercentage, scrollPosition, up);
+  
+      // // Find the previous and next sections
+      var prevSection = activeSection.prev('section');
+      var nextSection = activeSection.next('section');
+  
+      // // Scroll up condition: if scrolling up and >60% visible (with margin), and no oscillation
+      if (up && visiblePercentage > 70 && activeSection.length && !scrolling) {
+        scrolling = true; // Block scroll events while scrolling
+        $('html, body').animate({scrollTop: activeSection.offset().top}, 50, function() {
+          scrolling = false; // Re-enable scroll events after the animation is complete
+        });
+        // console.log("Scrolling up ", prevSection.offset().top);
+      } 
+      // // Scroll down condition: if scrolling down and <20% visible, and no oscillation
+      else if (!up && visiblePercentage < 30 && nextSection.length && !scrolling) {
+        scrolling = true; // Block scroll events while scrolling
+        $('html, body').animate({scrollTop: nextSection.offset().top}, 50, function() {
+          scrolling = false; // Re-enable scroll events after the animation is complete
+        });
+        // console.log("Scrolling down");
+      }
+      // // Add buffer logic: Don't trigger a scroll action when in the middle zone
+      // else if (visiblePercentage >= 20 && visiblePercentage <= 80) {
+      //   console.log('In middle zone: Not triggering scroll');
+      // }
+    } else {
+      // console.log('No section is currently visible.');
+    }
+  });
+  
+
+  // function getVisiblePercentage($section) {
+  //     // var windowHeight = $(window).height(); // Height of the viewport
+  //     // var top = $section.offset().top; // The distance of the section from the top of the document
+  //     // var sectionHeight = $section.outerHeight(); // The height of the section
+
+  //     // The scroll position of the window
+  //     // var scrollTop = $(window).scrollTop();
+
+  //     // Calculate the top and bottom positions of the section in the viewport
+  //     var sectionTopInViewport = Math.max(0, top - scrollTop); // Section's top relative to the viewport
+  //     var sectionBottomInViewport = Math.min(windowHeight, top + sectionHeight - scrollTop); // Section's bottom relative to the viewport
+
+  //     // Calculate the visible height of the section
+  //     var visibleHeight = sectionBottomInViewport - sectionTopInViewport;
+
+  //     // Calculate the percentage of the section that is visible
+  //     var visiblePercentage = (visibleHeight / sectionHeight) * 100;
+
+  //     return visiblePercentage;
+  // }
+
+  // Example usage:
+  // $('section').each(function() {
+  //     var $section = $(this);
+  //     var visiblePercentage = getVisiblePercentage($section);
+  //     console.log('Section visible: ' + visiblePercentage.toFixed(2) + '%');
+  // });
+
+
+
+  // $(window).on('scroll', function() {
+  //     // Find the current section in view
+  //     var currentSection = $('section').filter(function() {
+  //         var top = $(this).offset().top;
+  //         var bottom = top + $(this).outerHeight();
+  //         return top < scrollPosition + windowHeight && bottom > scrollPosition;
+  //     }).first();
+
+  //     var scrollPosition = $(window).scrollTop(); // Current scroll position
+  //     var windowHeight = $(window).height(); // Height of the viewport
+  //     var currentSectionHeight = $(currentSection).height(); // Total document height
+  //     var scrollPercentage = (scrollPosition / (currentSectionHeight - windowHeight)) * 100;
+
+  //     // Log scroll details and the current section
+  //     console.log(scrollPosition, windowHeight, currentSectionHeight, scrollPercentage, currentSection);
+
+  //     // Check if scroll position has passed 60% of the current section
+  //     if (scrollPercentage > 60 && currentSection.length) {
+  //         var nextSection = currentSection.next('section');
+
+  //         // Check if the next section exists
+  //         if (nextSection.length) {
+  //             var currentSectionHeight = currentSection.outerHeight();
+  //             var scrollThreshold = currentSectionHeight * 0.6; // 60% of the section height
+
+  //             // If the scroll position has passed 60% of the current section, scroll to the next section
+  //             if (scrollPosition >= currentSection.offset().top + scrollThreshold) {
+  //                 $('html, body').animate({
+  //                     scrollTop: nextSection.offset().top
+  //                 }, 500); // Smooth scroll to next section
+  //             }
+  //         }
+  //     }
+  // });
 
   /*--------------------------
     Back to top button
   ---------------------------- */
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
       $('.back-to-top').fadeIn('slow');
     } else {
@@ -103,11 +272,11 @@
     }
   });
 
-  $('.back-to-top').click(function(){
-    $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
+  $('.back-to-top').click(function () {
+    $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
     return false;
   });
-  
+
   // $('[data-toggle="popover"]').popover();
   // $('[data-bs-toggle="popover"]').each(function () {
   //   new bootstrap.Popover(this);
@@ -122,65 +291,65 @@
     });
   });
 
-  $('.navbar-nav .nav-link').click(function() {
+  $('.navbar-nav .nav-link').click(function () {
     // Check if the screen width is less than or equal to 768px (mobile view)
     if ($(window).width() <= 768) {
       // Set a timeout to close the menu after 2 seconds
-      
-      setTimeout(function() {
+
+      setTimeout(function () {
         $('#navbarNav').collapse('hide');  // Close the navbar menu
       }, timer); // 2000 milliseconds = 2 seconds
     }
   });
 
   // hide menu if we touck inside the menu
-    // add element on the menu only if we are in the mobile mode and in the about page
-    function isElementInViewport(el) {
-      var rect = el[0].getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
-      );
-    }
+  // add element on the menu only if we are in the mobile mode and in the about page
+  function isElementInViewport(el) {
+    var rect = el[0].getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+    );
+  }
 
-    // Function to add an element if in mobile mode and the About section is in the viewport
-    function addElementIfMobileAndInAbout() {
-      // Check if the screen width is less than or equal to 768px (mobile mode) and the #about div is in the viewport
-      if ($(window).width() <= 768 && $('#about').length > 0 && isElementInViewport($('#about'))) {
-        // Only add the new element if it's not already added
-        if ($('#navbarNav #extra-item-dwnld-cv').length === 0) {
-          var newItem = $('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
-          // $('#navbar-items').append('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
-          $('#navbar-items').append(newItem); 
-          newItem.hide().fadeIn(1000);
-          document.getElementById('extra-item-dwnld-cv').addEventListener('click', downloadCV);
-        }
-      } else {
-        $('#navbarNav #extra-item-dwnld-cv').fadeOut(1500, function() {
-          // After fading out, remove the element from the DOM
-          $(this).remove();  // This refers to the element that just faded out
-        });
+  // Function to add an element if in mobile mode and the About section is in the viewport
+  function addElementIfMobileAndInAbout() {
+    // Check if the screen width is less than or equal to 768px (mobile mode) and the #about div is in the viewport
+    if ($(window).width() <= 768 && $('#about').length > 0 && isElementInViewport($('#about'))) {
+      // Only add the new element if it's not already added
+      if ($('#navbarNav #extra-item-dwnld-cv').length === 0) {
+        var newItem = $('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
+        // $('#navbar-items').append('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
+        $('#navbar-items').append(newItem);
+        newItem.hide().fadeIn(1000);
+        document.getElementById('extra-item-dwnld-cv').addEventListener('click', downloadCV);
       }
+    } else {
+      $('#navbarNav #extra-item-dwnld-cv').fadeOut(1500, function () {
+        // After fading out, remove the element from the DOM
+        $(this).remove();  // This refers to the element that just faded out
+      });
     }
+  }
 
-    // Check when the document is ready
+  // Check when the document is ready
+  addElementIfMobileAndInAbout();
+
+  // Check on window resize to ensure the element is added/removed when resizing
+  $(window).resize(function () {
     addElementIfMobileAndInAbout();
-
-    // Check on window resize to ensure the element is added/removed when resizing
-    $(window).resize(function() {
-      addElementIfMobileAndInAbout();
-    });
-    // Check on scroll
-    $(window).scroll(function() {
-      addElementIfMobileAndInAbout();
-    });
+  });
+  // Check on scroll
+  $(window).scroll(function () {
+    addElementIfMobileAndInAbout();
+  });
   /*----------------------------
    Parallax maybe not nececcesry
   ------------------------------ */
   // Add event listener on nav links
-  
+
   // var well_lax = $('.wellcome-area');
   // well_lax.parallax("50%", 0.4);
   // var well_text = $('.wellcome-text');
@@ -255,19 +424,19 @@
   /*---------------------
    Circular Bars - Knob
   --------------------- */
-  if (typeof($.fn.knob) != 'undefined') {
+  if (typeof ($.fn.knob) != 'undefined') {
     var knob_tex = $('.knob');
-    knob_tex.each(function() {
+    knob_tex.each(function () {
       var $this = $(this),
         knobVal = $this.attr('data-rel');
 
       $this.knob({
-        'draw': function() {
+        'draw': function () {
           $(this.i).val(this.cv + '%')
         }
       });
 
-      $this.appear(function() {
+      $this.appear(function () {
         $({
           value: 0
         }).animate({
@@ -275,7 +444,7 @@
         }, {
           duration: 2000,
           easing: 'swing',
-          step: function() {
+          step: function () {
             $this.val(Math.ceil(this.value)).trigger('change');
           }
         });
@@ -287,7 +456,7 @@
   }
 
   // $(document).ready(function () {
-    
+
   //   $("#news-slider").owlCarousel({
   //     items: 3,
   //     itemsDesktop: [1199, 3],
@@ -300,41 +469,41 @@
   //   });
   // });
 
-  $(document).ready(function() {
+  $(document).ready(function () {
 
     var owl = $("#cv-slider");
 
     owl.owlCarousel({
-        stagePadding:1,
-        startPosition:7,
-        loop:false,
-        margin:10,
-        nav:true,
-        navText: [
-          "<div class='prev-slide'></div>",
-          "<div class='next-slide'></div>"],
-        autoplay:false,
-        dots:true,
-        items: 3, //10 items above 1000px browser width
-        responsiveClass:true,
-        responsive:{
-          0:{
-            items:1,
-            dots:false
-          },
-          600:{
-            items:2,
-            dots:false
-          },
-          1000:{
-              items:3
-          }
+      stagePadding: 1,
+      startPosition: 7,
+      loop: false,
+      margin: 10,
+      nav: true,
+      navText: [
+        "<div class='prev-slide'></div>",
+        "<div class='next-slide'></div>"],
+      autoplay: false,
+      dots: true,
+      items: 3, //10 items above 1000px browser width
+      responsiveClass: true,
+      responsive: {
+        0: {
+          items: 1,
+          dots: false
+        },
+        600: {
+          items: 2,
+          dots: false
+        },
+        1000: {
+          items: 3
         }
-      })
+      }
+    })
 
-    });
+  });
 
-    // to debug
+  // to debug
   //   owl.on('mousewheel', '.owl-stage', function (e) {
   //     if (e.deltaY>0) {
   //         owl.trigger('next.owl');
@@ -344,28 +513,28 @@
   //     e.preventDefault();
   // });
 
-  function downloadCV (event) {
+  function downloadCV(event) {
     const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf'; // Replace with your PDF file URL
-    
+
     // Fetch the PDF file
     fetch(pdfUrl)
-        .then(response => response.blob()) // Convert the response to a Blob
-        .then(blob => {
-            // Create a link element
-            const link = document.createElement('a');
-            
-            // Create a URL for the Blob and set it as the href attribute
-            link.href = URL.createObjectURL(blob);
-            
-            // Set the download attribute with the desired filename
-            link.download = 'resume_Capuzzo_2024.pdf'; // You can change the filename here
-            
-            // Programmatically click the link to trigger the download
-            link.click();
-        })
-        .catch(error => {
-            console.error('Error downloading the PDF:', error);
-        });
+      .then(response => response.blob()) // Convert the response to a Blob
+      .then(blob => {
+        // Create a link element
+        const link = document.createElement('a');
+
+        // Create a URL for the Blob and set it as the href attribute
+        link.href = URL.createObjectURL(blob);
+
+        // Set the download attribute with the desired filename
+        link.download = 'resume_Capuzzo_2024.pdf'; // You can change the filename here
+
+        // Programmatically click the link to trigger the download
+        link.click();
+      })
+      .catch(error => {
+        console.error('Error downloading the PDF:', error);
+      });
   }
 
   // close popover 
@@ -401,7 +570,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
 
   var postContent = document.createElement('div');
   postContent.classList.add('post-content');
-  
+
   // Create the table to hold the post content
   var postTable = document.createElement('table');
   postTable.classList.add('post-table');
@@ -419,7 +588,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   roleTitle.textContent = Role;
   roleDiv.appendChild(roleTitle);
   roleCell.appendChild(roleDiv);
-  
+
   var titleRow2 = document.createElement('tr')
   var companyCell = document.createElement('td');
   companyCell.classList.add('post-company-cell');
@@ -463,7 +632,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   dateIcon.classList.add('fa', 'fa-clock-o');
   dateCell.appendChild(dateIcon);
   dateCell.appendChild(document.createTextNode(Data));
-  
+
   var locCell = document.createElement('td');
   locCell.classList.add('post-loc-cell');
   var locIcon = document.createElement('i');
@@ -488,7 +657,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   readMore.textContent = 'Read more';
   // readMore.classList.add('btn', 'btn-info', 'btn-lg', 'post-slide', 'read-more');
   readMore.setAttribute('data-bs-toggle', 'modal');  // Enable modal functionality
-  readMore.setAttribute('data-bs-target', '#'+ tag);
+  readMore.setAttribute('data-bs-target', '#' + tag);
 
   readMoreCell.appendChild(readMore);
   readMoreRow.appendChild(locCell);
@@ -498,7 +667,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   // Append the table body to the table
   postTable.appendChild(tableBody);
   postContent.appendChild(postTable);
-  
+
   // Append the table to the postSlide
   postSlide.appendChild(postImg);
   postSlide.appendChild(postContent);
@@ -506,7 +675,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   // Append the postSlide to the main container
   document.getElementById('cv-slider').appendChild(postSlide);
 }
-  
+
 
 function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip, Data, Loc) {
   // Create the outer modal container (div with modal class)
@@ -519,22 +688,22 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
 
   // Create the modal dialog container
   const modalDialog = document.createElement('div');
-  modalDialog.classList.add('modal-dialog', 'modal-dialog-scrollable', 
+  modalDialog.classList.add('modal-dialog', 'modal-dialog-scrollable',
     'modal-dialog-centered', 'modal-lg');
-  
+
   // Create the modal content
   const modalContent = document.createElement('div');
   modalContent.classList.add('modal-content');
-  
+
   // Create the modal header
   const modalHeader = document.createElement('div');
   modalHeader.classList.add('modal-header');
-  
+
   const modalTitle = document.createElement('h5');
   modalTitle.classList.add('modal-title');
   modalTitle.id = 'myModalLabel';
   modalTitle.innerText = Role;
-  
+
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
   closeButton.classList.add('btn-close');
@@ -545,32 +714,32 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   const modalBody = document.createElement('div');
   modalBody.classList.add('modal-body');
   // modalBody.innerText = descriptionText;
-  
+
   const row = document.createElement('div');
   row.classList.add('row');
 
   const comapnycol = document.createElement('div');
-  comapnycol.classList.add("col-md-8","col-sm-8","col-xs-12");
+  comapnycol.classList.add("col-md-8", "col-sm-8", "col-xs-12");
 
   const modalCompany = document.createElement('h6');
   // modalCompany.classList.add('modal-title');
   modalCompany.innerText = Company;
   comapnycol.appendChild(modalCompany);
-  
+
   var dateCell = document.createElement('div');
-  dateCell.classList.add("col-md-2","col-sm-2","col-xs-12");
+  dateCell.classList.add("col-md-2", "col-sm-2", "col-xs-12");
   var dateIcon = document.createElement('i');
   dateIcon.classList.add('fa', 'fa-clock-o');
   dateCell.appendChild(dateIcon);
   dateCell.appendChild(document.createTextNode(Data));
-  
+
   var locCell = document.createElement('div');
-  locCell.classList.add("col-md-2","col-sm-2","col-xs-12");
+  locCell.classList.add("col-md-2", "col-sm-2", "col-xs-12");
   var locIcon = document.createElement('i');
   locIcon.classList.add('fa', 'fa-location-dot');
   locCell.appendChild(locIcon);
   locCell.appendChild(document.createTextNode(Loc));
-  
+
   row.appendChild(comapnycol);
   row.appendChild(dateCell);
   row.appendChild(locCell);
@@ -591,18 +760,18 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
 
   var modalList = document.createElement('div');
   const ulElement = document.createElement('ul');
-  ulElement.classList.add('modal-list'); 
+  ulElement.classList.add('modal-list');
   // Loop through the array and create a list item (li) for each one
   Listdescrip.forEach(item => {
-      const liElement = document.createElement('li');
-      liElement.textContent = item;
-      ulElement.appendChild(liElement);
+    const liElement = document.createElement('li');
+    liElement.textContent = item;
+    ulElement.appendChild(liElement);
   });
 
   modalList.appendChild(ulElement);
   // modalList.classList.add('modal-list');  
   modalDescription.appendChild(modalList);
-  
+
   // Assemble the modal structure
   modalBody.appendChild(row);
   // modalBody.appendChild(modalCompany);
@@ -611,75 +780,74 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
 
   modalHeader.appendChild(modalTitle);
   modalHeader.appendChild(closeButton);
-  
+
   modalContent.appendChild(modalHeader);
   modalContent.appendChild(modalBody);
-  
+
   modalDialog.appendChild(modalContent);
-  
+
   modal.appendChild(modalDialog);
-  
+
   // Append modal to a specific part of the page
   document.getElementById('about').appendChild(modal);
 }
 
 document.getElementById('downloadCV').addEventListener('click', downloadCV);
 
-function createList(Title,ListTitle,ListContent,dir, id)
-{
+function createList(Title, ListTitle, ListContent, dir, id) {
   // Create the <li> element
-var li = document.createElement('li');
+  var li = document.createElement('li');
 
-// Create the <button> element
-var button = document.createElement('button');
-button.type = 'button';
-button.classList.add('empty-button');
-button.setAttribute('data-bs-toggle', 'popover');
-button.setAttribute('data-bs-trigger', 'hover click');
-button.setAttribute('data-bs-placement', dir);
-button.setAttribute('title', Title);
-button.setAttribute('data-bs-original-title', Title);
-var s = "<div class ='inpop'><b>" + ListTitle + "</b><ul>";
-ListContent.forEach(item => {
-  s += "<li>" + item + "</li>";
-});
-s += "</ul></div>";
+  // Create the <button> element
+  var button = document.createElement('button');
+  button.type = 'button';
+  button.classList.add('empty-button');
+  button.setAttribute('data-bs-toggle', 'popover');
+  button.setAttribute('data-bs-trigger', 'hover click');
+  button.setAttribute('data-bs-placement', dir);
+  button.setAttribute('title', Title);
+  button.setAttribute('data-bs-original-title', Title);
+  var s = "<div class ='inpop'><b>" + ListTitle + "</b><ul>";
+  ListContent.forEach(item => {
+    s += "<li>" + item + "</li>";
+  });
+  s += "</ul></div>";
 
-button.setAttribute('data-bs-content', s);
+  button.setAttribute('data-bs-content', s);
 
-// Create the <h4> element and set its text
-var h4 = document.createElement('h4');
-h4.textContent = Title;
+  // Create the <h4> element and set its text
+  var h4 = document.createElement('h4');
+  h4.textContent = Title;
 
-// Append the <h4> element to the button
-button.appendChild(h4);
+  // Append the <h4> element to the button
+  button.appendChild(h4);
 
-// Append the <button> to the <li>
-li.appendChild(button);
+  // Append the <button> to the <li>
+  li.appendChild(button);
 
-// Append the <li> to a parent container (e.g., a <ul> with id 'myList')
-document.getElementById(id).appendChild(li);
-// var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-// var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-//   return new bootstrap.Popover(popoverTriggerEl)
-// })
-// var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-// var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-//   return new bootstrap.Popover(popoverTriggerEl, {
-//     html: true, // Allow HTML content
-//     trigger: 'hover', // Trigger popover on focus
-//     content: function() {
-//       var content = $(popoverTriggerEl).attr("data-bs-content");
-//       return $(content).children(".popover-body").html(); // Extract content from the targeted element
-//     }
-//   });
-// });
-const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-    
-    // Initialize popovers for each element
-    popoverTriggerList.forEach(function (popoverTriggerEl) {
-      new bootstrap.Popover(popoverTriggerEl, {
-        html: true
-      });
+  // Append the <li> to a parent container (e.g., a <ul> with id 'myList')
+  document.getElementById(id).appendChild(li);
+  // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+  // var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  //   return new bootstrap.Popover(popoverTriggerEl)
+  // })
+  // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+  // var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  //   return new bootstrap.Popover(popoverTriggerEl, {
+  //     html: true, // Allow HTML content
+  //     trigger: 'hover', // Trigger popover on focus
+  //     content: function() {
+  //       var content = $(popoverTriggerEl).attr("data-bs-content");
+  //       return $(content).children(".popover-body").html(); // Extract content from the targeted element
+  //     }
+  //   });
+  // });
+  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+
+  // Initialize popovers for each element
+  popoverTriggerList.forEach(function (popoverTriggerEl) {
+    new bootstrap.Popover(popoverTriggerEl, {
+      html: true
     });
+  });
 }
