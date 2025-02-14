@@ -1424,6 +1424,13 @@ opacity: 0.2;
 /*  16.Home Page 2  CSS
 /*----------------------------------------*/
 
+.content-area {
+  background-color: blue;
+	width: 100%;
+	min-height: 100vh
+}
+
+
 .header-bg {
   background: url(../images/davide_picture.jpg);
   background-repeat: no-repeat;

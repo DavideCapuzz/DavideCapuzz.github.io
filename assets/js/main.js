@@ -10,21 +10,6 @@
       $(this).remove();
     });
   });
-
-  /*---------------------
-   TOP Menu Stick
-  --------------------- */
-  // var s = $("#sticker");
-  // var pos = s.position();
-  // $(window).on('scroll', function() {
-  //   var windowpos = $(window).scrollTop() > 300;
-  //   if (windowpos > pos.top) {
-  //     s.addClass("stick");
-  //   } else {
-  //     s.removeClass("stick");
-  //   }
-  // });
-
   /*----------------------------
    Navbar nav
   ------------------------------ */
@@ -186,81 +171,9 @@
         });
         // console.log("Scrolling down");
       }
-      // // Add buffer logic: Don't trigger a scroll action when in the middle zone
-      // else if (visiblePercentage >= 20 && visiblePercentage <= 80) {
-      //   console.log('In middle zone: Not triggering scroll');
-      // }
-    } else {
-      // console.log('No section is currently visible.');
     }
   });
   
-
-  // function getVisiblePercentage($section) {
-  //     // var windowHeight = $(window).height(); // Height of the viewport
-  //     // var top = $section.offset().top; // The distance of the section from the top of the document
-  //     // var sectionHeight = $section.outerHeight(); // The height of the section
-
-  //     // The scroll position of the window
-  //     // var scrollTop = $(window).scrollTop();
-
-  //     // Calculate the top and bottom positions of the section in the viewport
-  //     var sectionTopInViewport = Math.max(0, top - scrollTop); // Section's top relative to the viewport
-  //     var sectionBottomInViewport = Math.min(windowHeight, top + sectionHeight - scrollTop); // Section's bottom relative to the viewport
-
-  //     // Calculate the visible height of the section
-  //     var visibleHeight = sectionBottomInViewport - sectionTopInViewport;
-
-  //     // Calculate the percentage of the section that is visible
-  //     var visiblePercentage = (visibleHeight / sectionHeight) * 100;
-
-  //     return visiblePercentage;
-  // }
-
-  // Example usage:
-  // $('section').each(function() {
-  //     var $section = $(this);
-  //     var visiblePercentage = getVisiblePercentage($section);
-  //     console.log('Section visible: ' + visiblePercentage.toFixed(2) + '%');
-  // });
-
-
-
-  // $(window).on('scroll', function() {
-  //     // Find the current section in view
-  //     var currentSection = $('section').filter(function() {
-  //         var top = $(this).offset().top;
-  //         var bottom = top + $(this).outerHeight();
-  //         return top < scrollPosition + windowHeight && bottom > scrollPosition;
-  //     }).first();
-
-  //     var scrollPosition = $(window).scrollTop(); // Current scroll position
-  //     var windowHeight = $(window).height(); // Height of the viewport
-  //     var currentSectionHeight = $(currentSection).height(); // Total document height
-  //     var scrollPercentage = (scrollPosition / (currentSectionHeight - windowHeight)) * 100;
-
-  //     // Log scroll details and the current section
-  //     console.log(scrollPosition, windowHeight, currentSectionHeight, scrollPercentage, currentSection);
-
-  //     // Check if scroll position has passed 60% of the current section
-  //     if (scrollPercentage > 60 && currentSection.length) {
-  //         var nextSection = currentSection.next('section');
-
-  //         // Check if the next section exists
-  //         if (nextSection.length) {
-  //             var currentSectionHeight = currentSection.outerHeight();
-  //             var scrollThreshold = currentSectionHeight * 0.6; // 60% of the section height
-
-  //             // If the scroll position has passed 60% of the current section, scroll to the next section
-  //             if (scrollPosition >= currentSection.offset().top + scrollThreshold) {
-  //                 $('html, body').animate({
-  //                     scrollTop: nextSection.offset().top
-  //                 }, 500); // Smooth scroll to next section
-  //             }
-  //         }
-  //     }
-  // });
-
   /*--------------------------
     Back to top button
   ---------------------------- */
@@ -277,11 +190,6 @@
     return false;
   });
 
-  // $('[data-toggle="popover"]').popover();
-  // $('[data-bs-toggle="popover"]').each(function () {
-  //   new bootstrap.Popover(this);
-  // }); 
-  // initialize the popvoer on competences 
   $('[data-bs-toggle="popover"]').each(function () {
     // Initialize the popover using Bootstrap 5's native API (not jQuery)
     new bootstrap.Popover(this, {
@@ -345,81 +253,6 @@
   $(window).scroll(function () {
     addElementIfMobileAndInAbout();
   });
-  /*----------------------------
-   Parallax maybe not nececcesry
-  ------------------------------ */
-  // Add event listener on nav links
-
-  // var well_lax = $('.wellcome-area');
-  // well_lax.parallax("50%", 0.4);
-  // var well_text = $('.wellcome-text');
-  // well_text.parallax("50%", 0.6);
-
-  /*--------------------------
-   collapse
-  ---------------------------- */
-  // var panel_test = $('.panel-heading a');
-  // panel_test.on('click'ta-bs-toggle="popover"]').each(function () {
-  //   new bootstrap.Popover(this);
-  // }); , function() {
-  //   panel_test.removeClass('active');
-  //   $(this).addClass('active');
-  // });
-
-  /*---------------------
-   Testimonial carousel
-  ---------------------*/
-  // var test_carousel = $('.testimonial-carousel');
-  // test_carousel.owlCarousel({
-  //   loop: true,
-  //   nav: false,
-  //   dots: true,
-  //   autoplay: true,
-  //   responsive: {
-  //     0: {
-  //       items: 1
-  //     },
-  //     768: {
-  //       items: 1
-  //     },
-  //     1000: {
-  //       items: 1
-  //     }
-  //   }
-  // });
-  /*----------------------------
-   isotope active
-  ------------------------------ */
-  // portfolio start
-  // $(window).on("load", function() {
-  //   var $container = $('.awesome-project-content');
-  //   $container.isotope({
-  //     filter: '*',
-  //     animationOptions: {
-  //       duration: 750,
-  //       easing: 'linear',
-  //       queue: false
-  //     }
-  //   });
-  //   var pro_menu = $('.project-menu li a');
-  //   pro_menu.on("click", function() {
-  //     var pro_menu_active = $('.project-menu li a.active');
-  //     pro_menu_active.removeClass('active');
-  //     $(this).addClass('active');
-  //     var selector = $(this).attr('data-filter');
-  //     $container.isotope({
-  //       filter: selector,
-  //       animationOptions: {
-  //         duration: 750,
-  //         easing: 'linear',
-  //         queue: false
-  //       }
-  //     });
-  //     return false;
-  //   });
-
-  // });
-  //portfolio end
 
   /*---------------------
    Circular Bars - Knob
@@ -455,20 +288,6 @@
     });
   }
 
-  // $(document).ready(function () {
-
-  //   $("#news-slider").owlCarousel({
-  //     items: 3,
-  //     itemsDesktop: [1199, 3],
-  //     itemsDesktopSmall: [980, 2],
-  //     itemsMobile: [600, 1],
-  //     navigation: true,
-  //     navigationText: ["", ""],
-  //     pagination: true,
-  //     autoPlay: true
-  //   });
-  // });
-
   $(document).ready(function () {
 
     var owl = $("#cv-slider");
@@ -503,16 +322,6 @@
 
   });
 
-  // to debug
-  //   owl.on('mousewheel', '.owl-stage', function (e) {
-  //     if (e.deltaY>0) {
-  //         owl.trigger('next.owl');
-  //     } else {
-  //         owl.trigger('prev.owl');
-  //     }
-  //     e.preventDefault();
-  // });
-
   function downloadCV(event) {
     const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf'; // Replace with your PDF file URL
 
@@ -546,15 +355,6 @@
   });
 
 })(jQuery);
-
-
-// const scrollContainer = document.querySelector("cv_area");
-
-// scrollContainer.addEventListener("wheel", (evt) => {
-//     evt.preventDefault();
-//     scrollContainer.scrollLeft += evt.deltaY;
-// });
-
 
 function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc) {
   // Create the post card container (table)
@@ -827,21 +627,7 @@ function createList(Title, ListTitle, ListContent, dir, id) {
 
   // Append the <li> to a parent container (e.g., a <ul> with id 'myList')
   document.getElementById(id).appendChild(li);
-  // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-  // var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  //   return new bootstrap.Popover(popoverTriggerEl)
-  // })
-  // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-  // var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  //   return new bootstrap.Popover(popoverTriggerEl, {
-  //     html: true, // Allow HTML content
-  //     trigger: 'hover', // Trigger popover on focus
-  //     content: function() {
-  //       var content = $(popoverTriggerEl).attr("data-bs-content");
-  //       return $(content).children(".popover-body").html(); // Extract content from the targeted element
-  //     }
-  //   });
-  // });
+  
   const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
 
   // Initialize popovers for each element
