@@ -1,0 +1,85 @@
+/*--------------------------------
+
+ 4.Competence Area
+--------------------------------*/
+.competences-area {	
+    background-color: #3ec1d5;
+    height: 100%;
+    display: inline;
+      opacity: 0.8;
+      float: left;
+      padding: 0px 0;
+      width: 100%;
+      background-position: top; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+    position: relative;
+    overflow: scroll;
+  }
+  
+  .competences-area .first-row{
+    background-color: #3ec1d5;
+  }
+  
+  .competences-area p {
+      font-size: 200%;
+      color: #fff;
+      font-weight: 300;
+      margin-bottom: 15px;
+  }
+  
+  .competences-area h2 {
+      
+    color: #fff;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  
+  /* list skill */
+  .list-skill {
+      margin-top: 30%;
+      color: #fff;
+  }
+  
+  .list-skill h3 {
+      color: #fff;
+  }
+  
+  .list-skill h4 {
+      color: #fff;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .empty-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .inpop {
+    width: 200px;
+  }
+  .inpop ul {
+    list-style-type: disc;
+    padding-left: 11%;
+    margin-top: 2%;
+  }
+  
+  @media (max-width: 767px) {
+    .list-skill {
+      margin-top: 5%;
+    }
+    .skill-div{
+      overflow: scroll;
+    }
+    .list-skill h4 {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    font-size: 19px;
+  }
+  }
+  

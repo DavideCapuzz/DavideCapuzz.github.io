@@ -1,0 +1,96 @@
+/*--------------------------------*/
+
+/*  2.2 Header top Area
+/*--------------------------------*/
+.navbar{
+  --bs-navbar-padding-y: 0.0rem;
+}
+.header-area {  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 1);
+  height: 60px;
+  z-index: 1000;
+}
+.navbar-header a.navbar-brand {
+  display: inline-block;
+  /* height: 60px; */
+  /* padding: 0px 0; */
+  --bs-navbar-padding-y: 0.5rem;
+}
+@media (min-width: 768px) {
+  .navbar{
+    overflow-y: hidden;
+  }
+  .bg-dark{
+    --bs-bg-opacity: 0;  
+  }
+}
+/*--------------------------------*/
+
+/* 2.1. Stick menu
+/*--------------------------------*/
+
+.stick .navbar-header a.navbar-brand {
+  display: inline-block;  
+}
+.sticky-logo h1 {
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.sticky-logo h1 span {
+  color: #3ec1d5;
+}
+.stick .main-menu ul.navbar-nav li.active > a::after {
+  border: 1px solid #fff;
+  bottom: 0px;
+  content: "";
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.stick .main-menu ul.nav>li>a:hover {
+  color: #fff;
+}
+
+.stick .main-menu ul.navbar-nav li.active a {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  color: #fff;
+  position: relative;
+}
+
+.stick .mainmenu ul#nav>li:hover>a, .stick .mainmenu ul#nav li .mega-menu, .stick .mainmenu ul#nav li ul.sub-menu {
+  background-color: #f5f5f5;
+  color: #fff;
+  outline: medium none;
+}
+
+.stick .mainmenu ul#nav li:hover ul.sub-menu li a:hover, .mainmenu ul#nav li .mega-menu span>a:hover, .stick .mainmenu ul#nav li .mega-menu-shop a.mega-menu-title:hover {
+  color: #fff;
+}
+.nav-link{
+  font-size: 16px;
+}
+.nav-link:active{
+  color: blue;
+  /* --bs-link-color-rgb: var(--bs-link-hover-color-rgb); */
+}
+
+@media (max-width: 768px) {
+  .sticky-logo h1 {
+    text-align: left;
+    font-size: 1.7rem;
+  }
+  .navbar-button{
+    padding-top:5px;
+    padding-right:10px;
+  }
+}

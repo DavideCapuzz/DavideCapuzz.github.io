@@ -1,0 +1,118 @@
+/*--------------------------------*/
+
+/* 2.1. Image Area
+/*--------------------------------*/
+
+.home-area {
+    background-image: url("../images/davide_picture.jpg");
+      display: inline;
+      /* opacity: 0.8; */
+      float: left;
+      padding: 0px 0;
+      width: 100%;
+      height: 100%;
+    top: 0;
+      background-position: top; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: 200%; 
+    overflow: hidden;
+  }
+  
+  /* .mu-header-featured-area {
+      background-image: url("../images/davide_picture.jpg");
+      display: inline;
+      float: left;
+      padding: 0px 0;
+      width: 100%;
+      height: 100%;
+    top: 0;
+      background-position: top;
+      background-repeat: no-repeat; 
+      background-size: 200%; 
+  } */
+  
+  .mu-header-featured-area .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .mu-header-featured-area .col-md-6 {
+    width: 50%;
+    height: 100%;
+    padding: 0 15px;
+  }
+  
+  .mu-header-featured-img {
+      margin-left: 10%;
+      float: left;
+  }
+  
+  .mu-header-featured-content {
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    top: 40%;
+    position: absolute;
+  }
+  
+  .mu-header-featured-content h1 {
+      font-size: 300%;
+      color: #fff;
+      font-weight: 300;
+      margin-bottom: 15px;
+  }
+  
+  .mu-header-featured-content h2 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 300;
+  }
+  
+  .mu-header-featured-content h1 span {
+      font-weight: 700;
+  }
+  
+  .mu-header-featured-content p{
+      color: #fff;
+  }
+  
+  .mu-header-featured-content a.ready-btn {
+    border: 1px solid #fff;
+    border-radius: 30px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.4s ease 0s;
+    z-index: 222;
+  }
+  
+  .layer-1-3 a.ready-btn:hover {
+    color: #fff;
+    background: #3EC1D5;
+    border: 1px solid #3EC1D5;
+    text-decoration: none;
+  }
+  
+  .mu-header-featured-content a.ready-btn:hover {
+    color: #fff;
+    background: #3EC1D5;
+    border: 1px solid #3EC1D5;
+    text-decoration: none;
+  }
+  
+  .ready-btn.right-btn {
+    margin-right: 15px;
+    background: #3EC1D5;
+    border: 1px solid #3EC1D5 !important;
+  }
+  
+  .ready-btn.right-btn:hover {
+    background: transparent !important;
+    border: 1px solid #fff !important;
+  }

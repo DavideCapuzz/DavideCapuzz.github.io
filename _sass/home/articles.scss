@@ -1,0 +1,57 @@
+/*----------------------------------------
+  5.Idea Area
+----------------------------------------*/
+
+.ideas-area {
+	
+	padding: 100px 1000 px 10 px 10 px;
+  background-color: #091d20;
+  height: 100%;
+  display: inline;
+	/* opacity: 0.8; */
+	float: left;
+	padding: 0px 0;
+	width: 100%;
+	background-position: top; /* Center the image */
+	background-repeat: no-repeat; /* Do not repeat the image */
+	/* background-size: 200%;  */
+}
+
+.ideas-area p {
+	font-size: 200%;
+	color: #fff;
+	font-weight: 300;
+	margin-bottom: 15px;
+}
+
+/* .ideas-area h1 {
+	margin-top: 5%;
+	font-size: 300%;
+	color: #fff;
+	font-weight: 300;
+	margin-bottom: 15px;
+}
+
+.ideas-area h1 span {
+	font-weight: 700;
+} */
+
+.ideas-area h2 {
+	
+  color: #fff;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.clearfix {
+	margin-top:20px;
+  overflow: auto;
+}
+
+.img_right {
+  float: right;
+}
+
+.img_left {
+  float: left;
+}

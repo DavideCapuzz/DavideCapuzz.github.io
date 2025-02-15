@@ -1,0 +1,116 @@
+/*--------------------------------*/
+
+/*  14.Contact Area
+/*--------------------------------*/
+
+.top-band-contact {
+    background: #3EC1D5 none repeat scroll 0 0;
+    padding: 30px 0;
+  }
+  
+  .top-band-contact-text {
+    display: block;
+    margin-top:5%;
+  }
+  
+  .top-band-contact-text h3 {
+    color: #fff;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  /* Tablet desktop :768px. */
+  @media (max-width: 767px) {
+    .top-band-contact-text h3 {
+      font-size: 16px;
+      padding-right: 20px;
+    }
+  }
+  
+  
+  
+  .contact-inner{
+      background-color: rgba(0,0,0,0.00);
+  }
+  
+  .contact-area {
+    height: auto;
+      float: left;
+      width: 100%;
+    overflow: scroll;
+  }
+  
+  .section-contact {
+    margin-top: 5%;
+  }
+  
+  .single-icon i {
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #444;
+    line-height: 46px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;  
+  }
+  
+  .link-link{
+    color:#444;
+  }
+  .link-link:hover {
+    color: #3EC1D5;
+  }
+  .link-link:hover {
+    --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
+  }
+  
+  .find-me{
+    margin-top: 20%;
+  }
+  
+  .single-icon p {
+    font-size: 16px;
+    line-height: 30px;
+  }
+  
+  .contact-icon {
+    margin-bottom: 40px;
+  }
+  
+  .single-icon{
+    margin-top: 40px;
+  }
+  
+  .map {
+    height: 370px;
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  
+  .no-map {
+    height: 370px;
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  /* Tablet desktop :768px. */
+  @media (max-width: 767px) {
+    .contact-form {
+      margin-top: 0px;
+    }
+    .no-map {
+    height: auto;
+    margin-bottom: 0px;
+  }
+  }
