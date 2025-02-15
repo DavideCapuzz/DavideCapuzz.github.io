@@ -19,11 +19,6 @@
   //   $(this).addClass("active");
   // });
 
-  /*----------------------------
-   wow js active
-  ------------------------------ */
-  new WOW().init();
-
   $(".navbar-collapse a:not(.dropdown-toggle)").on('click', function () {
     $(".navbar-collapse.collapse").removeClass('in');
   });
