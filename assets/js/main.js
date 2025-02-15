@@ -12,33 +12,12 @@
   });
   /*----------------------------
    Navbar nav
+   collapse nav bar when we are in phone mode
   ------------------------------ */
-  // var main_menu = $(".main-menu ul.navbar-nav li ");
-  // main_menu.on('click', function() {
-  //   main_menu.removeClass("active");
-  //   $(this).addClass("active");
-  // });
 
   $(".navbar-collapse a:not(.dropdown-toggle)").on('click', function () {
     $(".navbar-collapse.collapse").removeClass('in');
   });
-
-  //---------------------------------------------
-  //Nivo slider
-  //---------------------------------------------
-  // $('#ensign-nivoslider').nivoSlider({
-  //   effect: 'random',
-  //   slices: 15,
-  //   boxCols: 12,
-  //   boxRows: 8,
-  //   animSpeed: 500,
-  //   pauseTime: 5000,
-  //   startSlide: 0,
-  //   directionNav: true,
-  //   controlNavThumbs: false,
-  //   pauseOnHover: true,
-  //   manualAdvance: false,
-  // });
 
   /*----------------------------
    Scrollspy js
@@ -49,15 +28,11 @@
   //   offset: 80
   // });
 
-  /*---------------------
-    Venobox
-  --------------------- */
-  // var veno_box = $('.venobox');
-  // veno_box.venobox();
-
   /*----------------------------
   Page Scroll
+  automatic page scroll on the windows
   ------------------------------ */
+
   var page_scroll = $('a.page-scroll');
   var scrolling = false; // Flag to block scroll events during animation
   page_scroll.on('click', function (event) {
@@ -76,20 +51,7 @@
     });
 
     event.preventDefault();
-  });
-
-  var sectionIds = $('section').map(function () {
-    return $(this).attr('id');
-  }).get();
-  
-  // console.log(sectionIds);
-  
-  var heights = [];
-  $('section:visible').each(function () {
-    heights.push($(this).outerHeight());
-  });
-  
-  // console.log(heights);
+  });  
   
   var lastScrollTop = 0; // Initialize last scroll position
   var up = false; // Direction flag (up or down)
@@ -194,6 +156,9 @@
     });
   });
 
+  /*--------------------------
+    Fade menu after click if we are in mobile mode
+  ---------------------------- */
   $('.navbar-nav .nav-link').click(function () {
     // Check if the screen width is less than or equal to 768px (mobile view)
     if ($(window).width() <= 768) {
@@ -205,8 +170,10 @@
     }
   });
 
-  // hide menu if we touck inside the menu
-  // add element on the menu only if we are in the mobile mode and in the about page
+  // --------------------------
+  // add element (downoald cv) on the menu only if we are in the mobile mode and in the about page
+  // ----------------------------
+  
   function isElementInViewport(el) {
     var rect = el[0].getBoundingClientRect();
     return (
@@ -249,39 +216,9 @@
     addElementIfMobileAndInAbout();
   });
 
-  /*---------------------
-   Circular Bars - Knob
-  --------------------- */
-  if (typeof ($.fn.knob) != 'undefined') {
-    var knob_tex = $('.knob');
-    knob_tex.each(function () {
-      var $this = $(this),
-        knobVal = $this.attr('data-rel');
-
-      $this.knob({
-        'draw': function () {
-          $(this.i).val(this.cv + '%')
-        }
-      });
-
-      $this.appear(function () {
-        $({
-          value: 0
-        }).animate({
-          value: knobVal
-        }, {
-          duration: 2000,
-          easing: 'swing',
-          step: function () {
-            $this.val(Math.ceil(this.value)).trigger('change');
-          }
-        });
-      }, {
-        accX: 0,
-        accY: -150
-      });
-    });
-  }
+  // --------------------------
+  // set owl menu
+  // ----------------------------
 
   $(document).ready(function () {
 
@@ -317,31 +254,11 @@
 
   });
 
-  function downloadCV(event) {
-    const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf'; // Replace with your PDF file URL
+  // --------------------------
+  // close popover if click outside 
+  // ----------------------------
 
-    // Fetch the PDF file
-    fetch(pdfUrl)
-      .then(response => response.blob()) // Convert the response to a Blob
-      .then(blob => {
-        // Create a link element
-        const link = document.createElement('a');
-
-        // Create a URL for the Blob and set it as the href attribute
-        link.href = URL.createObjectURL(blob);
-
-        // Set the download attribute with the desired filename
-        link.download = 'resume_Capuzzo_2024.pdf'; // You can change the filename here
-
-        // Programmatically click the link to trigger the download
-        link.click();
-      })
-      .catch(error => {
-        console.error('Error downloading the PDF:', error);
-      });
-  }
-
-  // close popover 
+  
   $(document).on('click', function (e) {
     if (!$(e.target).closest('.popover').length && !$(e.target).closest('[data-bs-toggle="popover"]').length) {
       // Close the popover if clicked outside of it
@@ -424,7 +341,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   dateCell.classList.add('post-date-cell');
   dateLocRow.classList.add('post-date-cell');
   var dateIcon = document.createElement('i');
-  dateIcon.classList.add('fa', 'fa-clock-o');
+  dateIcon.classList.add('fa', 'fa-clock');
   dateCell.appendChild(dateIcon);
   dateCell.appendChild(document.createTextNode(Data));
 
@@ -524,7 +441,7 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   var dateCell = document.createElement('div');
   dateCell.classList.add("col-md-2", "col-sm-2", "col-xs-12");
   var dateIcon = document.createElement('i');
-  dateIcon.classList.add('fa', 'fa-clock-o');
+  dateIcon.classList.add('fa', 'fa-clock');
   dateCell.appendChild(dateIcon);
   dateCell.appendChild(document.createTextNode(Data));
 
@@ -585,6 +502,30 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
 
   // Append modal to a specific part of the page
   document.getElementById('about').appendChild(modal);
+}
+
+function downloadCV(event) {
+  const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf'; // Replace with your PDF file URL
+
+  // Fetch the PDF file
+  fetch(pdfUrl)
+    .then(response => response.blob()) // Convert the response to a Blob
+    .then(blob => {
+      // Create a link element
+      const link = document.createElement('a');
+
+      // Create a URL for the Blob and set it as the href attribute
+      link.href = URL.createObjectURL(blob);
+
+      // Set the download attribute with the desired filename
+      link.download = 'resume_Capuzzo_2024.pdf'; // You can change the filename here
+
+      // Programmatically click the link to trigger the download
+      link.click();
+    })
+    .catch(error => {
+      console.error('Error downloading the PDF:', error);
+    });
 }
 
 document.getElementById('downloadCV').addEventListener('click', downloadCV);
