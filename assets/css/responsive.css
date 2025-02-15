@@ -5,9 +5,12 @@
   /*  2. Header top Area
   /*--------------------------------*/
   .nav-link{
-    padding-right:calc(var(--bs-gutter-x) * .5);
-    padding-left:calc(var(--bs-gutter-x) * .5);
+    padding-right:calc(var(--bs-gutter-x));
+    padding-left: calc(var(--bs-gutter-x) * .5) !important;
   }
+   .navbar{
+    padding-bottom: 0px;
+   }
   .navbar-brand{
     /* padding-right:calc(var(--bs-gutter-x) * .5); */
     padding-left:calc(var(--bs-gutter-x) * .5) !important;
@@ -22,13 +25,28 @@
   }
   .navbar-header a.navbar-brand, .stick .navbar-header a.navbar-brand {
     display: inline-block;
-    height: 50px  !important;
-    padding: 9px 0;
+    /* height: 50px  !important; */
+    /* padding: 9px 0; */
   }
   .nav.navbar-nav.navbar-right, .stick .nav.navbar-nav.navbar-right {
     background-color: #252525;
     padding: 0;
     margin-top: 0;
+  }
+  .home-container{
+    background-color: black !important;
+    /* height: 50px !important; */
+  }
+  .sticky-logo h1 {
+    text-align: left;
+    font-size: 1.7rem;
+  }
+  .navbar-button{
+    /* padding-top:5px; */
+    padding-right:10px;
+  }
+  .navbar-collapse{
+    width: 100vw;
   }
    /*--------------------------------*/
 
