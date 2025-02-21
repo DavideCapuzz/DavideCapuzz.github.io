@@ -10,7 +10,8 @@
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header d-flex justify-content-between w-100">
                             <!-- Brand -->
-                            <a class="navbar-brand page-scroll sticky-logo" href="index.html">
+                            {% assign merged_string = page.return_home | append: "#home" %}
+                            <a class="navbar-brand page-scroll sticky-logo" href={{ merged_string }}>
                                 <h1>I am <span>Davide</span> Capuzzo</h1>
                             </a>
 

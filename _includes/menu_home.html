@@ -2,19 +2,24 @@
 <div class="collapse navbar-collapse" id="navbarNav">
     <ul id="navbar-items" class="navbar-nav ms-auto">
         <li class="nav-item">
-            <a class="page-scroll nav-link" href="#home">Home</a>
+            {% assign merged_string = page.return_home | append: "#home" %}
+            <a class="page-scroll nav-link" href={{ merged_string }}>Home</a>
         </li>
         <li class="nav-item">
-            <a class="page-scroll nav-link" href="#about">CV</a>
+            {% assign merged_string = page.return_home | append: "#about" %}
+            <a class="page-scroll nav-link" href={{ merged_string }}>CV</a>
         </li>
         <li class="nav-item">
-            <a class="page-scroll nav-link" href="#competences">Competences</a>
+            {% assign merged_string = page.return_home | append: "#competences" %}
+            <a class="page-scroll nav-link" href={{ merged_string }}>Competences</a>
         </li>
         <li class="nav-item">
-            <a class="page-scroll nav-link" href="#ideas">Ideas</a>
+            {% assign merged_string = page.return_home | append: "#ideas" %}
+            <a class="page-scroll nav-link" href={{ merged_string }}>Ideas</a>
         </li>
         <li class="nav-item">
-            <a class="page-scroll nav-link" href="#contact">Contact</a>
+            {% assign merged_string = page.return_home | append: "#contact" %}
+            <a class="page-scroll nav-link" href={{ merged_string }}>Contact</a>
         </li>
     </ul>
 </div>

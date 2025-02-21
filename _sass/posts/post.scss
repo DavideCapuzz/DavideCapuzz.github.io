@@ -1,0 +1,62 @@
+/*------------------------------
+  3. Post Area
+--------------------------------*/
+
+.post-area {
+  background-color: #f9f9f9;
+  height: 100%;
+  display: inline;
+  float: left;
+  padding: 0px 0;
+  width: 100%;
+  background-position: top;
+  background-repeat: no-repeat;
+}
+
+.first-line-about {
+  font-size: 150%;
+  // color: #fff;
+  font-weight: 300;
+  text-align: center;
+}
+
+.post-area p {
+  font-size: 100%;
+  // color: #fff;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+.post-area h2 {
+  // color: #black;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.post-area h3 {
+  margin: 0 0 1px;
+  margin-top: 1px;
+  font-size: 150%;
+  color: #000;
+}
+
+.post-area h4 {
+  margin: 0 0 1px;
+  margin-bottom: 0px;
+  font-size: 110%;
+  color: #000;
+  font-weight: 100;
+  line-height: 10px;
+}
+
+/* Container */
+.container-fluid {
+  margin-top: 6%;
+  --bs-gutter-x: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (max-width: 767px) {
+  
+}
