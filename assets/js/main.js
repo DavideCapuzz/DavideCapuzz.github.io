@@ -196,7 +196,7 @@
   // Function to add an element if in mobile mode and the About section is in the viewport
   function addElementIfMobileAndInAbout() {
     // Check if the screen width is less than or equal to 768px (mobile mode) and the #about div is in the viewport
-    if ($(window).width() <= 768 && $('#about').length > 0 && isElementInViewport($('#about'))) {
+    if ($(window).width() <= 1000 && $('#about').length > 0 && isElementInViewport($('#about'))) {
       // Only add the new element if it's not already added
       if ($('#navbarNav #extra-item-dwnld-cv').length === 0) {
         var newItem = $('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
