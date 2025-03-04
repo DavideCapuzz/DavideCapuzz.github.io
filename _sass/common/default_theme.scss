@@ -6,6 +6,9 @@
 html, body {
     height: 100%;
   }
+  html, body {
+    scroll-behavior: auto; /* Disables native smooth scrolling */
+  }
   
   .floatleft {
     float: left;
