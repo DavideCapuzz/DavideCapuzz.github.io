@@ -36,12 +36,41 @@
 	font-weight: 700;
 } */
 
-.ideas-area h2 {
-	
-  color: #fff;
-  font-size: 15px;
-  font-weight: 300;
+.short-article{
+	background-color: #5e787c;
+	overflow-y: hidden;
+	height: 140px;
+	width: 100%;
+	margin-bottom: 20px;
+	border: 5px solid black; 
+	border-radius: 20px;
 }
+
+.mini-post-content{
+	background-color: #849da1;
+	border-radius: 15px;
+}
+
+.mini-post-name{
+	background-color: #849da1;
+	border-radius: 15px;
+}
+
+.mini-post-name-h2{
+	font-size: 40px;
+}
+
+.mini-post{
+	height: 100%;
+	padding: 10px;
+}
+
+// .ideas-area h2 {
+	
+//   color: #fff;
+//   font-size: 15px;
+//   font-weight: 300;
+// }
 
 .clearfix {
 	margin-top:20px;

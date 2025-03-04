@@ -1,11 +1,14 @@
-<h1>Latest Posts</h1>
-
 <ul>
   {% for post in site.posts %}
-    <li>
-      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-      {{ post.excerpt }}
-    </li>
+  <li class="short-article">
+    <div class="row mini-post">
+      <div class="col-md-3 col-sm-3 col-xs-12 mini-post-name">
+        <h2 class="mini-post-name-h2"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      </div>
+      <div class="col-md-9 col-sm-9 col-xs-12 mini-post-content">
+        {{ post.excerpt }}
+      </div>
+    </div>
+  </li>
   {% endfor %}
 </ul>
-
