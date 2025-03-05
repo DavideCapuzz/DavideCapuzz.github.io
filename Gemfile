@@ -30,7 +30,9 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 
 # Performance-booster for watching directories on Windows
-gem "wdm", "~> 0.1.0", :platforms => [:mingw, :x64_mingw, :mswin]
+#gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
+#gem "wdm", "~> 0.1.0", :platforms => [:mingw, :x64_mingw, :mswin]
+gem 'wdm', platforms: [:mingw, :mswin], require: false
 
 # kramdown v2 ships without the gfm parser by default. If you're using
 # kramdown v1, comment out this line.

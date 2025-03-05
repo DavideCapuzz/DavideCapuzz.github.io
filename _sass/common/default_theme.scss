@@ -189,4 +189,13 @@ html, body {
   .area-padding {
     padding: 10px 0px 5%;
     overflow-y: scroll;
+	scrollbar-width: none
   }
+  
+  .area-paddin {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.area-paddin::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
