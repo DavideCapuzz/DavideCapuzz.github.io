@@ -5,8 +5,6 @@
 
 html, body {
     height: 100%;
-  }
-  html, body {
     scroll-behavior: auto; /* Disables native smooth scrolling */
   }
   
@@ -189,13 +187,29 @@ html, body {
   .area-padding {
     padding: 10px 0px 5%;
     overflow-y: scroll;
-	scrollbar-width: none
+	scrollbar-width: none;
   }
   
-  .area-paddin {
+  .area-padding {
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
 }
-.area-paddin::-webkit-scrollbar { 
+.area-padding::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
+}
+
+@media (min-width: 1600px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 1320px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: min(1220px, 75%);
+  }
+}
+
+.container{
+  text-align: center;
 }
