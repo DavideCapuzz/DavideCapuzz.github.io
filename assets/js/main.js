@@ -42,7 +42,7 @@
     } else { timer = 2000; }
 
     scrolling = true;
-    $('html, body').stop().animate({
+    $(document.documentElement, document.body).stop().animate({
       scrolling: true,
       scrollTop: $($anchor.attr('href')).offset().top
     }, 1500, 'easeInOutExpo', function () {
@@ -115,7 +115,7 @@
       // // Scroll up condition: if scrolling up and >60% visible (with margin), and no oscillation
       if (up && visiblePercentage > 70 && activeSection.length && !scrolling) {
         scrolling = true; // Block scroll events while scrolling
-        $('html, body').animate({scrollTop: activeSection.offset().top}, 50, function() {
+        $(document.documentElement, document.body).animate({scrollTop: activeSection.offset().top}, 50, function() {
           scrolling = false; // Re-enable scroll events after the animation is complete
         });
         // console.log("Scrolling up ", prevSection.offset().top);
@@ -123,7 +123,7 @@
       // // Scroll down condition: if scrolling down and <20% visible, and no oscillation
       else if (!up && visiblePercentage < 30 && nextSection.length && !scrolling) {
         scrolling = true; // Block scroll events while scrolling
-        $('html, body').animate({scrollTop: nextSection.offset().top}, 50, function() {
+        $(document.documentElement, document.body).animate({scrollTop: nextSection.offset().top}, 50, function() {
           scrolling = false; // Re-enable scroll events after the animation is complete
         });
         // console.log("Scrolling down");
@@ -143,7 +143,7 @@
   });
 
   $('.back-to-top').click(function () {
-    $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+    $(document.documentElement, document.body).animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
     return false;
   });
 
