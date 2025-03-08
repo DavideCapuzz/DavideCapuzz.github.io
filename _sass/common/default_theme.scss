@@ -96,7 +96,9 @@ html, body {
   a {
     transition: all 0.3s ease 0s;
     text-decoration: none;
-  }
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none !important;
+  }  
   
   a:hover {
     color: #3EC1D5;
