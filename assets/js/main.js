@@ -239,14 +239,14 @@
   });
 
   // Initialize Bootstrap 5 popovers
-  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-  popoverTriggerList.forEach(function (popoverTriggerEl) {
-    new bootstrap.Popover(popoverTriggerEl, {
-      html: true,
-      trigger: 'click',
-      placement: 'left'
-    });
-  });
+ 
+  // popoverTriggerList.forEach(function (popoverTriggerEl) {
+  //   new bootstrap.Popover(popoverTriggerEl, {
+  //     html: true,
+  //     trigger: 'click',
+  //     placement: 'left'
+  //   });
+  // });
 
   /*--------------------------
     Fade menu after click if we are in mobile mode
@@ -271,18 +271,6 @@
     // Get viewport dimensions consistently across browsers
   var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
   var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    console.log("check ",
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom >= viewportHeight && rect.top <= viewportHeight,      
-      rect.top >= 0 ,
-      rect.left >= 0 ,
-      rect.bottom >= viewportHeight,
-      rect.top <= viewportHeight,  
-      "rect.top",rect.top,
-      "rect.bottom", rect.bottom,
-      viewportHeight,
-    );
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
@@ -386,8 +374,19 @@
   // --------------------------
   // close popover if click outside 
   // ----------------------------
+  $(document).on('click', '[data-bs-toggle="popover"]', function (e) {
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    // Close all popovers using Bootstrap 5 API
+    popoverTriggerList.forEach(function(popoverTriggerEl) {
+      const popover = bootstrap.Popover.getInstance(popoverTriggerEl);
+      if (popover && popoverTriggerEl !== e.currentTarget) {
+        popover.hide();
+      }
+    });
+  });
   
   $(document).on('click', function (e) {
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
     if (!$(e.target).closest('.popover').length && !$(e.target).closest('[data-bs-toggle="popover"]').length) {
       // Close all popovers using Bootstrap 5 API
       popoverTriggerList.forEach(function(popoverTriggerEl) {
@@ -521,7 +520,7 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   }
 }
 
-function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip, Data, Loc) {
+function createModal(imageUrl, Role, Company, link, tag, descriptionText, Listdescrip, Data, Loc) {
   // Create the outer modal container (div with modal class)
   var modal = document.createElement('div');
   modal.classList.add('modal', 'fade');
@@ -564,9 +563,12 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   const companycol = document.createElement('div');
   companycol.classList.add("col-md-8", "col-sm-8", "col-xs-12");
 
-  const modalCompany = document.createElement('h6');
-  modalCompany.innerText = Company;
-  companycol.appendChild(modalCompany);
+  const link_el = document.createElement('a');
+  link_el.href = link;
+  link_el.target = '_blank';
+  link_el.classList.add('link-company');
+  link_el.innerText = Company;
+  companycol.appendChild(link_el);
 
   var dateCell = document.createElement('div');
   dateCell.classList.add("col-md-2", "col-sm-2", "col-xs-12");
