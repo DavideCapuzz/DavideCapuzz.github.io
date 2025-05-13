@@ -41,22 +41,54 @@
       timer = 4000;
     } else { timer = 2000; }
 
-    scrolling = true;
-    $('html, body').stop().animate({
-      scrolling: true,
-      scrollTop: $($anchor.attr('href')).offset().top
-    }, 1500, 'easeInOutExpo', function () {
-      // Reset scrolling flag to false when animation is complete
-      scrolling = false;
-    });
-
+    scrolling = true; // Set the flag before starting animation
+    
+    // Force layout recalculation to help with Chrome
+    var forceLayout = document.body.offsetHeight;
+    
+    // Use both methods for better cross-browser compatibility
+    if ('scrollBehavior' in document.documentElement.style) {
+      // Modern browsers with scroll-behavior support
+      var targetElement = document.querySelector($anchor.attr('href'));
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        // Reset scrolling flag after animation completes
+        setTimeout(function() {
+          scrolling = false;
+        }, 1500);
+      }
+    } else {
+      // Fallback for browsers without scroll-behavior support
+      $('html, body').stop().animate({
+        scrollTop: $($anchor.attr('href')).offset().top
+      }, 1500, 'easeInOutExpo', function () {
+        scrolling = false; // Reset the flag when animation completes
+      });
+    }
+    
     event.preventDefault();
   });  
   
   var lastScrollTop = 0; // Initialize last scroll position
   var up = false; // Direction flag (up or down)
+  var scrollTimeout = null; // For debouncing
   
-  $(window).on('scroll', function () {
+  // Throttle/debounce function to limit scroll event frequency
+  function debounce(func, wait) {
+    return function() {
+      var context = this, args = arguments;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function() {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+  
+  // Separate the scroll handling logic
+  function handleScroll() {
     if (scrolling) {
       return; // Prevent further scroll events during animation
     }
@@ -65,14 +97,12 @@
     var windowHeight = $(window).height();  // Height of the viewport
   
     // Determine scroll direction with margin
-    if (scrollPosition > lastScrollTop) {
+    if (scrollPosition > lastScrollTop + 5) { // Add a small threshold
       up = false;  // Scrolling down
-      // console.log('Scrolling down');
       // Update last scroll position to the current one for the next scroll event
       lastScrollTop = scrollPosition;
-    } else if (scrollPosition < lastScrollTop) {
+    } else if (scrollPosition < lastScrollTop - 5) { // Add a small threshold
       up = true;  // Scrolling up
-      // console.log('Scrolling up');
       // Update last scroll position to the current one for the next scroll event
       lastScrollTop = scrollPosition;
     }
@@ -105,31 +135,71 @@
       var visibleHeight = sectionBottomInViewport - sectionTopInViewport;
       var visiblePercentage = (visibleHeight / sectionHeight) * 100;
   
-      // console.log(activeSection.attr('id'), activeSection.prev('section').attr('id'), 
-      // activeSection.next('section').attr('id') , visiblePercentage, scrollPosition, up);
-  
-      // // Find the previous and next sections
+      // Find the previous and next sections
       var prevSection = activeSection.prev('section');
       var nextSection = activeSection.next('section');
   
-      // // Scroll up condition: if scrolling up and >60% visible (with margin), and no oscillation
-      if (up && visiblePercentage > 70 && activeSection.length && !scrolling) {
+      // Scroll up condition: if scrolling up and >75% visible, and no oscillation (adjusted threshold)
+      if (up && visiblePercentage > 75 && activeSection.length && !scrolling) {
         scrolling = true; // Block scroll events while scrolling
-        $('html, body').animate({scrollTop: activeSection.offset().top}, 50, function() {
-          scrolling = false; // Re-enable scroll events after the animation is complete
+        
+        // Force layout recalculation before scrolling
+        var forceLayout = document.body.offsetHeight;
+        
+        // Use requestAnimationFrame for smoother animation
+        requestAnimationFrame(function() {
+          // Use both methods for better cross-browser compatibility
+          if ('scrollBehavior' in document.documentElement.style) {
+            activeSection[0].scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            // Reset scrolling flag after animation completes
+            setTimeout(function() {
+              scrolling = false;
+            }, 100);
+          } else {
+            $('html, body').animate({
+              scrollTop: activeSection.offset().top
+            }, 400, function() {
+              scrolling = false; // Re-enable scroll events after the animation is complete
+            });
+          }
         });
-        // console.log("Scrolling up ", prevSection.offset().top);
       } 
-      // // Scroll down condition: if scrolling down and <20% visible, and no oscillation
-      else if (!up && visiblePercentage < 30 && nextSection.length && !scrolling) {
+      // Scroll down condition: if scrolling down and <25% visible, and no oscillation (adjusted threshold)
+      else if (!up && visiblePercentage < 25 && nextSection.length && !scrolling) {
         scrolling = true; // Block scroll events while scrolling
-        $('html, body').animate({scrollTop: nextSection.offset().top}, 50, function() {
-          scrolling = false; // Re-enable scroll events after the animation is complete
+        
+        // Force layout recalculation before scrolling
+        var forceLayout = document.body.offsetHeight;
+        
+        // Use requestAnimationFrame for smoother animation
+        requestAnimationFrame(function() {
+          // Use both methods for better cross-browser compatibility
+          if ('scrollBehavior' in document.documentElement.style) {
+            nextSection[0].scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            // Reset scrolling flag after animation completes
+            setTimeout(function() {
+              scrolling = false;
+            }, 100);
+          } else {
+            $('html, body').animate({
+              scrollTop: nextSection.offset().top
+            }, 400, function() {
+              scrolling = false; // Re-enable scroll events after the animation is complete
+            });
+          }
         });
-        // console.log("Scrolling down");
       }
     }
-  });
+  }
+  
+  // Use debounced scroll handler to improve performance
+  $(window).on('scroll', debounce(handleScroll, 50));
   
   /*--------------------------
     Back to top button
@@ -143,18 +213,40 @@
   });
 
   $('.back-to-top').click(function () {
-    $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+    scrolling = true; // Set flag before animation
+    
+    // Force layout recalculation
+    var forceLayout = document.body.offsetHeight;
+    
+    // Use both methods for better cross-browser compatibility
+    if ('scrollBehavior' in document.documentElement.style) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      // Reset scrolling flag after animation completes
+      setTimeout(function() {
+        scrolling = false;
+      }, 1500);
+    } else {
+      $('html, body').animate({
+        scrollTop: 0
+      }, 1500, 'easeInOutExpo', function() {
+        scrolling = false; // Reset flag after animation
+      });
+    }
     return false;
   });
 
-  $('[data-bs-toggle="popover"]').each(function () {
-    // Initialize the popover using Bootstrap 5's native API (not jQuery)
-    new bootstrap.Popover(this, {
-      html: true, // Allow HTML content in the popover
-      trigger: 'click', // Trigger the popover on click
-      placement: 'left' // Set popover placement to the left
-    });
-  });
+  // Initialize Bootstrap 5 popovers
+ 
+  // popoverTriggerList.forEach(function (popoverTriggerEl) {
+  //   new bootstrap.Popover(popoverTriggerEl, {
+  //     html: true,
+  //     trigger: 'click',
+  //     placement: 'left'
+  //   });
+  // });
 
   /*--------------------------
     Fade menu after click if we are in mobile mode
@@ -162,36 +254,29 @@
   $('.navbar-nav .nav-link').click(function () {
     // Check if the screen width is less than or equal to 768px (mobile view)
     if ($(window).width() <= 768) {
-      // Set a timeout to close the menu after 2 seconds
-
+      // Set a timeout to close the menu after the specified time
       setTimeout(function () {
         $('#navbarNav').collapse('hide');  // Close the navbar menu
-      }, timer); // 2000 milliseconds = 2 seconds
+      }, timer);
     }
   });
 
   // --------------------------
-  // add element (downoald cv) on the menu only if we are in the mobile mode and in the about page
+  // add element (download cv) on the menu only if we are in the mobile mode and in the about page
   // ----------------------------
   
   function isElementInViewport(el) {
+    if (!el.length) return false;
     var rect = el[0].getBoundingClientRect();
+    // Get viewport dimensions consistently across browsers
+  var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
-      rect.bottom <= $(window).height() && /* or  */
-      rect.right <= $(window).width()  /* or */
+      rect.bottom >= viewportHeight && rect.top <= viewportHeight
     );
   }
-  // function isElementInViewport(el) {
-  //   var rect = el[0].getBoundingClientRect();
-  //   return (
-  //     rect.top >= 0 &&
-  //     rect.left >= 0 &&
-  //     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
-  //     rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
-  //   );
-  // }
 
   // Function to add an element if in mobile mode and the About section is in the viewport
   function addElementIfMobileAndInAbout() {
@@ -200,37 +285,61 @@
       // Only add the new element if it's not already added
       if ($('#navbarNav #extra-item-dwnld-cv').length === 0) {
         var newItem = $('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
-        // $('#navbar-items').append('<li class="nav-item" id="extra-item-dwnld-cv"><a class="nav-link" href="#about">Download CV</a></li>');
         $('#navbar-items').append(newItem);
+        console.log("appendo");
         newItem.hide().fadeIn(1000);
-        document.getElementById('extra-item-dwnld-cv').addEventListener('click', downloadCV);
+        // Wait for the DOM to update before adding the event listener
+        setTimeout(function() {
+          var extraItemElement = document.getElementById('extra-item-dwnld-cv');
+          if (extraItemElement) {
+            extraItemElement.addEventListener('click', downloadCV);
+          }
+        }, 100);
       }
     } else {
-      $('#navbarNav #extra-item-dwnld-cv').fadeOut(1500, function () {
-        // After fading out, remove the element from the DOM
-        $(this).remove();  // This refers to the element that just faded out
-      });
+      // Only try to fade out if the element exists
+      var extraItem = $('#navbarNav #extra-item-dwnld-cv');
+      if (extraItem.length > 0) {
+        extraItem.fadeOut(1500, function () {
+          // After fading out, remove the element from the DOM
+          $(this).remove();
+        });
+      }
     }
   }
 
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
+
   // Check when the document is ready
-  addElementIfMobileAndInAbout();
+  $(document).ready(function() {
+    addElementIfMobileAndInAbout();
+    
+    // Add this to ensure the CSS scroll-behavior is applied
+    document.documentElement.style.scrollBehavior = 'smooth';
+  });
 
   // Check on window resize to ensure the element is added/removed when resizing
   $(window).resize(function () {
     addElementIfMobileAndInAbout();
   });
-  // Check on scroll
-  $(window).scroll(function () {
+
+  $(window).on('scroll', debounce(function() {
     addElementIfMobileAndInAbout();
-  });
+  }, 150)); // 150ms delay to detect when scrolling has finished
 
   // --------------------------
   // set owl menu
   // ----------------------------
 
   $(document).ready(function () {
-
     var owl = $("#cv-slider");
 
     owl.owlCarousel({
@@ -259,19 +368,33 @@
           items: 3
         }
       }
-    })
-
+    });
   });
 
   // --------------------------
   // close popover if click outside 
   // ----------------------------
-
+  $(document).on('click', '[data-bs-toggle="popover"]', function (e) {
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    // Close all popovers using Bootstrap 5 API
+    popoverTriggerList.forEach(function(popoverTriggerEl) {
+      const popover = bootstrap.Popover.getInstance(popoverTriggerEl);
+      if (popover && popoverTriggerEl !== e.currentTarget) {
+        popover.hide();
+      }
+    });
+  });
   
   $(document).on('click', function (e) {
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
     if (!$(e.target).closest('.popover').length && !$(e.target).closest('[data-bs-toggle="popover"]').length) {
-      // Close the popover if clicked outside of it
-      $('[data-bs-toggle="popover"]').popover('hide');
+      // Close all popovers using Bootstrap 5 API
+      popoverTriggerList.forEach(function(popoverTriggerEl) {
+        const popover = bootstrap.Popover.getInstance(popoverTriggerEl);
+        if (popover) {
+          popover.hide();
+        }
+      });
     }
   });
 
@@ -314,7 +437,6 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   var companyCell = document.createElement('td');
   companyCell.classList.add('post-company-cell');
   titleRow2.classList.add('post-company-cell');
-  // companyCell.classList.add('.post-content');
   companyCell.setAttribute("colspan", 2);
   var companyDiv = document.createElement('div');
   companyDiv.classList.add('table-card-div');
@@ -352,17 +474,16 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   var dateIcon = document.createElement('i');
   dateIcon.classList.add('fa', 'fa-clock');
   dateCell.appendChild(dateIcon);
-  dateCell.appendChild(document.createTextNode(Data));
+  dateCell.appendChild(document.createTextNode(" " + Data));
 
   var locCell = document.createElement('td');
   locCell.classList.add('post-loc-cell');
   var locIcon = document.createElement('i');
   locIcon.classList.add('fa', 'fa-location-dot');
   locCell.appendChild(locIcon);
-  locCell.appendChild(document.createTextNode(Loc));
+  locCell.appendChild(document.createTextNode(" " + Loc));
 
   dateLocRow.appendChild(dateCell);
-  // dateLocRow.appendChild(locCell);
   tableBody.appendChild(dateLocRow);
 
   // Create the table row for the "read more" link
@@ -376,7 +497,6 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
 
   readMore.classList.add('read-more');
   readMore.textContent = 'Read more';
-  // readMore.classList.add('btn', 'btn-info', 'btn-lg', 'post-slide', 'read-more');
   readMore.setAttribute('data-bs-toggle', 'modal');  // Enable modal functionality
   readMore.setAttribute('data-bs-target', '#' + tag);
 
@@ -394,11 +514,13 @@ function createPostCard(imageUrl, Role, Company, tag, descriptionText, Data, Loc
   postSlide.appendChild(postContent);
 
   // Append the postSlide to the main container
-  document.getElementById('cv-slider').appendChild(postSlide);
+  var sliderElement = document.getElementById('cv-slider');
+  if (sliderElement) {
+    sliderElement.appendChild(postSlide);
+  }
 }
 
-
-function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip, Data, Loc) {
+function createModal(imageUrl, Role, Company, link, tag, descriptionText, Listdescrip, Data, Loc) {
   // Create the outer modal container (div with modal class)
   var modal = document.createElement('div');
   modal.classList.add('modal', 'fade');
@@ -434,34 +556,35 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   // Create the modal body
   const modalBody = document.createElement('div');
   modalBody.classList.add('modal-body');
-  // modalBody.innerText = descriptionText;
 
   const row = document.createElement('div');
   row.classList.add('row');
 
-  const comapnycol = document.createElement('div');
-  comapnycol.classList.add("col-md-8", "col-sm-8", "col-xs-12");
+  const companycol = document.createElement('div');
+  companycol.classList.add("col-md-8", "col-sm-8", "col-xs-12");
 
-  const modalCompany = document.createElement('h6');
-  // modalCompany.classList.add('modal-title');
-  modalCompany.innerText = Company;
-  comapnycol.appendChild(modalCompany);
+  const link_el = document.createElement('a');
+  link_el.href = link;
+  link_el.target = '_blank';
+  link_el.classList.add('link-company');
+  link_el.innerText = Company;
+  companycol.appendChild(link_el);
 
   var dateCell = document.createElement('div');
   dateCell.classList.add("col-md-2", "col-sm-2", "col-xs-12");
   var dateIcon = document.createElement('i');
   dateIcon.classList.add('fa', 'fa-clock');
   dateCell.appendChild(dateIcon);
-  dateCell.appendChild(document.createTextNode(Data));
+  dateCell.appendChild(document.createTextNode(" " + Data));
 
   var locCell = document.createElement('div');
   locCell.classList.add("col-md-2", "col-sm-2", "col-xs-12");
   var locIcon = document.createElement('i');
   locIcon.classList.add('fa', 'fa-location-dot');
   locCell.appendChild(locIcon);
-  locCell.appendChild(document.createTextNode(Loc));
+  locCell.appendChild(document.createTextNode(" " + Loc));
 
-  row.appendChild(comapnycol);
+  row.appendChild(companycol);
   row.appendChild(dateCell);
   row.appendChild(locCell);
 
@@ -490,12 +613,10 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   });
 
   modalList.appendChild(ulElement);
-  // modalList.classList.add('modal-list');  
   modalDescription.appendChild(modalList);
 
   // Assemble the modal structure
   modalBody.appendChild(row);
-  // modalBody.appendChild(modalCompany);
   modalBody.appendChild(modalImg);
   modalBody.appendChild(modalDescription);
 
@@ -510,15 +631,23 @@ function createModal(imageUrl, Role, Company, tag, descriptionText, Listdescrip,
   modal.appendChild(modalDialog);
 
   // Append modal to a specific part of the page
-  document.getElementById('about').appendChild(modal);
+  var aboutElement = document.getElementById('about');
+  if (aboutElement) {
+    aboutElement.appendChild(modal);
+  }
 }
 
 function downloadCV(event) {
-  const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf'; // Replace with your PDF file URL
+  const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf';
 
   // Fetch the PDF file
   fetch(pdfUrl)
-    .then(response => response.blob()) // Convert the response to a Blob
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.blob();
+    })
     .then(blob => {
       // Create a link element
       const link = document.createElement('a');
@@ -527,17 +656,37 @@ function downloadCV(event) {
       link.href = URL.createObjectURL(blob);
 
       // Set the download attribute with the desired filename
-      link.download = 'resume_Capuzzo_2024.pdf'; // You can change the filename here
+      link.download = 'resume_Capuzzo_2024.pdf';
+
+      // Append to the document
+      document.body.appendChild(link);
 
       // Programmatically click the link to trigger the download
       link.click();
+
+      // Clean up - remove the link after download starts
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+      }, 100);
     })
     .catch(error => {
       console.error('Error downloading the PDF:', error);
     });
 }
 
-document.getElementById('downloadCV').addEventListener('click', downloadCV);
+// Add event listener to the main download button
+document.addEventListener('DOMContentLoaded', function() {
+  var downloadButton = document.getElementById('downloadCV');
+  if (downloadButton) {
+    downloadButton.addEventListener('click', downloadCV);
+  }
+  
+  // Add CSS scroll-behavior through JavaScript to ensure it's applied
+  document.head.insertAdjacentHTML('beforeend', 
+    '<style>html{scroll-behavior:smooth}</style>'
+  );
+});
 
 function createList(Title, ListTitle, ListContent, dir, id) {
   // Create the <li> element
@@ -552,7 +701,7 @@ function createList(Title, ListTitle, ListContent, dir, id) {
   button.setAttribute('data-bs-placement', dir);
   button.setAttribute('title', Title);
   button.setAttribute('data-bs-original-title', Title);
-  var s = "<div class ='inpop'><b>" + ListTitle + "</b><ul>";
+  var s = "<div class='inpop'><b>" + ListTitle + "</b><ul>";
   ListContent.forEach(item => {
     s += "<li>" + item + "</li>";
   });
@@ -570,15 +719,14 @@ function createList(Title, ListTitle, ListContent, dir, id) {
   // Append the <button> to the <li>
   li.appendChild(button);
 
-  // Append the <li> to a parent container (e.g., a <ul> with id 'myList')
-  document.getElementById(id).appendChild(li);
+  // Append the <li> to a parent container
+  var listContainer = document.getElementById(id);
+  if (listContainer) {
+    listContainer.appendChild(li);
+  }
   
-  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-
-  // Initialize popovers for each element
-  popoverTriggerList.forEach(function (popoverTriggerEl) {
-    new bootstrap.Popover(popoverTriggerEl, {
-      html: true
-    });
+  // Initialize Bootstrap 5 popovers for the new element
+  new bootstrap.Popover(button, {
+    html: true
   });
 }

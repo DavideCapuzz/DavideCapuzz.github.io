@@ -5,8 +5,6 @@
 
 html, body {
     height: 100%;
-  }
-  html, body {
     scroll-behavior: auto; /* Disables native smooth scrolling */
   }
   
@@ -98,7 +96,9 @@ html, body {
   a {
     transition: all 0.3s ease 0s;
     text-decoration: none;
-  }
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none !important;
+  }  
   
   a:hover {
     color: #3EC1D5;
@@ -187,6 +187,32 @@ html, body {
   }
   
   .area-padding {
-    padding: 10px 0px 5%;
+    padding-top: 60px;
     overflow-y: scroll;
+	scrollbar-width: none;
   }
+  
+  .area-padding {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.area-padding::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+@media (min-width: 1600px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 1320px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: min(1220px, 75%);
+  }
+}
+
+/* .container{
+  text-align: center;
+  padding-top: 60px;
+} */
