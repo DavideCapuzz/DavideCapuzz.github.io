@@ -9,8 +9,10 @@ layout: home
             </div>
             <div class="side-bar-list crosshair section">
                 <nav class="link-effect-14" id="link-effect-14">
+                    {% for category in site.categories %}
+                    <h1>{{ category[0] }}</h1>
                     <ul>
-                        {% for post in site.posts %}
+                        {% for post in category[1] %}
                         <li class="name">
                             <h2 class="mini-post-name-h2">
                                 <a href="{{ post.url }}">
@@ -20,6 +22,7 @@ layout: home
                         </li>
                         {% endfor %}
                     </ul>
+                    {% endfor %}
                 </nav>
             </div>
         </div>
