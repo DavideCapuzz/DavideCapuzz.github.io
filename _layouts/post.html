@@ -3,51 +3,51 @@ layout: home
 ---
 <section id="post" class="post-area area-padding">
     <div class="side-bar">
-    <div class="side-bar-content">
-        <div class="side-bar-title">
-            <h2 class="title-h2">Articles list</h2>
-        </div>
-        <div class="side-bar-list crosshair section">
-            <nav class="link-effect-14" id="link-effect-14">
-                {% for category in site.categories %}
-                <button class="dropdown-btn">{{ category[0] }}
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <ul>
-                        {% for post in category[1] %}
-                        <li class="name">
-                            <h2 class="mini-post-name-h2">
-                                <a href="{{ post.url }}">
-                                    <span>{{ post.title }}</span>
-                                </a>
-                            </h2>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endfor %}
-            </nav>
+        <div class="side-bar-content">
+            <div class="side-bar-title">
+                <h2 class="title-h2">Articles list</h2>
+            </div>
+            <div class="side-bar-list crosshair section">
+                <nav class="link-effect-14" id="link-effect-14">
+                    {% for category in site.categories %}
+                    <button class="dropdown-btn">{{ category[0] }}
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <ul>
+                            {% for post in category[1] %}
+                            <li class="name">
+                                <h2 class="mini-post-name-h2">
+                                    <a href="{{ post.url }}">
+                                        <span>{{ post.title }}</span>
+                                    </a>
+                                </h2>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </nav>
+            </div>
         </div>
     </div>
-</div>
     <script>
-/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
 
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
-  });
-}
-</script>
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
     <div class="container content-post">
         <div class="first-row-post">
             <div class="col-md-12 col-sm-12 col-xs-12">
