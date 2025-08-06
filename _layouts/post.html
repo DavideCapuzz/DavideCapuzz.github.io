@@ -10,10 +10,19 @@ layout: home
             <div class="side-bar-list crosshair section">
                 <nav class="link-effect-14" id="link-effect-14">
                     {% for category in site.categories %}
-                    <button class="dropdown-btn">{{ category[0] }}
+                        {% assign is_active = false %}
+                            {% for post in category[1] %}
+                                {% if post.url == page.url %}
+                                    {% assign is_active = true %}
+                                {% endif %}
+                        {% endfor %}
+
+                    <button class="dropdown-btn{% if is_active %} active{% endif %}">
+                        {{ category[0] }}
                         <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-container">
+                    <div class="dropdown-container" {% if is_active %} style="display:block;" {% else %}
+                        style="display:none;" {% endif %}>
                         <ul>
                             {% for post in category[1] %}
                             <li class="name">
