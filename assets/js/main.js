@@ -638,7 +638,7 @@ function createModal(imageUrl, Role, Company, link, tag, descriptionText, Listde
 }
 
 function downloadCV(event) {
-  const pdfUrl = 'assets/pdf/resume_Capuzzo_2024.pdf';
+  const pdfUrl = 'assets/pdf/resume_Capuzzo_Davide_2025.pdf';
 
   // Fetch the PDF file
   fetch(pdfUrl)
@@ -656,7 +656,7 @@ function downloadCV(event) {
       link.href = URL.createObjectURL(blob);
 
       // Set the download attribute with the desired filename
-      link.download = 'resume_Capuzzo_2024.pdf';
+      link.download = 'resume_Capuzzo_Davide_2025.pdf';
 
       // Append to the document
       document.body.appendChild(link);
