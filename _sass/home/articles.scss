@@ -143,3 +143,13 @@
 .more-link h2{
 	margin-top: 40px;
 }
+
+@media (max-width: 767px) {
+  .short-article{
+	height: 330px;
+}
+
+.mini-post-image{
+	height: 140px;
+}
+}
