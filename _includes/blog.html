@@ -2,11 +2,13 @@
   {% for post in site.posts limit:4%}
   <li class="short-article">
     <div class="row mini-post">
-      <div class="col-md-3 col-sm-3 col-xs-12 mini-post-name">
-        <h2 class="mini-post-name-h2"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <div class="col-md-3 col-sm-3 col-xs-12 mini-post-image">
+        <a class="mini-post-link" href="{{ post.url }}">
+          <img src="{{ post.image_header | relative_url }}" alt="iphone image">
+        </a>
       </div>
       <div class="col-md-9 col-sm-9 col-xs-12 mini-post-content">
-        <a href="{{ post.url }}">{{ post.title }}</a>
+        <a class="mini-post-title" href="{{ post.url }}">{{ post.title }}</a>
         {{ post.excerpt }}
       </div>
     </div>
