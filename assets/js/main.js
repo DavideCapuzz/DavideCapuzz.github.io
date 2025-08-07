@@ -42,10 +42,10 @@
     } else { timer = 2000; }
 
     scrolling = true; // Set the flag before starting animation
-    
+
     // Force layout recalculation to help with Chrome
     var forceLayout = document.body.offsetHeight;
-    
+
     // Use both methods for better cross-browser compatibility
     if ('scrollBehavior' in document.documentElement.style) {
       // Modern browsers with scroll-behavior support
@@ -56,7 +56,7 @@
           block: 'start'
         });
         // Reset scrolling flag after animation completes
-        setTimeout(function() {
+        setTimeout(function () {
           scrolling = false;
         }, 1500);
       }
@@ -68,34 +68,34 @@
         scrolling = false; // Reset the flag when animation completes
       });
     }
-    
+
     event.preventDefault();
-  });  
-  
+  });
+
   var lastScrollTop = 0; // Initialize last scroll position
   var up = false; // Direction flag (up or down)
   var scrollTimeout = null; // For debouncing
-  
+
   // Throttle/debounce function to limit scroll event frequency
   function debounce(func, wait) {
-    return function() {
+    return function () {
       var context = this, args = arguments;
       clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(function() {
+      scrollTimeout = setTimeout(function () {
         func.apply(context, args);
       }, wait);
     };
   }
-  
+
   // Separate the scroll handling logic
   function handleScroll() {
     if (scrolling) {
       return; // Prevent further scroll events during animation
     }
-  
+
     var scrollPosition = $(window).scrollTop();  // Current scroll position
     var windowHeight = $(window).height();  // Height of the viewport
-  
+
     // Determine scroll direction with margin
     if (scrollPosition > lastScrollTop + 5) { // Add a small threshold
       up = false;  // Scrolling down
@@ -106,25 +106,25 @@
       // Update last scroll position to the current one for the next scroll event
       lastScrollTop = scrollPosition;
     }
-  
+
     var activeSection = $('section').filter(function () {
       var top = $(this).offset().top;  // Top position of the section
       var sectionHeight = $(this).outerHeight();
       var bottom = top + sectionHeight;  // Bottom position of the section
-  
+
       var sectionTopInViewport = Math.max(0, top - scrollPosition); // Section's top relative to the viewport
       var sectionBottomInViewport = Math.min(windowHeight, top + sectionHeight - scrollPosition);
-  
+
       // Calculate the visible height of the section
       var visibleHeight = sectionBottomInViewport - sectionTopInViewport;
-  
+
       // Calculate the percentage of the section that is visible
       var visiblePercentage = (visibleHeight / sectionHeight) * 100;
-  
+
       // Return whether the section is visible
       return top < scrollPosition + windowHeight && bottom > scrollPosition;
     }).first();  // Get the first section that is currently in the viewport
-  
+
     // After getting the first visible section, now we can calculate and log the details.
     if (activeSection.length) {
       var top = activeSection.offset().top;
@@ -134,20 +134,20 @@
       var sectionBottomInViewport = Math.min(windowHeight, top + sectionHeight - scrollPosition);
       var visibleHeight = sectionBottomInViewport - sectionTopInViewport;
       var visiblePercentage = (visibleHeight / sectionHeight) * 100;
-  
+
       // Find the previous and next sections
       var prevSection = activeSection.prev('section');
       var nextSection = activeSection.next('section');
-  
+
       // Scroll up condition: if scrolling up and >75% visible, and no oscillation (adjusted threshold)
       if (up && visiblePercentage > 75 && activeSection.length && !scrolling) {
         scrolling = true; // Block scroll events while scrolling
-        
+
         // Force layout recalculation before scrolling
         var forceLayout = document.body.offsetHeight;
-        
+
         // Use requestAnimationFrame for smoother animation
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
           // Use both methods for better cross-browser compatibility
           if ('scrollBehavior' in document.documentElement.style) {
             activeSection[0].scrollIntoView({
@@ -155,27 +155,27 @@
               block: 'start'
             });
             // Reset scrolling flag after animation completes
-            setTimeout(function() {
+            setTimeout(function () {
               scrolling = false;
             }, 100);
           } else {
             $('html, body').animate({
               scrollTop: activeSection.offset().top
-            }, 400, function() {
+            }, 400, function () {
               scrolling = false; // Re-enable scroll events after the animation is complete
             });
           }
         });
-      } 
+      }
       // Scroll down condition: if scrolling down and <25% visible, and no oscillation (adjusted threshold)
       else if (!up && visiblePercentage < 25 && nextSection.length && !scrolling) {
         scrolling = true; // Block scroll events while scrolling
-        
+
         // Force layout recalculation before scrolling
         var forceLayout = document.body.offsetHeight;
-        
+
         // Use requestAnimationFrame for smoother animation
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
           // Use both methods for better cross-browser compatibility
           if ('scrollBehavior' in document.documentElement.style) {
             nextSection[0].scrollIntoView({
@@ -183,13 +183,13 @@
               block: 'start'
             });
             // Reset scrolling flag after animation completes
-            setTimeout(function() {
+            setTimeout(function () {
               scrolling = false;
             }, 100);
           } else {
             $('html, body').animate({
               scrollTop: nextSection.offset().top
-            }, 400, function() {
+            }, 400, function () {
               scrolling = false; // Re-enable scroll events after the animation is complete
             });
           }
@@ -197,10 +197,10 @@
       }
     }
   }
-  
+
   // Use debounced scroll handler to improve performance
   $(window).on('scroll', debounce(handleScroll, 50));
-  
+
   /*--------------------------
     Back to top button
   ---------------------------- */
@@ -214,10 +214,10 @@
 
   $('.back-to-top').click(function () {
     scrolling = true; // Set flag before animation
-    
+
     // Force layout recalculation
     var forceLayout = document.body.offsetHeight;
-    
+
     // Use both methods for better cross-browser compatibility
     if ('scrollBehavior' in document.documentElement.style) {
       window.scrollTo({
@@ -225,13 +225,13 @@
         behavior: 'smooth'
       });
       // Reset scrolling flag after animation completes
-      setTimeout(function() {
+      setTimeout(function () {
         scrolling = false;
       }, 1500);
     } else {
       $('html, body').animate({
         scrollTop: 0
-      }, 1500, 'easeInOutExpo', function() {
+      }, 1500, 'easeInOutExpo', function () {
         scrolling = false; // Reset flag after animation
       });
     }
@@ -239,7 +239,7 @@
   });
 
   // Initialize Bootstrap 5 popovers
- 
+
   // popoverTriggerList.forEach(function (popoverTriggerEl) {
   //   new bootstrap.Popover(popoverTriggerEl, {
   //     html: true,
@@ -264,13 +264,13 @@
   // --------------------------
   // add element (download cv) on the menu only if we are in the mobile mode and in the about page
   // ----------------------------
-  
+
   function isElementInViewport(el) {
     if (!el.length) return false;
     var rect = el[0].getBoundingClientRect();
     // Get viewport dimensions consistently across browsers
-  var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-  var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
@@ -289,7 +289,7 @@
         console.log("appendo");
         newItem.hide().fadeIn(1000);
         // Wait for the DOM to update before adding the event listener
-        setTimeout(function() {
+        setTimeout(function () {
           var extraItemElement = document.getElementById('extra-item-dwnld-cv');
           if (extraItemElement) {
             extraItemElement.addEventListener('click', downloadCV);
@@ -310,7 +310,7 @@
 
   function debounce(func, wait) {
     let timeout;
-    return function() {
+    return function () {
       const context = this;
       const args = arguments;
       clearTimeout(timeout);
@@ -319,9 +319,9 @@
   }
 
   // Check when the document is ready
-  $(document).ready(function() {
+  $(document).ready(function () {
     addElementIfMobileAndInAbout();
-    
+
     // Add this to ensure the CSS scroll-behavior is applied
     document.documentElement.style.scrollBehavior = 'smooth';
   });
@@ -331,7 +331,7 @@
     addElementIfMobileAndInAbout();
   });
 
-  $(window).on('scroll', debounce(function() {
+  $(window).on('scroll', debounce(function () {
     addElementIfMobileAndInAbout();
   }, 150)); // 150ms delay to detect when scrolling has finished
 
@@ -377,19 +377,19 @@
   $(document).on('click', '[data-bs-toggle="popover"]', function (e) {
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
     // Close all popovers using Bootstrap 5 API
-    popoverTriggerList.forEach(function(popoverTriggerEl) {
+    popoverTriggerList.forEach(function (popoverTriggerEl) {
       const popover = bootstrap.Popover.getInstance(popoverTriggerEl);
       if (popover && popoverTriggerEl !== e.currentTarget) {
         popover.hide();
       }
     });
   });
-  
+
   $(document).on('click', function (e) {
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
     if (!$(e.target).closest('.popover').length && !$(e.target).closest('[data-bs-toggle="popover"]').length) {
       // Close all popovers using Bootstrap 5 API
-      popoverTriggerList.forEach(function(popoverTriggerEl) {
+      popoverTriggerList.forEach(function (popoverTriggerEl) {
         const popover = bootstrap.Popover.getInstance(popoverTriggerEl);
         if (popover) {
           popover.hide();
@@ -398,7 +398,21 @@
     }
   });
 
-  
+  /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+  var dropdown = document.getElementsByClassName("dropdown-btn");
+  var i;
+
+  for (i = 0; i < dropdown.length; i++) {
+    dropdown[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var dropdownContent = this.nextElementSibling;
+      if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+      } else {
+        dropdownContent.style.display = "block";
+      }
+    });
+  }
 
 })(jQuery);
 
@@ -678,14 +692,14 @@ function downloadCV(event) {
 }
 
 // Add event listener to the main download button
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var downloadButton = document.getElementById('downloadCV');
   if (downloadButton) {
     downloadButton.addEventListener('click', downloadCV);
   }
-  
+
   // Add CSS scroll-behavior through JavaScript to ensure it's applied
-  document.head.insertAdjacentHTML('beforeend', 
+  document.head.insertAdjacentHTML('beforeend',
     '<style>html{scroll-behavior:smooth}</style>'
   );
 });
@@ -726,7 +740,7 @@ function createList(Title, ListTitle, ListContent, dir, id) {
   if (listContainer) {
     listContainer.appendChild(li);
   }
-  
+
   // Initialize Bootstrap 5 popovers for the new element
   new bootstrap.Popover(button, {
     html: true
