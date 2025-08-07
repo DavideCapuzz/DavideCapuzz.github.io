@@ -398,6 +398,35 @@
     }
   });
 
+  
+//   function toggleNav() {
+//   const sidebar = $("#side-bar");
+//   if (sidebar.width() === 250) {
+//     sidebar.width(0);
+//   } else {
+//     sidebar.width(250);
+//   }
+// }
+
+// function closeNav() {
+  
+// }
+
+// $(document).on("click", function(e) {
+//   const sidebar = $("#side-bar");
+//   const openBtn = $(".openbtn");
+
+//   if (
+//     $(window).width() <= 768 &&
+//     !sidebar.is(e.target) &&
+//     sidebar.has(e.target).length === 0 &&
+//     !openBtn.is(e.target) &&
+//     openBtn.has(e.target).length === 0
+//   ) {
+//     $("#side-bar").width(0);
+//   }
+// });
+
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
   var dropdown = document.getElementsByClassName("dropdown-btn");
   var i;
@@ -413,6 +442,8 @@
       }
     });
   }
+
+
 
 })(jQuery);
 

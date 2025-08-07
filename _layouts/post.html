@@ -2,8 +2,9 @@
 layout: home
 ---
 <section id="post" class="post-area area-padding">
-    <div class="side-bar">
+    <div class="side-bar" id = "side-bar">
         <div class="side-bar-content">
+            <button id ="openbtn" class="openbtn" onclick="toggleNav()">☰</button> 
             <div class="side-bar-title">
                 <h2 class="title-h2">Articles list</h2>
             </div>
@@ -40,6 +41,40 @@ layout: home
             </div>
         </div>
     </div>
+
+    <script>
+  // Global toggleNav function
+  function toggleNav() {
+    const sidebar = document.getElementById("side-bar");
+    const openbtn = document.getElementById("openbtn");
+    if (sidebar.style.width === "250px") {
+      sidebar.style.width = "0";
+      openbtn.style.left = "0px";
+      openbtn.textContent = "☰";
+    } else {
+      sidebar.style.width = "250px";
+      openbtn.style.left = "250px";
+      openbtn.textContent = "✖";
+    }
+  }
+
+  // Close sidebar on clicking outside (mobile only)
+  document.addEventListener("click", function(e) {
+    const sidebar = document.getElementById("side-bar");
+    const openBtn = document.querySelector(".openbtn");
+
+    if (
+      window.innerWidth <= 768 &&
+      sidebar.style.width === "250px" && // sidebar open
+      !sidebar.contains(e.target) &&
+      !openBtn.contains(e.target)
+    ) {
+      sidebar.style.width = "0";
+      openbtn.style.left = "0px";
+      openbtn.textContent = "☰";
+    }
+  });
+</script>
     <div class="container content-post">
         <div class="first-row-post">
             <div class="col-md-12 col-sm-12 col-xs-12">
