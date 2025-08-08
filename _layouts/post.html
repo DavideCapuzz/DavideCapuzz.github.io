@@ -2,21 +2,22 @@
 layout: home
 ---
 <section id="post" class="post-area area-padding">
-    <div class="side-bar" id = "side-bar">
-        <div class="side-bar-content">
-            <button id ="openbtn" class="openbtn" onclick="toggleNav()">☰</button> 
-            <div class="side-bar-title">
-                <h2 class="title-h2">Articles list</h2>
-            </div>
-            <div class="side-bar-list crosshair section">
-                <nav class="link-effect-14" id="link-effect-14">
-                    {% for category in site.categories %}
-                        {% assign is_active = false %}
-                            {% for post in category[1] %}
-                                {% if post.url == page.url %}
-                                    {% assign is_active = true %}
-                                {% endif %}
-                        {% endfor %}
+    <div class="side-bar" id="side-bar">
+    <div class="side-bar-content">
+        <button id="openbtn" class="openbtn" onclick="toggleNav()">☰</button> 
+        <div class="side-bar-title">
+            <h2 class="title-h2">Articles list</h2>
+        </div>
+        <div class="side-bar-list crosshair section">
+            <nav class="link-effect-14" id="link-effect-14">
+                {% for category in site.categories %}
+                    {% assign is_active = false %}
+                    {% assign sorted_posts = category[1] | sort: 'order' %} <!-- Sorting posts by 'order' -->
+                    {% for post in sorted_posts %}
+                        {% if post.url == page.url %}
+                            {% assign is_active = true %}
+                        {% endif %}
+                    {% endfor %}
 
                     <button class="dropdown-btn{% if is_active %} active{% endif %}">
                         {{ category[0] }}
@@ -25,22 +26,22 @@ layout: home
                     <div class="dropdown-container" {% if is_active %} style="display:block;" {% else %}
                         style="display:none;" {% endif %}>
                         <ul>
-                            {% for post in category[1] %}
-                            <li class="name">
-                                <h2 class="mini-post-name-h2">
-                                    <a href="{{ post.url }}">
-                                        <span>{{ post.title }}</span>
-                                    </a>
-                                </h2>
-                            </li>
+                            {% for post in sorted_posts %}
+                                <li class="name">
+                                    <h2 class="mini-post-name-h2">
+                                        <a href="{{ post.url }}">
+                                            <span>{{ post.title }}</span>
+                                        </a>
+                                    </h2>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
-                    {% endfor %}
-                </nav>
-            </div>
+                {% endfor %}
+            </nav>
         </div>
     </div>
+</div>
 
     <script>
   // Global toggleNav function
