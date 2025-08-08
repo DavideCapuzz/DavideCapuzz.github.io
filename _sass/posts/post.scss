@@ -171,6 +171,10 @@ ul.post-list li::before {
   border-bottom-left-radius: 0;
 }
 
+.small-space{
+  height: 10vh;
+}
+
 @media (max-width: 767px) {
   .post-image img{
     width: 100%;
