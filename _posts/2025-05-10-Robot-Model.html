@@ -1,0 +1,184 @@
+---
+layout: post
+author: Davide Capuzzo
+title: Robot Model
+body_class: ""
+menu: "header.html"
+return_home: "/index.html"
+excerpt_separator: <!--end_excerpt-->
+category: RoboMagellan
+image_header: "/assets/images/post_images/robomagellan/sensor_architecture.png"
+order: 3
+---
+<p>
+    In this article, I’ll introduce the robot platform we are using for the Robo Magellan Challenge.
+</p>
+<!--end_excerpt-->
+<p>
+    The robot's name is Whelee and it has been designed and built several years ago by the Central Illinois Robotics
+    Club (CIRC).
+</p>
+<p>
+    The robot’s design and architecture are crucial to its ability to navigate complex environments, detect objects,
+    and make decisions in real time. Let’s dive into the specifics of Whelee’s design, including its mechanical
+    structure,
+    sensors, control systems, and power architecture.
+</p>
+
+<div class="post-image image-big">
+    <img class="image-big" src="{{ '/assets/images/post_images/robomagellan/wheele1.jpeg' | relative_url }}"
+        alt="sensor architecture">
+    <p>
+        The Robot
+    </p>
+</div>
+<p><b>Whelee Robot Platform Overview</b></p>
+
+<p>
+    The Whelee robot is a four-wheeled autonomous vehicle featuring both traction and steering capabilities.
+    The design allows for excellent maneuverability, which is essential for navigating the unpredictable terrain found
+    in
+    the Robo Magellan Challenge.
+</p>
+<p><b>Mechanical Design</b></p>
+<p>
+<ul class="post-list">
+    <li>
+        <b>Wheels and Motors:</b> Whelee uses a differential drive system with two traction motors, one for the left
+        side and one for the right. This setup allows the robot to create a virtual differential drive mechanism,
+        enabling it to turn smoothly and maneuver with high precision.
+    </li>
+    <li>
+        <b>Steering System: </b>Each of the four wheels has its own independent steering motor. These motors are
+        controlled via PWM signals, allowing precise control over the robot’s orientation and movement.
+    </li>
+    <li>
+        <b>Traction and Steering Integration: </b>The traction motors are linked to the four wheels via a belt system,
+        ensuring power is distributed evenly across the robot for stability and control.
+    </li>
+</ul>
+</p>
+
+<p><b>Sensor Suite</b></p>
+
+<p>
+To successfully complete tasks like navigation, obstacle avoidance, and mapping, Whelee is equipped with a range of
+sensors that gather real-time data from the environment:
+<ul class="post-list">
+    <li>
+        2D Circular LiDAR: This sensor provides a 360-degree scan of the robot’s surroundings, enabling SLAM (Simultaneous
+Localization and Mapping). This feature is critical for the robot to build a map of its environment while simultaneously
+determining its position.
+    </li>
+    <li>
+        2D Long-Range LiDAR: This sensor is designed to scan longer distances, providing information about obstacles and terrain
+far ahead of the robot.
+    </li>
+    <li>
+        IMU (Inertial Measurement Unit): The MPU-6050 IMU is responsible for providing orientation and acceleration data,
+allowing the robot to understand its own movement and balance.
+    </li>
+    <li>
+        GPS (Global Positioning System): The NEO-M8N GPS is essential for outdoor navigation, providing location data with high
+precision.
+    </li>
+    <li>
+        Camera: The Sony PlayStation 3 Eye Camera is used for object detection, which is crucial for recognizing obstacles or
+identifying specific targets.
+    </li>
+    <li>
+        Safety Bar: This is a crucial fail-safe for stopping the robot in case of emergency or failure, ensuring the robot
+doesn’t continue moving unpredictably.
+    </li>
+    <li>
+        Wheel Encoders: Simple optical encoders are used to track the rotation of the wheels and provide feedback on the robot’s
+movement and position.
+    </li>
+</ul>
+
+</p>
+
+<p><b>Electronics and Control Systems</b></p>
+
+
+<p>
+Whelee's control system is made up of several components, which communicate with each other over a CAN Bus network for
+reliable data transfer and synchronization. The architecture includes the following:
+
+<ul class="post-list">
+    <li>
+        Raspberry Pi 4: The main processing unit and brain of the robot. It runs ROS2 (Robot Operating System 2), managing the
+robot’s tasks, algorithms, and sensor integration.
+
+    </li>
+    <li>
+        Arduino Nano (Engine Control): This handles low-level control of the motors that manage the robot's movement. It
+interfaces directly with the traction motors and steering actuators.
+    </li>
+    <li>
+        Arduino Nano (Sensor and RC Control): This Arduino manages the sensors and remote control (RC) interface, ensuring data
+from sensors like LiDAR, IMU, and GPS are transmitted to the Raspberry Pi.
+    </li>
+</ul>
+</p>
+
+<p><b>Power Architecture</b></p>
+
+<p>
+Whelee’s power system is designed for efficiency and redundancy:
+
+<ul class="post-list">
+    <li>
+        Dual Power Switches: The robot is equipped with two main switches—one for controlling the motors and one for overall
+power management.
+
+    </li>
+    <li>
+        Motors: Two DC motors are used for forward movement, with one motor controlling the left wheels and the other
+controlling the right. This configuration enables the robot to execute differential steering.
+
+    </li>
+    <li>
+        Steering Motors: Four DC motors (one for each wheel) are responsible for steering. These motors are PWM-controlled for
+precise movement and direction.
+    </li>
+</ul>
+</p>
+
+<p><b>Overall System Diagram</b></p>
+
+
+Below is the schematic representation of the robot’s overall architecture, which illustrates how each component is
+connected:
+
+This diagram highlights the connections between the Raspberry Pi, Arduino boards, motors, and sensors, with the CAN Bus
+network enabling communication between all the components.
+</p>
+<div class="post-image image-big">
+    <img class="image-big" src="{{ '/assets/images/post_images/robomagellan/sensor_architecture.png' | relative_url }}"
+        alt="sensor architecture">
+    <p>
+        The sensor Architecture
+    </p>
+</div>
+
+<div class="small-space"></div>
+<p>
+    
+    <b>Links:</b>
+<ul>
+    <li>
+        <a href="https://www.circpeoria.org/" target="_blank" rel="noopener noreferrer">Central Illnois Robotic Club</a>
+    </li>
+    <li>
+        <a href="http://robogames.net/rules/magellan.php" target="_blank" rel="noopener noreferrer">RoboMagellan</a>
+    </li>
+</ul>
+</p>
+
+<p>
+    
+    <b>Contact Information</b>
+
+Feel free to reach out for any questions or clarifications. You can find my contact information on the Contact Page.
+</p>
