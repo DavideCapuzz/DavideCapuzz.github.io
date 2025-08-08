@@ -11,110 +11,142 @@ image_header: "/assets/images/post_images/robomagellan/architecture.png"
 order: 2
 ---
 <p>
-The architecture has been designed as that modular, clear, 
-flexible, robust and intexchengable between simulation and real robot.
+    The architecture of the Robo Magellan robot has been designed with a
+    strong focus on modularity, clarity, flexibility, robustness, and interchangeability,
+    making it equally applicable to both simulation environments and real-world robotics.
 </p>
 <!--end_excerpt-->
 <p>
-The goal? Guide the robot to a designated target location while
- avoiding real-world hazards such as trees, curbs, poles, 
- unpredictable lighting conditions, and uneven terrain. 
- Success requires both durable hardware and sophisticated decision-making software.
-
+    This design philosophy ensures that the system is not only versatile but also easily
+    adaptable for various use cases, from controlled simulations to deployment in dynamic
+    real-world conditions.
+</p>
+<p>
+    To achieve this goal, I started by thoroughly analyzing the context and expanding
+    upon the initial concept. The aim is to develop a framework that simplifies the complexity
+    of robot systems while maintaining a high level of reliability and efficiency in both
+    simulation and real-world scenarios.
 </p>
 
+<p>
+    At its core, the robot’s functioning can be broken down into three primary components,
+    or blocks, each handling different aspects of the robot’s interaction with its environment:
+<ul class="post-list">
+    <li>
+        <b>Sensing Part:</b> This block encompasses everything that enables the robot to perceive its surroundings.
+        It includes sensors, cameras, and other devices that gather environmental data.
+    </li>
+    <li>
+        <b>Elaboration Part:</b> This is the brain of the robot, where all the core algorithms operate.
+        It processes the sensory information, interprets the data, and makes decisions on how
+        the robot should behave based on its understanding of the environment.
+    </li>
+    <li>
+        <b>Actuation Part:</b>
+        This is the output layer where the robot interacts with its environment.
+        It includes all the hardware and systems that allow the robot to perform actions,
+        such as moving, manipulating objects, or performing other tasks.
+    </li>
+</ul>
+</p>
+
+<p>
+    While each part is vital, my primary focus has been on the <b>Elaboration Part</b>.
+    The design of this section is what ensures that the same algorithms can be deployed both
+    in a simulated environment and on the actual robot in the field. The key advantage of using
+    simulation is the ability to test and refine algorithms in a controlled and repeatable environment.
+    While no simulation can perfectly mimic the real world, the results in a simulated environment
+    are close enough to facilitate the rapid design and iteration of algorithms.</p>
+
+<p>
+    For this project, Gazebo has been the primary simulation tool used,
+    integrated with ROS2 for robotic compatibility. Thanks to this simulator,
+    I can test and refine algorithms without the risk and time investment required by physical trials.
+    The system’s Elaboration Part is agnostic to the origin of its input; whether the
+    data comes from the real world or a simulated environment,
+    the algorithms perform in the same way.
+</p>
+
+<p>Here are the high-level system architectures for both the physical robot and its corresponding simulation:</p>
+
 <div class="post-image image-medium">
-    <img class="image-medium image-medium" src="{{ '/assets/images/post_images/robomagellan/robot_architecture.png' | relative_url }}" alt="iphone image">
+    <img class="image-medium image-medium"
+        src="{{ '/assets/images/post_images/robomagellan/robot_architecture.png' | relative_url }}" alt="iphone image">
     <p>
         THe Robot Architecture
     </p>
 </div>
 
 <div class="post-image image-medium">
-    <img class="image-medium" src="{{ '/assets/images/post_images/robomagellan/gazebo_architecture.png' | relative_url }}" alt="iphone image">
+    <img class="image-medium"
+        src="{{ '/assets/images/post_images/robomagellan/gazebo_architecture.png' | relative_url }}" alt="iphone image">
     <p>
         THe Gazebo Architecture
     </p>
 </div>
 
 <p>
-When I moved to Peoria, IL, I joined the Central Illinois Robotics Club,
- a group of friends bound by a shared passion for robotics 
- and competitions. Years ago, the club had built Wheele, 
- an autonomous platform designed specifically for Robo-Magellan 
- challenges. Back then, Wheele was powered by Arduinos and Raspberry 
- Pi boards, running ROS 1 as its main control framework.
-
+    Breaking down the Elaboration Part further, it is structured into several key 
+    subsystems, each responsible for a specific function. These components work together 
+    to ensure that the robot can understand its environment, make decisions, and execute 
+    its tasks efficiently:
+<ul class="post-list">
+    <li>
+        <b>Sensor Interface:</b> This is the layer responsible for connecting the robot to its sensors. It’s the bridge between the physical hardware and the software that processes the sensor data.
+    </li>
+    <li>
+         <b>Sensor Elaboration:</b> Once data is collected from the sensors, this component processes the raw information, transforming it into useful insights for the robot’s decision-making system.
+    </li>
+    <li>
+ <b>Decision Making:</b> This is the heart of the robot’s cognitive abilities. It decides what the robot should do based on the data received from the sensors and the goals set for the task at hand.
+    </li>
+    <li>
+ <b>Planning:</b> The planning system takes the robot’s goal and creates a series of actions or paths to achieve it. It’s about strategizing how to best reach a given destination.
+    </li>
+    <li>
+ <b>Control:</b> Once the planning system has mapped out a course of action, the control system takes over, ensuring that the robot’s movements and actions follow the planned path accurately and efficiently.
+    </li>
+    <li>
+ <b>Decorators:</b> These are auxiliary components, not strictly necessary for task completion but valuable for diagnostics and debugging. They include tools like visualizers, loggers, and other monitoring systems.
+    </li>
+</ul>
 </p>
+
+<p>Here’s a second-level view of the robot's architecture, highlighting the individual components within the  <b>Elaboration Part:</b></p>
+
+<div class="post-image image-medium">
+    <img class="image-medium"
+        src="{{ '/assets/images/post_images/robomagellan/architecture_2level.png' | relative_url }}"
+        alt="architecture second level">
+    <p>
+        THe Second level of architecture
+    </p>
+</div>
+
+<p>
+    The architecture can be further expanded to define specific nodes for each subtask, as well as the signals that pass between them. This step is crucial for creating a clear and structured workflow that ensures the robot can seamlessly transition from one task to another.
+</p>
+
+<p>
+One of the most interesting innovations I’ve introduced into this architecture is the use of Behavior Trees for decision-making. Traditionally, decision-making in robots is handled by finite state machines or rule-based systems. However, Behavior Trees provide a more flexible and scalable approach, often used in game development to control the behavior of characters. This approach allows for more dynamic and modular decision-making logic, making it easier to modify and extend the system as needed.
+</p>
+
 <div class="post-image image-big">
-    <img class="image-big" src="{{ '/assets/images/post_images/robomagellan/architecture.png' | relative_url }}" alt="iphone image">
+    <img class="image-big" src="{{ '/assets/images/post_images/robomagellan/architecture.png' | relative_url }}"
+        alt="iphone image">
     <p>
         THe Overall Architecture
     </p>
 </div>
 
 <p>
-Over time, the technology aged, and the team agreed it was time for a major upgrade. 
-I saw this as the perfect opportunity to take the project to the next level — replacing 
-outdated components, enhancing sensing capabilities, and migrating the entire 
-software architecture to ROS 2.
+    In this article, I’ve introduced the high-level design and organization of the Robo Magellan robot’s
+     architecture. The next set of articles will delve deeper into the specifics of the physical robot as well as its simulated counterpart. Stay tuned for more insights into the hardware, algorithms, and unique challenges of building a robot that operates seamlessly in both virtual and real environments.</p>
 
-</p>
-<p>
-Originally launched by the Seattle Robotics Society, the Robo-Magellan
- competition is a unique blend of mechanical engineering, sensor fusion,
-  and AI-driven decision-making. Robots start at a fixed location,
-   use GPS to navigate toward a target waypoint, and must adapt on 
-   the fly to obstacles detected via cameras, ultrasonic sensors, 
-   LiDAR, or other range-finding devices.
-</p>
-<p>
 
-</p>
-<p>
-For Wheele, the specific challenge is to navigate through an unknown outdoor 
-environment and locate multiple traffic cones scattered within a 
-designated competition zone. On paper, the task sounds straightforward — 
-“just drive to the cones.” In reality, building a robust, 
-competition-ready system requires:
-<ul class="post-list">
-    <li>
-Precise GPS integration to maintain accuracy even in areas with 
-signal noise or multipath interference.
-    </li>
-    <li>
-Sensor fusion algorithms to merge data from LiDAR, vision,
- and ultrasonic sensors into a reliable world model.
-    </li>
-    <li>
-Obstacle detection and avoidance capable of handling both 
-static and dynamic hazards.
-    </li>
-    <li>
-Robust path-planning to find efficient, collision-free
- routes in a space the robot has never seen before.
-    </li>
-    <li>
-High-level decision-making for cone detection, verification, and sequencing.
-    </li>
-</ul>
-</p>
-<p>
-Migrating to ROS 2 not only modernized Wheele’s software stack 
-but also unlocked advanced features like improved real-time performance,
- better communication between distributed nodes, and greater modularity 
- for future upgrades.
-</p>
-<p>
-The journey of upgrading Wheele has been as challenging as the competition
- itself — a mix of electronics design, embedded programming, control theory, 
- and field testing in all sorts of unpredictable Illinois weather. But that’s 
- the essence of Robo-Magellan: pushing both the robot and the team behind it 
- to perform at their best in the real world.
-</p>
 <div class="small-space"></div>
 <p>
-Links:
+    Links:
 <ul>
     <li>
         <a href="https://www.circpeoria.org/" target="_blank" rel="noopener noreferrer">Central Illnois Robotic Club</a>
