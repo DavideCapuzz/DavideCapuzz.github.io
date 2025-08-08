@@ -66,7 +66,9 @@
   word-break: break-word;
 }
 
-
+.empty{
+  height: 40vh;
+}
 
 .date p{
   color: rgb(107, 107, 107);
@@ -114,6 +116,25 @@
   text-align: center
 }
 
+ul.post-list {
+  list-style-type: none;
+  padding-left: 1.2em;
+}
+ul.post-list li {
+  position: relative;
+  margin-bottom: 0.5em;
+  padding-left: 1.2em;
+}
+ul.post-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  color: #3ec1d5;
+  font-size: 1.4em;
+  line-height: 1;
+}
+
 .side-bar{
   margin: 0;
   padding: 0;
@@ -151,6 +172,9 @@
 }
 
 @media (max-width: 767px) {
+  .post-image img{
+    width: 100%;
+  }
   .side-bar{
     width: 0px;
 }
