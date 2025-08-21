@@ -62,37 +62,45 @@ order: 3
 <p><b>Sensor Suite</b></p>
 
 <p>
-To successfully complete tasks like navigation, obstacle avoidance, and mapping, Whelee is equipped with a range of
-sensors that gather real-time data from the environment:
+    To successfully complete tasks like navigation, obstacle avoidance, and mapping, Whelee is equipped with a range of
+    sensors that gather real-time data from the environment:
 <ul class="post-list">
     <li>
-        2D Circular LiDAR: This sensor provides a 360-degree scan of the robot’s surroundings, enabling SLAM (Simultaneous
-Localization and Mapping). This feature is critical for the robot to build a map of its environment while simultaneously
-determining its position.
+        2D Circular LiDAR: This sensor provides a 360-degree scan of the robot’s surroundings, enabling SLAM
+        (Simultaneous
+        Localization and Mapping). This feature is critical for the robot to build a map of its environment while
+        simultaneously
+        determining its position.
     </li>
     <li>
-        2D Long-Range LiDAR: This sensor is designed to scan longer distances, providing information about obstacles and terrain
-far ahead of the robot.
+        2D Long-Range LiDAR: This sensor is designed to scan longer distances, providing information about obstacles and
+        terrain
+        far ahead of the robot.
     </li>
     <li>
-        IMU (Inertial Measurement Unit): The MPU-6050 IMU is responsible for providing orientation and acceleration data,
-allowing the robot to understand its own movement and balance.
+        IMU (Inertial Measurement Unit): The MPU-6050 IMU is responsible for providing orientation and acceleration
+        data,
+        allowing the robot to understand its own movement and balance.
     </li>
     <li>
-        GPS (Global Positioning System): The NEO-M8N GPS is essential for outdoor navigation, providing location data with high
-precision.
+        GPS (Global Positioning System): The NEO-M8N GPS is essential for outdoor navigation, providing location data
+        with high
+        precision.
     </li>
     <li>
-        Camera: The Sony PlayStation 3 Eye Camera is used for object detection, which is crucial for recognizing obstacles or
-identifying specific targets.
+        Camera: The Sony PlayStation 3 Eye Camera is used for object detection, which is crucial for recognizing
+        obstacles or
+        identifying specific targets.
     </li>
     <li>
-        Safety Bar: This is a crucial fail-safe for stopping the robot in case of emergency or failure, ensuring the robot
-doesn’t continue moving unpredictably.
+        Safety Bar: This is a crucial fail-safe for stopping the robot in case of emergency or failure, ensuring the
+        robot
+        doesn’t continue moving unpredictably.
     </li>
     <li>
-        Wheel Encoders: Simple optical encoders are used to track the rotation of the wheels and provide feedback on the robot’s
-movement and position.
+        Wheel Encoders: Simple optical encoders are used to track the rotation of the wheels and provide feedback on the
+        robot’s
+        movement and position.
     </li>
 </ul>
 
@@ -102,22 +110,25 @@ movement and position.
 
 
 <p>
-Whelee's control system is made up of several components, which communicate with each other over a CAN Bus network for
-reliable data transfer and synchronization. The architecture includes the following:
+    Whelee's control system is made up of several components, which communicate with each other over a CAN Bus network
+    for
+    reliable data transfer and synchronization. The architecture includes the following:
 
 <ul class="post-list">
     <li>
-        Raspberry Pi 4: The main processing unit and brain of the robot. It runs ROS2 (Robot Operating System 2), managing the
-robot’s tasks, algorithms, and sensor integration.
+        Raspberry Pi 4: The main processing unit and brain of the robot. It runs ROS2 (Robot Operating System 2),
+        managing the
+        robot’s tasks, algorithms, and sensor integration.
 
     </li>
     <li>
         Arduino Nano (Engine Control): This handles low-level control of the motors that manage the robot's movement. It
-interfaces directly with the traction motors and steering actuators.
+        interfaces directly with the traction motors and steering actuators.
     </li>
     <li>
-        Arduino Nano (Sensor and RC Control): This Arduino manages the sensors and remote control (RC) interface, ensuring data
-from sensors like LiDAR, IMU, and GPS are transmitted to the Raspberry Pi.
+        Arduino Nano (Sensor and RC Control): This Arduino manages the sensors and remote control (RC) interface,
+        ensuring data
+        from sensors like LiDAR, IMU, and GPS are transmitted to the Raspberry Pi.
     </li>
 </ul>
 </p>
@@ -125,22 +136,24 @@ from sensors like LiDAR, IMU, and GPS are transmitted to the Raspberry Pi.
 <p><b>Power Architecture</b></p>
 
 <p>
-Whelee’s power system is designed for efficiency and redundancy:
+    Whelee’s power system is designed for efficiency and redundancy:
 
 <ul class="post-list">
     <li>
-        Dual Power Switches: The robot is equipped with two main switches—one for controlling the motors and one for overall
-power management.
+        Dual Power Switches: The robot is equipped with two main switches—one for controlling the motors and one for
+        overall
+        power management.
 
     </li>
     <li>
         Motors: Two DC motors are used for forward movement, with one motor controlling the left wheels and the other
-controlling the right. This configuration enables the robot to execute differential steering.
+        controlling the right. This configuration enables the robot to execute differential steering.
 
     </li>
     <li>
-        Steering Motors: Four DC motors (one for each wheel) are responsible for steering. These motors are PWM-controlled for
-precise movement and direction.
+        Steering Motors: Four DC motors (one for each wheel) are responsible for steering. These motors are
+        PWM-controlled for
+        precise movement and direction.
     </li>
 </ul>
 </p>
@@ -164,9 +177,9 @@ network enabling communication between all the components.
 
 <div class="small-space"></div>
 <p>
-    
+
     <b>Links:</b>
-<ul>
+<ul class="link-list">
     <li>
         <a href="https://www.circpeoria.org/" target="_blank" rel="noopener noreferrer">Central Illnois Robotic Club</a>
     </li>
@@ -177,8 +190,8 @@ network enabling communication between all the components.
 </p>
 
 <p>
-    
+
     <b>Contact Information</b>
 
-Feel free to reach out for any questions or clarifications. You can find my contact information on the Contact Page.
+    Feel free to reach out for any questions or clarifications. You can find my contact information on the Contact Page.
 </p>

@@ -3,20 +3,20 @@ layout: home
 ---
 <section id="post" class="post-area area-padding">
     <div class="side-bar" id="side-bar">
-    <div class="side-bar-content">
-        <button id="openbtn" class="openbtn" onclick="toggleNav()">☰</button> 
-        <div class="side-bar-title">
-            <h2 class="title-h2">Articles list</h2>
-        </div>
-        <div class="side-bar-list crosshair section">
-            <nav class="link-effect-14" id="link-effect-14">
-                {% for category in site.categories %}
+        <div class="side-bar-content">
+            <button id="openbtn" class="openbtn" onclick="toggleNav()">☰</button>
+            <div class="side-bar-title">
+                <h2 class="title-h2">Articles list</h2>
+            </div>
+            <div class="side-bar-list crosshair section">
+                <nav class="link-effect-14" id="link-effect-14">
+                    {% for category in site.categories %}
                     {% assign is_active = false %}
                     {% assign sorted_posts = category[1] | sort: 'order' %} <!-- Sorting posts by 'order' -->
                     {% for post in sorted_posts %}
-                        {% if post.url == page.url %}
-                            {% assign is_active = true %}
-                        {% endif %}
+                    {% if post.url == page.url %}
+                    {% assign is_active = true %}
+                    {% endif %}
                     {% endfor %}
 
                     <button class="dropdown-btn{% if is_active %} active{% endif %}">
@@ -27,55 +27,55 @@ layout: home
                         style="display:none;" {% endif %}>
                         <ul>
                             {% for post in sorted_posts %}
-                                <li class="name">
-                                    <h2 class="mini-post-name-h2">
-                                        <a href="{{ post.url }}">
-                                            <span>{{ post.title }}</span>
-                                        </a>
-                                    </h2>
-                                </li>
+                            <li class="name">
+                                <h2 class="mini-post-name-h2">
+                                    <a href="{{ post.url }}">
+                                        <span>{{ post.title }}</span>
+                                    </a>
+                                </h2>
+                            </li>
                             {% endfor %}
                         </ul>
                     </div>
-                {% endfor %}
-            </nav>
+                    {% endfor %}
+                </nav>
+            </div>
         </div>
     </div>
-</div>
 
     <script>
-  // Global toggleNav function
-  function toggleNav() {
-    const sidebar = document.getElementById("side-bar");
-    const openbtn = document.getElementById("openbtn");
-    if (sidebar.style.width === "250px") {
-      sidebar.style.width = "0";
-      openbtn.style.left = "0px";
-      openbtn.textContent = "☰";
-    } else {
-      sidebar.style.width = "250px";
-      openbtn.style.left = "250px";
-      openbtn.textContent = "✖";
-    }
-  }
+        // Global toggleNav function
+        function toggleNav() {
+            const sidebar = document.getElementById("side-bar");
+            const openbtn = document.getElementById("openbtn");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                openbtn.style.left = "0px";
+                openbtn.textContent = "☰";
+            } else {
+                sidebar.style.width = "250px";
+                openbtn.style.left = "250px";
+                openbtn.textContent = "✖";
+            }
+        }
 
-  // Close sidebar on clicking outside (mobile only)
-  document.addEventListener("click", function(e) {
-    const sidebar = document.getElementById("side-bar");
-    const openBtn = document.querySelector(".openbtn");
+        // Close sidebar on clicking outside (mobile only)
+        document.addEventListener("click", function (e) {
+            const sidebar = document.getElementById("side-bar");
+            const openBtn = document.querySelector(".openbtn");
 
-    if (
-      window.innerWidth <= 768 &&
-      sidebar.style.width === "250px" && // sidebar open
-      !sidebar.contains(e.target) &&
-      !openBtn.contains(e.target)
-    ) {
-      sidebar.style.width = "0";
-      openbtn.style.left = "0px";
-      openbtn.textContent = "☰";
-    }
-  });
-</script>
+            if (
+                window.innerWidth <= 768 &&
+                sidebar.style.width === "250px" && // sidebar open
+                !sidebar.contains(e.target) &&
+                !openBtn.contains(e.target)
+            ) {
+                sidebar.style.width = "0";
+                openbtn.style.left = "0px";
+                openbtn.textContent = "☰";
+            }
+        });
+    </script>
     <div class="container content-post">
         <div class="first-row-post">
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -95,6 +95,20 @@ layout: home
             <div class="col-md-12 col-sm-12 col-xs-12">
                 {{ content }}
             </div>
+        </div>
+        <div class="small-space"></div>
+        <div class="post-navigation">
+        {% if page.previous %}
+            <a href="{{ page.previous.url }}" class="bottom-button prev-button">
+            ← {{ page.previous.title }}
+            </a>
+        {% endif %}
+        
+        {% if page.next %}
+            <a href="{{ page.next.url }}" class="bottom-button next-button">
+            {{ page.next.title }} →
+            </a>
+        {% endif %}
         </div>
         <div class="empty">
         </div>
