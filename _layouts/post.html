@@ -2,7 +2,7 @@
 layout: home
 ---
 <section id="post" class="post-area area-padding">
-    <div class="side-bar" id="side-bar">
+    <div class="post-side-bar" id="side-bar">
         <div class="side-bar-content">
             <button id="openbtn" class="openbtn" onclick="toggleNav()">☰</button>
             <div class="side-bar-title">
@@ -18,7 +18,7 @@ layout: home
                     {% assign is_active = true %}
                     {% endif %}
                     {% endfor %}
-
+                    
                     <button class="dropdown-btn{% if is_active %} active{% endif %}">
                         {{ category[0] }}
                         <i class="fa fa-caret-down"></i>
@@ -91,7 +91,7 @@ layout: home
             </div>
         </div>
 
-        <div class="content">
+        <div class="post-content">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 {{ content }}
             </div>

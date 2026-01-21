@@ -17,8 +17,12 @@
   <link href="{{ '/assets/images/favicon_io/favicon-16x16.png' | relative_url }}" rel="icon">
   <link href="{{ '/assets/images/favicon_io/favicon-32x32.png' | relative_url }}" rel="icon">
   <link href="{{ '/assets/images/favicon_io/apple-touch-icon.png' | relative_url }}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
+<!-- <link href="//cdn.jsdelivr.net/npm/prismjs@1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> -->
+<!-- 1. The Styles (Core Theme + Toolbar UI) -->
+<!-- <link href="cdn.jsdelivr.net" rel="stylesheet" />
+<link href="cdn.jsdelivr.net" rel="stylesheet" />   -->
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+<!-- Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900"
     rel="stylesheet">
@@ -46,8 +50,34 @@
 
   <!-- boutton to go to the top -->
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- <script src="cdn.jsdelivr.net"></script> -->
+<!-- Prism Core -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script>
+Prism.plugins.autoloader.languages_path =
+  'https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/';
+document.addEventListener("DOMContentLoaded", () => {
+  Prism.highlightAll();
 
-  <!-- JavaScript Libraries -->
+  // Copy button functionality
+  document.querySelectorAll(".copy-button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const code = btn.parentElement.querySelector("code");
+      navigator.clipboard.writeText(code.innerText);
+      btn.innerText = "Copied!";
+      setTimeout(() => btn.innerText = "Copy", 2000);
+    });
+  });
+});
+</script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/prismjs@1.9.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.9.0/components/prism-cpp.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.9.0/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.9.0/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.9.0/components/prism-markdown.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.9.0/components/prism-markup.js"></script> -->
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
