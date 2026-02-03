@@ -127,17 +127,17 @@
   word-break: break-word;
 }
 
-.empty{
+.blog-empty{
   height: 40vh;
 }
 
-.date p{
+.blog-date p{
   color: rgb(107, 107, 107);
   font-size: 15px;
   font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* Container */
-.container-fluid {
+.blog-container-fluid {
   margin-top: 6%;
   --bs-gutter-x: 0 !important;
   padding-left: 0 !important;
@@ -150,7 +150,7 @@
   margin-left: auto;
 }
 
-.content{
+.content-blog{
   font-size: 16px;
   line-height: 21px;
 }
@@ -271,7 +271,9 @@
 }
 
 .side-bar-content h2{
+  margin-top: 5px;
   line-height: 8px;
+  font-size: 17px !important;
 }
 
 .side-bar-title{
@@ -330,7 +332,7 @@
 }
 
 /* Add an active class to the active dropdown button */
-.active {
+.blog-active {
   background-color: #777575b0;
   color: white;
 }

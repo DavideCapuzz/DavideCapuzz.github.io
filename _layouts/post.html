@@ -19,7 +19,7 @@ layout: home
                     {% endif %}
                     {% endfor %}
                     
-                    <button class="dropdown-btn{% if is_active %} active{% endif %}">
+                    <button class="dropdown-btn{% if is_active %} blog-active{% endif %}">
                         {{ category[0] }}
                         <i class="fa fa-caret-down"></i>
                     </button>
@@ -85,7 +85,7 @@ layout: home
             </div>
         </div>
 
-        <div class="date">
+        <div class="blog-date">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <p>{{ page.date | date_to_string }} - {{ page.author }}</p>
             </div>
@@ -110,7 +110,7 @@ layout: home
             </a>
         {% endif %}
         </div>
-        <div class="empty">
+        <div class="blog-empty">
         </div>
     </div>
 </section>
