@@ -1,8 +1,8 @@
 ---
 layout: home
 ---
-<section id="post" class="post-area area-padding">
-    <div class="post-side-bar" id="side-bar">
+<section id="blog" class="blog-area area-padding">
+    <div class="blog-side-bar" id="side-bar">
         <div class="side-bar-content">
             <button id="openbtn" class="openbtn" onclick="toggleNav()">☰</button>
             <div class="side-bar-title">
@@ -28,7 +28,7 @@ layout: home
                         <ul>
                             {% for post in sorted_posts %}
                             <li class="name">
-                                <h2 class="mini-post-name-h2">
+                                <h2 class="mini-blog-name-h2">
                                     <a href="{{ post.url }}">
                                         <span>{{ post.title }}</span>
                                     </a>
@@ -76,8 +76,8 @@ layout: home
             }
         });
     </script>
-    <div class="container content-post">
-        <div class="first-row-post">
+    <div class="container content-blog">
+        <div class="first-row-blog">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="section-headline text-center Article-title">
                     <h1>{{ page.title }}</h1>
@@ -91,13 +91,13 @@ layout: home
             </div>
         </div>
 
-        <div class="post-content">
+        <div class="blog-content">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 {{ content }}
             </div>
         </div>
         <div class="small-space"></div>
-        <div class="post-navigation">
+        <div class="blog-navigation">
         {% if page.previous %}
             <a href="{{ page.previous.url }}" class="bottom-button prev-button">
             ← {{ page.previous.title }}

@@ -1,8 +1,8 @@
 /*------------------------------
-  3. Post Area
+  3. blog Area
 --------------------------------*/
 
-.post-area {
+.blog-area {
   background-color: #f9f9f9;
   height: 100%;
   display: inline;
@@ -20,27 +20,27 @@
   text-align: center;
 }
 
-.post-side-bar p {
+.blog-side-bar p {
   font-size: 100%;
   // color: #fff;
   font-weight: 300;
   margin-bottom: 15px;
 }
 
-.post-side-bar h2 {
+.blog-side-bar h2 {
   // color: #black;
   font-size: 15px;
   font-weight: 300;
 }
 
-.post-side-bar h3 {
+.blog-side-bar h3 {
   margin: 0 0 1px;
   margin-top: 1px;
   font-size: 150%;
   color: #000;
 }
 
-.post-side-bar h4 {
+.blog-side-bar h4 {
   margin: 0 0 1px;
   margin-bottom: 0px;
   font-size: 110%;
@@ -49,7 +49,7 @@
   line-height: 10px;
 }
 
-.post-content p {
+.blog-content p {
   font-size: 120%;
   // color: #fff;
   font-weight: 300;
@@ -57,7 +57,7 @@
   margin-bottom: 1.5rem;
 }
 
-.post-content a {
+.blog-content a {
   color: #333;
   text-decoration: none;
   position: relative;
@@ -65,7 +65,7 @@
   font-size: 17px;
 }
 
-.post-content a::after {
+.blog-content a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -76,24 +76,24 @@
   transition: width 0.3s ease;
 }
 
-.post-content a:hover::after {
+.blog-content a:hover::after {
   width: 100%;
 }
 
-.post-content hr {
+.blog-content hr {
   // color: #black;
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
 }
 
-.post-content h2 {
+.blog-content h2 {
   // color: #black;
   margin-top: 1.5rem;
   font-size: 35px;
   font-weight: 500;
 }
 
-.post-content h3 {
+.blog-content h3 {
   margin: 0 0 1px;
   margin-top: 2rem;
   margin-bottom: 1.5rem;
@@ -101,7 +101,7 @@
   color: #000;
 }
 
-.post-content h4 {
+.blog-content h4 {
   margin: 0 0 1px;
   margin-top: 1.5rem;
   margin-bottom: 0px;
@@ -110,14 +110,14 @@
   line-height: 11px;
 }
 
-.first-row-post {
+.first-row-blog {
   margin-top:14%;
   background-color: #f9f9f9;
   margin-bottom: 4%;
   display: block;
 }
 
-.first-row-post h1{
+.first-row-blog h1{
   // color: #000;
   font-size: 500%;
   font-style: normal;
@@ -144,7 +144,7 @@
   padding-right: 0 !important;
 }
 
-.content-post div{
+.content-blog div{
   max-width: 680px;
   margin-right: auto;
   margin-left: auto;
@@ -155,7 +155,7 @@
   line-height: 21px;
 }
 
-.post-image{
+.blog-image{
   display: block;
   width: 90%;
   padding-top: 30px;
@@ -170,7 +170,7 @@
   width: 100% !important;
 }
 
-.post-image img{
+.blog-image img{
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -178,25 +178,25 @@
   padding-bottom: 7px;
 }
 
-.post-image p{
+.blog-image p{
   font-size: 12px;
   line-height: 14px;
   color: rgb(121, 117, 117);
   text-align: center
 }
 
-.post-content ul {
+.blog-content ul {
   margin-top: 2rem;
   list-style-type: none;
   padding-left: 1.2em;
 }
 
-.post-content ul li {
+.blog-content ul li {
   position: relative;
   margin-bottom: 0.5em;
   padding-left: 1.2em;
 }
-.post-content ul li::before {
+.blog-content ul li::before {
   content: "•";
   position: absolute;
   left: 0;
@@ -206,7 +206,7 @@
   line-height: 1;
 }
 
-.post-side-bar{
+.blog-side-bar{
   margin: 0;
   padding: 0;
   width: 250px;
@@ -247,10 +247,10 @@
 }
 
 @media (max-width: 767px) {
-  .post-image img{
+  .blog-image img{
     width: 100%;
   }
-  .post-side-bar{
+  .blog-side-bar{
     width: 0px;
 }
 .openbtn {
@@ -259,7 +259,7 @@
   .Article-title h1{
     color: #242424 !important;
   }
-  .first-row-post{
+  .first-row-blog{
     margin-top: 35%;
     margin-bottom: 10%;
   }
@@ -497,7 +497,7 @@ div.section {
   }
 }
 
-.post-navigation {
+.blog-navigation {
         display: flex; /* Enables Flexbox layout */
         justify-content: space-between; /* Distributes space evenly between items, pushing them to the edges */
         width: 100%; /* Ensures the container spans the full width of its parent */
